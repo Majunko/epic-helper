@@ -32,7 +32,7 @@ export const _ownerInfo = async ({client}: IOwnerInfo) => {
     {
       totalGuilds: 0,
       totalRam: 0,
-    },
+    }
   );
   const summaryValue = [
     `**Guilds**: ${summary.totalGuilds.toLocaleString()}`,

@@ -32,7 +32,7 @@ export const _isServerAdmin = async ({
   const memberRoles = member.roles.cache.map((role) => role.id);
   return (
     serverAccount.settings.admin.rolesId.some((roleId) =>
-      memberRoles.includes(roleId),
+      memberRoles.includes(roleId)
     ) || serverAccount.settings.admin.usersId.includes(userId)
   );
 };

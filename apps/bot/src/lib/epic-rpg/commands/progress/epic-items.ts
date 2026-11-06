@@ -116,15 +116,15 @@ const rpgUseEpicItemSuccess = async ({
 
 const isPlantingEpicSeed = ({message}: IMessageContentChecker) =>
   ['planting the', 'epic seed'].every((word) =>
-    message.content.toLowerCase().includes(word),
+    message.content.toLowerCase().includes(word)
   );
 
 const isSummoningCoinRain = ({message}: IMessageContentChecker) =>
   ['summoning the', 'coin rain'].every((word) =>
-    message.content.toLowerCase().includes(word),
+    message.content.toLowerCase().includes(word)
   );
 
 const isPlacingUltraBait = ({message}: IMessageContentChecker) =>
   ['placing the', 'ultra bait'].every((word) =>
-    message.content.toLowerCase().includes(word),
+    message.content.toLowerCase().includes(word)
   );

@@ -15,7 +15,7 @@ export const _deleteGlobalSlashCommand = async ({
   if (!client.user) return [];
   try {
     await djsRestClient.delete(
-      Routes.applicationCommand(client.user.id!, commandId),
+      Routes.applicationCommand(client.user.id!, commandId)
     );
   } catch (e: any) {
     logger({

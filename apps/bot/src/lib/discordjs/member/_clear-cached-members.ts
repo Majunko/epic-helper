@@ -6,7 +6,10 @@ interface IClearCachedMembers {
   serverId: string;
 }
 
-export const _clearCachedMembers = async ({client, serverId}: IClearCachedMembers) => {
+export const _clearCachedMembers = async ({
+  client,
+  serverId,
+}: IClearCachedMembers) => {
   const server = await djsServerHelper.getServer({serverId, client});
   if (!server) return;
 

@@ -1,4 +1,7 @@
-import {USER_ACC_OFF_ACTIONS, USER_NOT_REGISTERED_ACTIONS} from '@epic-helper/constants';
+import {
+  USER_ACC_OFF_ACTIONS,
+  USER_NOT_REGISTERED_ACTIONS,
+} from '@epic-helper/constants';
 import {SLASH_COMMAND} from './constant';
 import commandHelper from '../../lib/epic-helper/command-helper';
 import djsInteractionHelper from '../../lib/discordjs/interaction';
@@ -12,10 +15,11 @@ export default <SlashCommand>{
   },
   type: 'command',
   builder: (builder) =>
-    builder.addStringOption(option =>
-      option.setName('search')
+    builder.addStringOption((option) =>
+      option
+        .setName('search')
         .setDescription('Search for a command')
-        .setRequired(false),
+        .setRequired(false)
     ),
   execute: async (client, interaction) => {
     const search = interaction.options.getString('search') ?? undefined;

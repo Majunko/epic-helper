@@ -1,4 +1,8 @@
-import {donorService, freeDonorService, serverService} from '@epic-helper/services';
+import {
+  donorService,
+  freeDonorService,
+  serverService,
+} from '@epic-helper/services';
 import {DONOR_TOKEN_AMOUNT} from '@epic-helper/constants';
 
 export const _hasValidBoost = async (userId: string) => {
@@ -16,7 +20,7 @@ export const _hasValidBoost = async (userId: string) => {
   });
   const boostedServersTokens = boostedServers.reduce(
     (acc, server) => acc + server.token,
-    0,
+    0
   );
   return totalTokens >= boostedServersTokens;
 };

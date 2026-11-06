@@ -1,5 +1,5 @@
 import type {Embed} from 'discord.js';
-import ms from 'ms';
+import {parseMs} from '@epic-helper/utils';
 
 export interface IGuildReader {
   embed: Embed;
@@ -21,7 +21,7 @@ const guildReader = ({embed}: IGuildReader) => {
     xp: Number(xp),
     stealth: Number(stealth),
     readyIn: time.reduce((acc, curr) => {
-      return acc + ms(curr);
+      return acc + parseMs(curr);
     }, 0),
     energy: Number(energy),
   };

@@ -16,7 +16,7 @@ export default <SlashMessage>{
   },
   execute: async (client, message, author) => {
     const workingType = Object.values(RPG_WORKING_TYPE).find(
-      (type) => message.interaction?.commandName === type,
+      (type) => message.interaction?.commandName === type
     );
     if (!workingType) return;
     rpgWorking({

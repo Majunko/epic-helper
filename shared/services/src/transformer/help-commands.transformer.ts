@@ -14,7 +14,7 @@ export const toHelpCommands = (
     BotHelpSkeleton,
     'WITHOUT_UNRESOLVABLE_LINKS',
     string
-  >,
+  >
 ) => {
   const data: IHelpCommand[] = [];
   for (const item of entries.items) {
@@ -31,7 +31,7 @@ export const toHelpCommands = (
 };
 
 export const toHelpCommand = (
-  entry: Entry<BotHelpSkeleton, 'WITHOUT_UNRESOLVABLE_LINKS'>,
+  entry: Entry<BotHelpSkeleton, 'WITHOUT_UNRESOLVABLE_LINKS'>
 ) => {
   const {prefixCommands, description, usage, name, type} = entry.fields;
   return {

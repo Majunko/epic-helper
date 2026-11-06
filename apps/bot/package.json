@@ -6,16 +6,16 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:bot": "tsc",
     "type-check": "tsc --noEmit --skipLibCheck",
-    "lint": "eslint src/ --ext .ts --fix"
+    "lint": "vp lint src/ --fix"
   },
   "dependencies": {
     "@epic-helper/constants": "workspace:*",
+    "@epic-helper/libs": "workspace:*",
     "@epic-helper/models": "workspace:*",
     "@epic-helper/services": "workspace:*",
-    "@epic-helper/utils": "workspace:*",
-    "@epic-helper/libs": "workspace:*",
     "@epic-helper/types": "workspace:*",
-    "@sentry/node": "^7.52.1"
+    "@epic-helper/utils": "workspace:*",
+    "@sentry/node": "^11.11.0"
   },
   "devDependencies": {
     "@epic-helper/tsconfig": "workspace:*"

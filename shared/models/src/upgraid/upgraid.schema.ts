@@ -1,4 +1,4 @@
-import type {IUpgraid} from './upgraid.type';
+import type {IUpgraid, IUpgraidUser} from './upgraid.type';
 import {Schema} from 'mongoose';
 
 const recordSchema = new Schema<IUpgraid['users'][0]['records'][0]>({
@@ -9,7 +9,7 @@ const recordSchema = new Schema<IUpgraid['users'][0]['records'][0]>({
   upgraidAt: Date,
 });
 
-const userSchema = new Schema<IUpgraid['users'][0]>({
+const userSchema = new Schema<IUpgraidUser>({
   uId: String,
   records: {
     type: [recordSchema],

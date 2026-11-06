@@ -19,7 +19,7 @@ declare module 'discord.js' {
       djsMessageHelper: typeof djsMessageHelper;
       redis: {
         redisMainUsers: typeof redisMainUsers;
-      }
+      };
     };
   }
 }

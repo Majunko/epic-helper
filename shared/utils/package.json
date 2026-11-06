@@ -7,10 +7,11 @@
   "scripts": {
     "build:shared": "tsc",
     "type-check": "tsc --noEmit --skipLibCheck",
-    "lint": "eslint src/ --ext .ts --fix"
+    "lint": "vp lint src/ --fix"
   },
   "dependencies": {
-    "readdirp": "^3.6.0"
+    "ms": "^2.1.3",
+    "readdirp": "^5.1.1"
   },
   "devDependencies": {
     "@epic-helper/tsconfig": "workspace:*"

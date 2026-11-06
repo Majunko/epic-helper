@@ -31,7 +31,7 @@ export const renderEmbed = ({embedsInfo}: IGetToggleEmbed): EmbedBuilder => {
     renderFieldValue({
       info,
       index,
-    }),
+    })
   );
   embed.addFields(fields);
   return embed;
@@ -63,7 +63,7 @@ const renderFieldValue = ({info, index}: IRenderFieldValue): EmbedField => {
         const emoji = renderEmoji({status: value, grey: toGreySubChildren});
         const subChildId = String.fromCharCode(97 + Number(j));
         embedValue.push(
-          `${emoji}--\`${groupId}${childId}${subChildId}\` ${label}`,
+          `${emoji}--\`${groupId}${childId}${subChildId}\` ${label}`
         );
       }
     }

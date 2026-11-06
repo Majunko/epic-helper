@@ -6,52 +6,53 @@
 
 Discord bot. A reminder & utilities bot for [EPIC RPG](https://top.gg/bot/555955826880413696).
 
---- 
+---
 
 ## Guide to start the bot
 
 1. Install node.js
 2. Install pnpm if you haven't
 
-    ```bash
-    npm install -g pnpm
-    ```
+   ```bash
+   npm install -g pnpm
+   ```
 
 3. Install dependencies
 
-    ```bash
-    pnpm install
-    pnpm run build:shared
-    pnpm run build:bot
-    ```
+   ```bash
+   pnpm install
+   pnpm run build:shared
+   pnpm run build:bot
+   ```
 
 4. Copy `.env.example` to `.env` and fill in the required fields
 
-    ```dotenv
-    BOT_TOKEN= # Your bot token
-    NODE_ENV= # development or production
-    BOT_PREFIX= # Bot prefix
-    MONGO_URI= # MongoDB URI e.g. mongodb://localhost:27017/
-    MONGO_DB_NAME= # MongoDB database name e.g. epic_helper
-    REDIS_URL= # Redis URL
-    TOTAL_CLUSTERS= # Total number of shards
-    TOTAL_SHARDS= # Total number of shards
-    DEV_PREFIX= # (Optional) Dev prefix, for dev only commands
-    DEVS_ID= # (Optional) Devs' ID, separated by commas, only whitelisted users can use dev commands
-    SENTRY_DSN= # (Optional) Sentry DSN, if you want to use Sentry for error tracking
-    PATREON_CAMPAIGN_ID= # (Optional) Patreon campaign ID
-    PATREON_ACCESS_TOKEN= # (Optional) Patreon access token
-    PATREON_WEBHOOK_TOKEN= # (Optional) Patreon webhook token
-    API_PORT= # (Optional) API port, for receiving webhooks from Patreon
-    CONTENTFUL_SPACE_ID= # (Optional) Contentful space ID, sources of commands in bot help
-    CONTENTFUL_ACCESS_TOKEN= # (Optional) Contentful access token
-    STATS_LEADERBOARD_CHANNEL= # (Optional) Channel ID for the leaderboard
-    ```
+   ```dotenv
+   BOT_TOKEN= # Your bot token
+   NODE_ENV= # development or production
+   BOT_PREFIX= # Bot prefix
+   MONGO_URI= # MongoDB URI e.g. mongodb://localhost:27017/
+   MONGO_DB_NAME= # MongoDB database name e.g. epic_helper
+   REDIS_URL= # Redis URL
+   TOTAL_CLUSTERS= # Total number of shards
+   TOTAL_SHARDS= # Total number of shards
+   DEV_PREFIX= # (Optional) Dev prefix, for dev only commands
+   DEVS_ID= # (Optional) Devs' ID, separated by commas, only whitelisted users can use dev commands
+   SENTRY_DSN= # (Optional) Sentry DSN, if you want to use Sentry for error tracking
+   PATREON_CAMPAIGN_ID= # (Optional) Patreon campaign ID
+   PATREON_ACCESS_TOKEN= # (Optional) Patreon access token
+   PATREON_WEBHOOK_TOKEN= # (Optional) Patreon webhook token
+   API_PORT= # (Optional) API port, for receiving webhooks from Patreon
+   CONTENTFUL_SPACE_ID= # (Optional) Contentful space ID, sources of commands in bot help
+   CONTENTFUL_ACCESS_TOKEN= # (Optional) Contentful access token
+   STATS_LEADERBOARD_CHANNEL= # (Optional) Channel ID for the leaderboard
+   ```
+
 5. Setup MongoDB and Redis
 6. Start bot for development
    ```bash
    # NODE_ENV=development
-   pnpm run dev:bot 
+   pnpm run dev:bot
    ```
    or for production
    ```bash
@@ -59,7 +60,7 @@ Discord bot. A reminder & utilities bot for [EPIC RPG](https://top.gg/bot/555955
    pnpm run prod:bot
    ```
 
---- 
+---
 
 ## Support
 

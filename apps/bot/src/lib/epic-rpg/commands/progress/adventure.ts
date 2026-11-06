@@ -184,7 +184,6 @@ const getHealReminderMsg = ({
   let horseSaved = false;
   let dead = false;
   if (content.includes('but lost fighting')) {
-
     //player lost
     dead = true;
     if (content.includes('saved you before the enemy')) horseSaved = true;
@@ -209,7 +208,6 @@ const getHealReminderMsg = ({
   } else if (dead) {
     return;
   } else if (hpLost && Number(hpLost) !== 0) {
-
     // user is damaged
     if (target && Number(hp) <= Number(target))
       msg = `Your HP is getting low. Time to ${RPG_CLICKABLE_SLASH_COMMANDS.heal} now`;

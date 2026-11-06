@@ -1,4 +1,9 @@
-import type {BaseMessageOptions, Client, Guild, StringSelectMenuInteraction} from 'discord.js';
+import type {
+  BaseMessageOptions,
+  Client,
+  Guild,
+  StringSelectMenuInteraction,
+} from 'discord.js';
 import {ActionRowBuilder, StringSelectMenuBuilder} from 'discord.js';
 import {serverService} from '@epic-helper/services';
 import {_getRandomEventSettingsEmbed} from './embed/random-event.embed';
@@ -85,7 +90,7 @@ export const _serverSettings = async ({server, client}: IServerSettings) => {
   };
 
   const responseInteraction = (
-    interaction: StringSelectMenuInteraction,
+    interaction: StringSelectMenuInteraction
   ): BaseMessageOptions => {
     const pageType = interaction.values[0] as ValuesOf<
       typeof SERVER_SETTINGS_PAGE_TYPE
@@ -147,6 +152,6 @@ const _getServerSettingsPageSelector = ({
           label,
           value: id,
           default: id === pageType,
-        })),
-      ),
+        }))
+      )
   );

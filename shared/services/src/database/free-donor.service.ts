@@ -84,7 +84,7 @@ const deleteFreeDonors = async ({usersId}: IDeleteFreeDonors) => {
           discordId: userId,
         },
       },
-    })),
+    }))
   );
   await redisFreeDonor.delFreeDonors(usersId);
   await redisUserBoostedServers.delMany(usersId);
@@ -96,4 +96,3 @@ export const freeDonorService = {
   findFreeDonor,
   deleteFreeDonors,
 };
-

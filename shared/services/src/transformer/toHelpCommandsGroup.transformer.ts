@@ -12,7 +12,7 @@ export interface IHelpCommandsGroup {
 }
 
 export const toHelpCommandsGroup = (
-  entries: EntryCollection<BotHelpGroupSkeleton, 'WITHOUT_UNRESOLVABLE_LINKS'>,
+  entries: EntryCollection<BotHelpGroupSkeleton, 'WITHOUT_UNRESOLVABLE_LINKS'>
 ) => {
   const data: IHelpCommandsGroup[] = [];
   for (const item of entries.items) {

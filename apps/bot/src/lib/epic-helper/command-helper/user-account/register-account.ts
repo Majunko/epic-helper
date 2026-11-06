@@ -61,5 +61,5 @@ const registeredEmbed = new EmbedBuilder()
         Use ${BOT_CLICKABLE_SLASH_COMMANDS.help} to explore more commands
         Or Join our [support server](${SUPPORT_SERVER_INVITE_LINK})`,
       inline: false,
-    },
+    }
   );

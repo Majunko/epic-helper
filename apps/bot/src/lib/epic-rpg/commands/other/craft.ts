@@ -47,7 +47,7 @@ interface IRpgCraftSuccess {
 
 const rpgCraftSuccess = async ({content, author}: IRpgCraftSuccess) => {
   const item = typedObjectEntries(RPG_EQUIPMENTS).find(([, item]) =>
-    content.toLowerCase().includes(item),
+    content.toLowerCase().includes(item)
   )?.[1] as keyof typeof RPG_EQUIPMENTS;
   if (!item) return;
 

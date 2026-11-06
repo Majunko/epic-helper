@@ -171,7 +171,7 @@ export const registerPetsToAdventure = async ({
       }
     }
     petsToSend = petsToSend.filter(
-      (p) => !returnedPets.map(convertPetIdToNum).includes(p.petId),
+      (p) => !returnedPets.map(convertPetIdToNum).includes(p.petId)
     );
   }
 
@@ -442,7 +442,7 @@ const extractSentPets = ({message, author}: IMessageContentChecker) => {
   if (isSentSinglePetToAdventure({message, author})) return 1;
   if (isSentMultiplePetsToAdventure({message, author})) {
     const amount = message.content.match(
-      /\*\*(\d+)\*\* of your pets have started an adventure!/,
+      /\*\*(\d+)\*\* of your pets have started an adventure!/
     );
     if (amount) return parseInt(amount[1]);
   }

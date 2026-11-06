@@ -19,7 +19,7 @@ const filterKeyword = (keyword: string): string[] =>
     .toLowerCase()
     .split(' ')
     .filter(
-      (item) => regexParent.test(item) || regexChild.test(item) || regexRange,
+      (item) => regexParent.test(item) || regexChild.test(item) || regexRange
     );
 
 export const getUpdateQuery = <T>({
@@ -32,8 +32,8 @@ export const getUpdateQuery = <T>({
     : [];
   const itemOff = off
     ? filterKeyword(off).flatMap((item) =>
-      getPathsFromKeyword(item, toggleInfo),
-    )
+        getPathsFromKeyword(item, toggleInfo)
+      )
     : [];
   const query: Record<string, boolean> = {};
 
@@ -53,7 +53,7 @@ export const getUpdateQuery = <T>({
 
 const getPathsFromKeyword = (
   key: string,
-  toggleInfo: IToggleEmbedsInfo[],
+  toggleInfo: IToggleEmbedsInfo[]
 ): string | string[] | null => {
   if (regexParent.test(key)) {
     const _key = key.match(regexParent);

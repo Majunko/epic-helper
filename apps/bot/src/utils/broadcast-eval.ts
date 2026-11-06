@@ -4,7 +4,7 @@ import {logger} from '@epic-helper/utils';
 
 type IBroadcastEval<T, K> = {
   client: Client;
-  target?: number[] | 'all' | 'rest'
+  target?: number[] | 'all' | 'rest';
 } & (EvalFn<T, K> | EvalString);
 
 type EvalFn<T, K> = {
@@ -23,7 +23,7 @@ interface IBroadcastEvalResult<T> {
 }
 
 export const broadcastEval = async <T, K>(
-  props: IBroadcastEval<T, K>,
+  props: IBroadcastEval<T, K>
 ): Promise<IBroadcastEvalResult<T>[]> => {
   const {client, target} = props;
 
@@ -32,7 +32,9 @@ export const broadcastEval = async <T, K>(
   if (target === 'rest') {
     const totalCluster = getInfo().CLUSTER_COUNT;
     const currentCluster = client.cluster.id;
-    const restClusters = Array.from({length: totalCluster}, (_, i) => i).filter((i) => i !== currentCluster);
+    const restClusters = Array.from({length: totalCluster}, (_, i) => i).filter(
+      (i) => i !== currentCluster
+    );
     return await broadcastTargets({...props, target: restClusters});
   }
   if (Array.isArray(target)) return await broadcastTargets(props);

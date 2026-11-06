@@ -5,8 +5,10 @@ export interface IGuildUpgradeReader {
 }
 
 const guildUpgradeReader = ({embed}: IGuildUpgradeReader) => {
-  const oldStealth = embed.fields?.[0].value.match(/\*\*(\d+)\*\* --> \*\*\d+\*\*/)?.[1] ?? '0';
-  const newStealth = embed.fields?.[0].value.match(/\*\*\d+\*\* --> \*\*(\d+)\*\*/)?.[1] ?? '0';
+  const oldStealth =
+    embed.fields?.[0].value.match(/\*\*(\d+)\*\* --> \*\*\d+\*\*/)?.[1] ?? '0';
+  const newStealth =
+    embed.fields?.[0].value.match(/\*\*\d+\*\* --> \*\*(\d+)\*\*/)?.[1] ?? '0';
 
   return {
     oldStealth: Number(oldStealth),

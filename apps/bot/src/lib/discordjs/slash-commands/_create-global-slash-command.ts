@@ -17,7 +17,7 @@ export const _createGlobalSlashCommand = async ({
       Routes.applicationCommands(client.user!.id),
       {
         body: commands,
-      },
+      }
     );
     return data as ApplicationCommand;
   } catch (e: any) {

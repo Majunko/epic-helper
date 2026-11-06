@@ -3,7 +3,7 @@ import readdirp from 'readdirp';
 
 interface IImportFiles {
   path: string;
-  options: ReaddirpOptions;
+  options: Partial<ReaddirpOptions>;
 }
 
 interface IReturn<T> {
@@ -28,7 +28,7 @@ export const importFiles = <T>({
                 path,
               });
             });
-          }),
+          })
         );
       })
       .on('end', () => {

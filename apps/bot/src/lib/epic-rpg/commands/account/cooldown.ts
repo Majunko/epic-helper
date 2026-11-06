@@ -1,5 +1,5 @@
 import type {Client, Embed, EmbedField, Message, User} from 'discord.js';
-import ms from 'ms';
+import {parseMs} from '@epic-helper/utils';
 import {createRpgCommandListener} from '../../../../utils/rpg-command-listener';
 import {calcExtraHuntCdWithPartner} from '../../../epic-helper/reminders/commands-cooldown';
 import {RPG_COMMAND_TYPE} from '@epic-helper/constants';
@@ -89,7 +89,7 @@ const rpgCooldownSuccess = async ({
   client,
 }: IRpgCooldownSuccess) => {
   const currentCooldowns = await userReminderServices.getUserAllCooldowns(
-    author.id,
+    author.id
   );
   const userAccount = await userService.getUserAccount(author.id);
   if (!userAccount) return;
@@ -126,14 +126,13 @@ const rpgCooldownSuccess = async ({
 
       const readyAt = new Date(Date.now() + readyIn);
       const currentCooldown = currentCooldowns.find(
-        (cooldown) => cooldown.type === commandType,
+        (cooldown) => cooldown.type === commandType
       );
       if (
         !currentCooldown?.readyAt ||
-        (
-          currentCooldown?.readyAt &&
-          Math.abs(currentCooldown.readyAt.getTime() - readyAt.getTime()) > 1000
-        )
+        (currentCooldown?.readyAt &&
+          Math.abs(currentCooldown.readyAt.getTime() - readyAt.getTime()) >
+            1000)
       ) {
         await userReminderServices.updateUserCooldown({
           userId: author.id,
@@ -165,14 +164,15 @@ const searchCommandType = (fieldRow: string) => {
   const commandList = extractCommandsCooldown(fieldRow);
 
   return Object.entries(RPG_COMMAND_CATEGORY).find(([, value]) =>
-    value.some((command) => commandList.some((name) => name.includes(command))),
+    value.some((command) => commandList.some((name) => name.includes(command)))
   )?.[0] as keyof typeof RPG_COMMAND_CATEGORY;
 };
 
 const extractAndCalculateReadyAt = (fieldRow: string) => {
-  const timeLeftList = fieldRow.match(/\*\*([\w\s]+)\*\*/)?.[1]?.split(' ') ?? [];
+  const timeLeftList =
+    fieldRow.match(/\*\*([\w\s]+)\*\*/)?.[1]?.split(' ') ?? [];
   return timeLeftList.reduce((acc, cur) => {
-    return acc + ms(cur);
+    return acc + parseMs(cur);
   }, 0);
 };
 

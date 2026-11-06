@@ -133,9 +133,9 @@ const getUserCooldownEmbed = ({
       const cooldown = userReminder.find((c) => c.type === item.type);
       const commandName = cooldown
         ? _parseCommandString({
-          toggleChecker,
-          ...cooldown,
-        }).replace('RPG ', '')
+            toggleChecker,
+            ...cooldown,
+          }).replace('RPG ', '')
         : item.name;
       const readyIn =
         !!cooldown?.readyAt &&
@@ -143,13 +143,13 @@ const getUserCooldownEmbed = ({
         timestampHelper.relative({
           time: cooldown.readyAt,
         });
-      const isCmdReady = !cooldown?.readyAt || cooldown?.readyAt.getTime() < Date.now();
+      const isCmdReady =
+        !cooldown?.readyAt || cooldown?.readyAt.getTime() < Date.now();
       if (field.skipIfNone && isCmdReady) continue;
 
-      const icon =
-        isCmdReady
-          ? BOT_EMOJI.utils.ready
-          : BOT_EMOJI.utils.notReady;
+      const icon = isCmdReady
+        ? BOT_EMOJI.utils.ready
+        : BOT_EMOJI.utils.notReady;
       const formattedCommandName = capitalizeFirstLetters(commandName);
       const readyString = readyIn ? ` (${readyIn})` : '';
       value.push(`${icon} ~-~ \`${formattedCommandName}\`${readyString}`);

@@ -25,7 +25,7 @@ export default <PrefixCommand>{
     for (const slashCommand of slashCommands) {
       if (
         globalSlashCommands.find(
-          (gsc) => gsc.name === slashCommand.builder.name,
+          (gsc) => gsc.name === slashCommand.builder.name
         )
       ) {
         registeredGlobalSlashCommands.push(slashCommand.name);
@@ -46,17 +46,17 @@ export default <PrefixCommand>{
 | global |  guild | name 
 | --------------------------------
 ${slashCommands
-          .map(
-            (sc) =>
-              `| ${
-                registeredGlobalSlashCommands.includes(sc.name) ? '  ✓   ' : '  ✗   '
-              } | ${
-                registeredGuildSlashCommands.includes(sc.name) ? '  ✓   ' : '  ✗   '
-              } | ${sc.name}`,
-          )
-          .join('\n')}
+  .map(
+    (sc) =>
+      `| ${
+        registeredGlobalSlashCommands.includes(sc.name) ? '  ✓   ' : '  ✗   '
+      } | ${
+        registeredGuildSlashCommands.includes(sc.name) ? '  ✓   ' : '  ✗   '
+      } | ${sc.name}`
+  )
+  .join('\n')}
 \`\`\` 
-      `,
+      `
       )
       .addFields(
         {
@@ -68,7 +68,7 @@ ${slashCommands
           name: 'Flags',
           value: '`--guild` `--global`',
           inline: true,
-        },
+        }
       );
 
     await djsMessageHelper.send({

@@ -88,7 +88,7 @@ const findLatestLog = async ({userId}: IFindLatestLog) => {
       sort: {
         duelAt: -1,
       },
-    },
+    }
   );
   return log ?? null;
 };

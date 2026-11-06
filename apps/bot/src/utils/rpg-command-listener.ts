@@ -1,8 +1,15 @@
-import type {AnyThreadChannel, Channel, Client, Embed, Message, MessageCollector, User} from 'discord.js';
+import type {
+  AnyThreadChannel,
+  Channel,
+  Client,
+  Embed,
+  Message,
+  MessageCollector,
+  User,
+} from 'discord.js';
 import {TextChannel, ThreadChannel} from 'discord.js';
 import {TypedEventEmitter} from './typed-event-emitter';
-import ms from 'ms';
-import {typedObjectEntries} from '@epic-helper/utils';
+import {parseMs, typedObjectEntries} from '@epic-helper/utils';
 import type {RPG_COOLDOWN_EMBED_TYPE} from '@epic-helper/constants';
 import {EPIC_RPG_ID} from '@epic-helper/constants';
 import {createMessageEditedListener} from './message-edited-listener';
@@ -38,7 +45,9 @@ type TExtraProps = {
 
 const filter = (m: Message) => m.author.id === EPIC_RPG_ID;
 
-const isChannelSupported = (channel: Channel): channel is TextChannel | AnyThreadChannel => {
+const isChannelSupported = (
+  channel: Channel
+): channel is TextChannel | AnyThreadChannel => {
   return channel instanceof TextChannel || channel instanceof ThreadChannel;
 };
 
@@ -52,11 +61,10 @@ export const createRpgCommandListener = ({
   if (!channel) return;
   let collector: MessageCollector | undefined;
   if (isChannelSupported(channel) && !!channel.guild) {
-
     // const textChannel
     collector = channel.createMessageCollector({time: 15000, filter});
   }
-  if (!collector || !(djsChannelHelper.isGuildChannel(channel))) return;
+  if (!collector || !djsChannelHelper.isGuildChannel(channel)) return;
   let event = new TypedEventEmitter<TEventTypes>() as CustomEventType;
   let police = false;
   let waitingAnswer = false;
@@ -113,7 +121,6 @@ export const createRpgCommandListener = ({
       if (police) return;
       event?.emit('embed', collected.embeds[0], collected);
     } else if (!collected.embeds.length) {
-
       // Message Content
       if (isBotMaintenance({collected, author})) {
         event?.stop();
@@ -179,7 +186,7 @@ function extractCooldown(embed: Embed) {
   const time = embed.title?.split('**')[1].split(' ') ?? [];
   let time_ms = 0;
   time.forEach((t) => {
-    time_ms += ms(t);
+    time_ms += parseMs(t);
   });
   return time_ms;
 }
@@ -262,7 +269,7 @@ function isUserSpamming({author, collected}: IChecker) {
   if (!embed) return false;
   return (
     embed.author?.name === author.username &&
-    embed.fields[0]?.name.includes('please don\'t spam')
+    embed.fields[0]?.name.includes("please don't spam")
   );
 }
 
@@ -272,7 +279,6 @@ function isPolicePass({author, collected}: IChecker) {
     collected.content.includes(author.username)
   );
 }
-
 
 const isLoadingContent = ({collected}: IChecker) =>
   (collected.content === '' && collected.embeds.length === 0) ||

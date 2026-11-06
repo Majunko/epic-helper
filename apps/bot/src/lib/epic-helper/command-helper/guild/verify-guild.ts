@@ -73,6 +73,6 @@ const getUserGuildRoles = async ({
   if (!serverMember) return null;
   const guildRoles = await guildService.getAllGuildRoles({serverId: server.id});
   return serverMember.roles.cache.filter((userRole) =>
-    guildRoles.some((guildRole) => userRole.id === guildRole),
+    guildRoles.some((guildRole) => userRole.id === guildRole)
   );
 };

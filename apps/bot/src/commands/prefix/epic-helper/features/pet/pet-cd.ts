@@ -1,6 +1,13 @@
-import {paginatePetCd, PET_CD_PET_PAGE} from '../../../../../lib/epic-helper/features/pets/pet-cd';
+import {
+  paginatePetCd,
+  PET_CD_PET_PAGE,
+} from '../../../../../lib/epic-helper/features/pets/pet-cd';
 import {itemListingHelper} from '../../../../../utils/item-listing-helper';
-import {PREFIX_COMMAND_TYPE, USER_ACC_OFF_ACTIONS, USER_NOT_REGISTERED_ACTIONS} from '@epic-helper/constants';
+import {
+  PREFIX_COMMAND_TYPE,
+  USER_ACC_OFF_ACTIONS,
+  USER_NOT_REGISTERED_ACTIONS,
+} from '@epic-helper/constants';
 import {userPetServices} from '@epic-helper/services';
 
 export default <PrefixCommand>{

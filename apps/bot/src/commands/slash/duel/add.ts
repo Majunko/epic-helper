@@ -1,5 +1,8 @@
 import {SLASH_COMMAND} from '../constant';
-import {USER_ACC_OFF_ACTIONS, USER_NOT_REGISTERED_ACTIONS} from '@epic-helper/constants';
+import {
+  USER_ACC_OFF_ACTIONS,
+  USER_NOT_REGISTERED_ACTIONS,
+} from '@epic-helper/constants';
 import commandHelper from '../../../lib/epic-helper/command-helper';
 import djsInteractionHelper from '../../../lib/discordjs/interaction';
 import messageFormatter from '../../../lib/discordjs/message-formatter';
@@ -20,11 +23,11 @@ export default <SlashCommand>{
             {name: '0', value: 0},
             {name: '1', value: 1},
             {name: '2', value: 2},
-            {name: '3', value: 3},
-          ),
+            {name: '3', value: 3}
+          )
       )
       .addStringOption((option) =>
-        option.setName('link').setDescription('Message link to the duel result'),
+        option.setName('link').setDescription('Message link to the duel result')
       )
       .addStringOption((option) =>
         option
@@ -32,8 +35,8 @@ export default <SlashCommand>{
           .setDescription('Duel result')
           .addChoices(
             {name: 'win', value: 'win'},
-            {name: 'lose', value: 'lose'},
-          ),
+            {name: 'lose', value: 'lose'}
+          )
       ),
   preCheck: {
     userAccOff: USER_ACC_OFF_ACTIONS.skip,

@@ -47,15 +47,15 @@ export const generateDuelLogEmbed = ({
         channelId: source.channelId,
         messageId: source.messageId,
         serverId: source.serverId,
-      })}) **@ ${serverName}**`,
+      })}) **@ ${serverName}**`
     );
   }
   embed.setDescription(description.join('\n'));
 
   const timeStr = lastDuel
     ? convertMsToHumanReadableString(
-      new Date().getTime() - lastDuel.getTime(),
-    ) + ' ago'
+        new Date().getTime() - lastDuel.getTime()
+      ) + ' ago'
     : 'N/A';
   embed.setFooter({
     text: `Last duel: ${timeStr}`,

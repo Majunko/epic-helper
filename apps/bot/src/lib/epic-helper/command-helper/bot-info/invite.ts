@@ -1,5 +1,9 @@
 import {EmbedBuilder} from 'discord.js';
-import {BOT_COLOR, BOT_INVITE_LINK, SUPPORT_SERVER_INVITE_LINK} from '@epic-helper/constants';
+import {
+  BOT_COLOR,
+  BOT_INVITE_LINK,
+  SUPPORT_SERVER_INVITE_LINK,
+} from '@epic-helper/constants';
 
 export const _invite = (): EmbedBuilder => {
   const embed = new EmbedBuilder().setColor(BOT_COLOR.embed);
@@ -12,7 +16,7 @@ export const _invite = (): EmbedBuilder => {
     {
       name: 'Join the IDLE Helper support server',
       value: `**[Support Server](${SUPPORT_SERVER_INVITE_LINK})**`,
-    },
+    }
   );
 
   return embed;

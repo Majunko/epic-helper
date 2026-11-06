@@ -85,7 +85,6 @@ const rpgGuildSuccess = async ({
   });
 
   if (isSlashCommand) {
-
     // return if guild name is not matched in slash command
     const currentGuild = await guildService.findGuild({
       serverId: guildServerId,

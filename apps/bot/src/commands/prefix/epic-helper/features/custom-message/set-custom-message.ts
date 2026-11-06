@@ -1,4 +1,8 @@
-import {PREFIX_COMMAND_TYPE, USER_ACC_OFF_ACTIONS, USER_NOT_REGISTERED_ACTIONS} from '@epic-helper/constants';
+import {
+  PREFIX_COMMAND_TYPE,
+  USER_ACC_OFF_ACTIONS,
+  USER_NOT_REGISTERED_ACTIONS,
+} from '@epic-helper/constants';
 import {
   CUSTOM_MESSAGE_PAGE_TYPE,
   CUSTOM_MESSAGE_TYPES_DISPLAY_NAME,
@@ -21,7 +25,7 @@ export default <PrefixCommand>{
     const type = args[2];
     if (
       !Object.values(CUSTOM_MESSAGE_TYPES_DISPLAY_NAME).includes(
-        type.toLowerCase(),
+        type.toLowerCase()
       )
     ) {
       return djsMessageHelper.reply({
@@ -29,7 +33,7 @@ export default <PrefixCommand>{
         message,
         options: {
           content: `Invalid type. Valid types are: ${Object.values(
-            CUSTOM_MESSAGE_TYPES_DISPLAY_NAME,
+            CUSTOM_MESSAGE_TYPES_DISPLAY_NAME
           )
             .map((name) => `\`${name}\``)
             .join(', ')}`,
@@ -47,7 +51,7 @@ export default <PrefixCommand>{
     }
     const messageContent = extractReminderMessage(message.content);
     const updateKey = Object.entries(CUSTOM_MESSAGE_TYPES_DISPLAY_NAME).find(
-      ([, displayName]) => displayName.toLowerCase() === type.toLowerCase(),
+      ([, displayName]) => displayName.toLowerCase() === type.toLowerCase()
     )?.[0] as keyof typeof CUSTOM_MESSAGE_TYPES_DISPLAY_NAME;
     const userAccount = await userService.updateUserCustomMessage({
       userId: message.author.id,

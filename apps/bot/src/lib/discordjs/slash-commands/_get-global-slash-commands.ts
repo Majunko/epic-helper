@@ -13,7 +13,7 @@ export const _getGlobalSlashCommands = async ({
   if (!client.user) return [];
   try {
     const data = await djsRestClient.get(
-      Routes.applicationCommands(client.user.id),
+      Routes.applicationCommands(client.user.id)
     );
 
     return data as ApplicationCommand[];

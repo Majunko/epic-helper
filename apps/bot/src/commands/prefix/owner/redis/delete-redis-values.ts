@@ -19,6 +19,5 @@ export default <PrefixCommand>{
       },
       channelId: message.channel.id,
     });
-
   },
 };

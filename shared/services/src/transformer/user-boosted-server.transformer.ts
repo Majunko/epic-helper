@@ -1,7 +1,7 @@
 import type {IGetUserBoostedServersResponse} from '../database/server.service';
 
 export const toUserBoostedServers = (
-  userBoostedServers: IGetUserBoostedServersResponse[],
+  userBoostedServers: IGetUserBoostedServersResponse[]
 ): IGetUserBoostedServersResponse[] => {
   return userBoostedServers.map((userBoostedServer) => {
     return {

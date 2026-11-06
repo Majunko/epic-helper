@@ -43,5 +43,5 @@ export const userReminderSchema = new Schema<IUserReminder>(
           .limit(1);
       },
     },
-  },
+  }
 );

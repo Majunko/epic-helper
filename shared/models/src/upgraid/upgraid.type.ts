@@ -6,7 +6,7 @@ interface IRecord {
   messageId: string;
 }
 
-interface IUpgraidUser {
+export interface IUpgraidUser {
   uId: string;
   records: IRecord[];
 }

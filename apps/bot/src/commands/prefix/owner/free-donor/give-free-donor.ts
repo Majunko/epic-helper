@@ -1,5 +1,5 @@
 import {PREFIX_COMMAND_TYPE} from '@epic-helper/constants';
-import ms from 'ms';
+import {parseMs} from '@epic-helper/utils';
 import {djsMessageHelper} from '../../../../lib/discordjs/message';
 import {freeDonorService} from '@epic-helper/services';
 
@@ -21,7 +21,7 @@ export default <PrefixCommand>{
       }
     }
     const token = tokenArg ? parseInt(tokenArg) : null;
-    const duration = durationArg ? ms(durationArg) : null;
+    const duration = durationArg ? parseMs(durationArg) : null;
 
     if (mentionedUsers.size === 0 && mentionedUsersId.length === 0) {
       djsMessageHelper.send({

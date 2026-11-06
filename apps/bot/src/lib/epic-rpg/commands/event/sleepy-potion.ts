@@ -11,7 +11,12 @@ interface IRpgUseSleepyPotion {
   isSlashCommand?: boolean;
 }
 
-export const rpgUseSleepyPotion = async ({message, client, isSlashCommand, author}: IRpgUseSleepyPotion) => {
+export const rpgUseSleepyPotion = async ({
+  message,
+  client,
+  isSlashCommand,
+  author,
+}: IRpgUseSleepyPotion) => {
   let event = createRpgCommandListener({
     client,
     author,
@@ -34,7 +39,9 @@ interface IRpgUseSleepyPotionSuccess {
   author: User;
 }
 
-const rpgUseSleepyPotionSuccess = async ({author}: IRpgUseSleepyPotionSuccess) => {
+const rpgUseSleepyPotionSuccess = async ({
+  author,
+}: IRpgUseSleepyPotionSuccess) => {
   await userReminderServices.deleteUserCooldowns({
     userId: author.id,
     types: [
@@ -53,5 +60,4 @@ const rpgUseSleepyPotionSuccess = async ({author}: IRpgUseSleepyPotionSuccess) =
       RPG_COMMAND_TYPE.dungeon,
     ],
   });
-
 };

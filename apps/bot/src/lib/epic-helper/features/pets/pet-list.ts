@@ -2,7 +2,11 @@ import type {EmbedField, User} from 'discord.js';
 import {EmbedBuilder} from 'discord.js';
 import {convertNumToPetId, typedObjectEntries} from '@epic-helper/utils';
 import type {IUserPet} from '@epic-helper/models';
-import type {RPG_PET_SKILL_ASCEND, RPG_PET_SKILL_SPECIAL, TSkillTierNumber} from '@epic-helper/constants';
+import type {
+  RPG_PET_SKILL_ASCEND,
+  RPG_PET_SKILL_SPECIAL,
+  TSkillTierNumber,
+} from '@epic-helper/constants';
 import {
   BOT_COLOR,
   BOT_EMOJI,
@@ -95,7 +99,7 @@ const generatePetSkillsRows = (pet: IUserPet) => {
   }
 
   const eventPet = typedObjectEntries(RPG_PET_TYPE_EVENT).find(
-    ([, value]) => value === pet.name,
+    ([, value]) => value === pet.name
   )?.[0];
   if (eventPet) {
     const skillType = RPG_PET_SKILL_EVENT[eventPet];

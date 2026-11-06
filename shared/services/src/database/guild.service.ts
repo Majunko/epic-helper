@@ -155,7 +155,7 @@ const updateLeader = async ({serverId, roleId, leaderId}: IUpdateLeader) => {
   await dbGuild.findOneAndUpdate(
     {serverId, roleId},
     {$set: {leaderId}},
-    {new: true},
+    {new: true}
   );
   return findGuild({serverId, roleId});
 };
@@ -241,7 +241,7 @@ const weeklyReset = async ({client}: IWeeklyReset) => {
       $set: {
         'info.stealth': 0,
       },
-    },
+    }
   );
 };
 
@@ -264,7 +264,7 @@ const updateToggle = async ({
     query,
     {
       new: true,
-    },
+    }
   );
   return findGuild({serverId, roleId});
 };
@@ -287,7 +287,7 @@ const resetToggle = async ({
     },
     {
       new: true,
-    },
+    }
   );
   return findGuild({serverId, roleId});
 };
@@ -306,7 +306,7 @@ const registerUserToGuild = async ({
   await dbGuild.findOneAndUpdate(
     {serverId, roleId},
     {$addToSet: {membersId: userId}},
-    {new: true},
+    {new: true}
   );
   await dbGuild.findOneAndUpdate(
     {
@@ -314,7 +314,7 @@ const registerUserToGuild = async ({
       membersId: {$in: [userId]},
     },
     {$pull: {membersId: userId}},
-    {new: true},
+    {new: true}
   );
 
   await redisGuildMembers.setGuildMember({
@@ -337,7 +337,7 @@ const registerUsersToGuild = async ({
   await dbGuild.findOneAndUpdate(
     {serverId, roleId},
     {$addToSet: {membersId: {$each: usersId}}},
-    {new: true},
+    {new: true}
   );
   await dbGuild.findOneAndUpdate(
     {
@@ -345,7 +345,7 @@ const registerUsersToGuild = async ({
       membersId: {$in: usersId},
     },
     {$pull: {membersId: {$in: usersId}}},
-    {new: true},
+    {new: true}
   );
 
   await Promise.all(
@@ -354,8 +354,8 @@ const registerUsersToGuild = async ({
         guildRoleId: roleId,
         serverId,
         userId,
-      }),
-    ),
+      })
+    )
   );
 };
 
@@ -373,7 +373,7 @@ const removeUserFromGuild = async ({
   await dbGuild.findOneAndUpdate(
     {serverId, roleId},
     {$pull: {membersId: userId}},
-    {new: true},
+    {new: true}
   );
 
   await redisGuildMembers.removeGuildInfo({

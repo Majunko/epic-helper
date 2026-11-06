@@ -1,5 +1,10 @@
 import type {IGuild} from '@epic-helper/models';
-import type {BaseInteraction, BaseMessageOptions, Guild, StringSelectMenuInteraction} from 'discord.js';
+import type {
+  BaseInteraction,
+  BaseMessageOptions,
+  Guild,
+  StringSelectMenuInteraction,
+} from 'discord.js';
 import {ActionRowBuilder, StringSelectMenuBuilder} from 'discord.js';
 import {generateNavigationRow} from './pagination-row';
 
@@ -23,7 +28,9 @@ export const guildSelectorHelper = ({
   let guildId = currentGuildRoleId;
 
   const getSelector = () => {
-    const components: BaseMessageOptions['components'] = [];
+    const components: Array<
+      NonNullable<BaseMessageOptions['components']>[number]
+    > = [];
     const selector = _getPageSelector({
       guilds,
       page,

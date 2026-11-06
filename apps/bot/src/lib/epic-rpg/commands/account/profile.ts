@@ -83,7 +83,10 @@ const rpgProfileSuccess = async ({
     channelId: channel.id,
     timeTravels: profile.timeTravels,
   });
-  if (profile.currentArea && userAccount?.rpgInfo.currentArea !== profile.currentArea) {
+  if (
+    profile.currentArea &&
+    userAccount?.rpgInfo.currentArea !== profile.currentArea
+  ) {
     await userService.updateUserCurrentArea({
       userId: author.id,
       area: profile.currentArea,

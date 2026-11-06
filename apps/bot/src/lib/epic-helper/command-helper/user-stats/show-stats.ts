@@ -54,5 +54,4 @@ export const _showStats = async ({client, author, serverId}: IShowStats) => {
     replyInteraction,
     hasComponents: isDonor,
   };
-
 };

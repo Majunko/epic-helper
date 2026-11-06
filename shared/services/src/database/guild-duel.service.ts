@@ -27,7 +27,7 @@ const addLog = async ({
       weekAt: getGuildWeek(),
     })
     .lean();
-  let query = {};
+  let query: Record<string, any>;
   const arrayFilters: {[p: string]: any}[] = [];
   if (currentLog?.users.some((user) => user.userId === userId)) {
     query = {
@@ -61,7 +61,7 @@ const addLog = async ({
       upsert: true,
       arrayFilters,
       new: true,
-    },
+    }
   );
   return updatedDuel ?? null;
 };
@@ -105,7 +105,7 @@ const modifyUserDuel = async ({
     weekAt: getGuildWeek(),
   });
   const isUserExists = currentLog?.users.some((user) => user.userId === userId);
-  let query = {};
+  let query: Record<string, any>;
   const arrayFilters: {[p: string]: any}[] = [];
   if (isUserExists) {
     query = {
@@ -138,7 +138,7 @@ const modifyUserDuel = async ({
     {
       upsert: true,
       arrayFilters,
-    },
+    }
   );
   return updatedDuel ?? null;
 };
@@ -190,7 +190,7 @@ const resetGuildDuel = async ({serverId, roleId}: IResetGuildDuel) => {
     {
       upsert: true,
       new: true,
-    },
+    }
   );
   return updatedDuel ?? null;
 };
@@ -236,7 +236,7 @@ const undoUserDuel = async ({
         },
       ],
       new: true,
-    },
+    }
   );
   return updatedDuel ?? null;
 };

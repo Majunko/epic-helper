@@ -1,4 +1,8 @@
-import {donorService, freeDonorService, serverService} from '@epic-helper/services';
+import {
+  donorService,
+  freeDonorService,
+  serverService,
+} from '@epic-helper/services';
 import {DONOR_TOKEN_AMOUNT} from '@epic-helper/constants';
 import type {BaseMessageOptions} from 'discord.js';
 
@@ -29,7 +33,7 @@ export const _useEpicToken = async ({
   const remainingTokens = totalTokens - usedTokens;
   if (totalTokens === 0) {
     return {
-      content: 'You don\'t have any tokens to boost servers.',
+      content: "You don't have any tokens to boost servers.",
     };
   }
   if (remainingTokens < token) {

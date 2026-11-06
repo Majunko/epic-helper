@@ -5,7 +5,12 @@ import type {Client, User} from 'discord.js';
 import {EmbedBuilder} from 'discord.js';
 import {toggleGuildChecker} from '../../../toggle-checker/guild';
 import {BOT_COLOR} from '@epic-helper/constants';
-import {guildDuelService, guildService, redisServerInfo, userDuelService} from '@epic-helper/services';
+import {
+  guildDuelService,
+  guildService,
+  redisServerInfo,
+  userDuelService,
+} from '@epic-helper/services';
 
 interface IRegisterUserDuel {
   author: User;

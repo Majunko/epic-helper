@@ -1,6 +1,10 @@
 import type {BaseMessageOptions, User} from 'discord.js';
 import {EmbedBuilder} from 'discord.js';
-import {userPetServices, userReminderServices, userService} from '@epic-helper/services';
+import {
+  userPetServices,
+  userReminderServices,
+  userService,
+} from '@epic-helper/services';
 import {BOT_COLOR} from '@epic-helper/constants';
 
 interface ITurnOnAccount {
@@ -37,5 +41,5 @@ const embed = new EmbedBuilder()
         '- Material calculator\n' +
         '- Guild reminder\n' +
         '- Guild duel logger\n',
-    },
+    }
   );

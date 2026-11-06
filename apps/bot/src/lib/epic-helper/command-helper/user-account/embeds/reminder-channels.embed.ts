@@ -1,7 +1,11 @@
 import type {IUser} from '@epic-helper/models';
 import type {User} from 'discord.js';
 import {EmbedBuilder} from 'discord.js';
-import {BOT_CLICKABLE_SLASH_COMMANDS, BOT_COLOR, RPG_COMMAND_TYPE} from '@epic-helper/constants';
+import {
+  BOT_CLICKABLE_SLASH_COMMANDS,
+  BOT_COLOR,
+  RPG_COMMAND_TYPE,
+} from '@epic-helper/constants';
 import messageFormatter from '../../../../discordjs/message-formatter';
 import type {ValuesOf} from '@epic-helper/types';
 
@@ -120,7 +124,7 @@ export const _getUserReminderChannelEmbed = ({
     .setColor(BOT_COLOR.embed)
     .setThumbnail(author.avatarURL())
     .setDescription(
-      `**Default**: ${messageFormatter.channel(userProfile.channel.all)}`,
+      `**Default**: ${messageFormatter.channel(userProfile.channel.all)}`
     );
 
   for (const field of cmd) {

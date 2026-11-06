@@ -26,7 +26,7 @@ export const _serverDonorRoleSettings = async ({
     const rolesToAdd = rolesId.filter(
       (roleId) =>
         !serverAccount.donor.roles.includes(roleId) &&
-        server.roles.cache.has(roleId),
+        server.roles.cache.has(roleId)
     );
 
     await serverService.addDonorRoles({
@@ -39,7 +39,7 @@ export const _serverDonorRoleSettings = async ({
   const removeRoles = async (rolesId: string[]) => {
     if (!server || !serverAccount) return;
     const rolesToRemove = rolesId.filter((roleId) =>
-      serverAccount.donor.roles.includes(roleId),
+      serverAccount.donor.roles.includes(roleId)
     );
 
     await serverService.removeDonorRoles({

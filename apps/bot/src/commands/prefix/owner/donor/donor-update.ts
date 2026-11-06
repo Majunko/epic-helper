@@ -3,7 +3,6 @@ import {djsMessageHelper} from '../../../../lib/discordjs/message';
 import {donorService} from '@epic-helper/services';
 import {PATREON_PATRON_STATUS, patreonApi} from '@epic-helper/libs';
 
-
 export default <PrefixCommand>{
   name: 'donorUpdate',
   commands: ['donor update', 'donor u', 'd update', 'd u'],
@@ -24,8 +23,10 @@ export default <PrefixCommand>{
         },
         tier: patron.currentTier,
         expiresAt: patron.subscription.nextChargeDate,
-        active: patron.subscription.patronStatus === PATREON_PATRON_STATUS.activePatron,
-      })),
+        active:
+          patron.subscription.patronStatus ===
+          PATREON_PATRON_STATUS.activePatron,
+      }))
     );
     await djsMessageHelper.send({
       options: {

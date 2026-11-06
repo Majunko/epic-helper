@@ -38,7 +38,7 @@ export const _removeRoles = async ({
       clusterId: client.cluster?.id,
       logLevel: 'error',
       message: `Failed to remove roles ${roleIds.join(
-        ', ',
+        ', '
       )} to ${userId} in ${serverId}`,
       variant: 'add-roles',
     });

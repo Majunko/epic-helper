@@ -4,7 +4,12 @@ import {convertNumToPetId} from '@epic-helper/utils';
 import {convertNumberToRoman} from '../../../../utils/roman-conversion';
 import timestampHelper from '../../../discordjs/timestamp';
 import type {IUserPet} from '@epic-helper/models';
-import {BOT_COLOR, BOT_EMOJI, RPG_PET_ADV_STATUS, RPG_PET_TYPE} from '@epic-helper/constants';
+import {
+  BOT_COLOR,
+  BOT_EMOJI,
+  RPG_PET_ADV_STATUS,
+  RPG_PET_TYPE,
+} from '@epic-helper/constants';
 import {userPetServices} from '@epic-helper/services';
 
 export const PET_CD_PET_PAGE = 21;
@@ -59,7 +64,7 @@ const generateEmbedFields = (pets: IUserPet[]) => {
     const petId = convertNumToPetId(pet.petId);
     const petTier = convertNumberToRoman(pet.tier);
     const petNameKey = Object.entries(RPG_PET_TYPE).find(
-      ([, value]) => value === pet.name,
+      ([, value]) => value === pet.name
     )?.[0] as keyof typeof RPG_PET_TYPE;
     const petEmoji = petNameKey ? BOT_EMOJI.pet[petNameKey] : '';
     const statusText = getStatusText(pet);

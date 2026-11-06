@@ -26,17 +26,17 @@ export const _getTTVerificationSettingsEmbed = ({
         name: 'RULES',
         value: settings?.rules.length
           ? settings.rules
-            .sort((a, b) => a.minTT - b.minTT)
-            .map((rule) => {
-              return (
-                `**Role:** ${messageFormatter.role(rule.roleId)}\n` +
-                `**Range:** ${rule.minTT} -> ${rule.maxTT ?? '∞'}\n` +
-                `**Message:** ${rule.message ?? '-'}\n`
-              );
-            })
-            .join('\n')
+              .sort((a, b) => a.minTT - b.minTT)
+              .map((rule) => {
+                return (
+                  `**Role:** ${messageFormatter.role(rule.roleId)}\n` +
+                  `**Range:** ${rule.minTT} -> ${rule.maxTT ?? '∞'}\n` +
+                  `**Message:** ${rule.message ?? '-'}\n`
+                );
+              })
+              .join('\n')
           : '-',
         inline: false,
-      },
+      }
     );
 };

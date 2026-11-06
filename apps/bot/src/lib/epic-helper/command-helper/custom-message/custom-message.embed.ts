@@ -13,7 +13,6 @@ import ms from 'ms';
 import type {IToggleUserCheckerReturnType} from '../../toggle-checker/user';
 import type {ValuesOf} from '@epic-helper/types';
 
-
 export interface IGetCustomMessageEmbed {
   client: Client;
   author: User;
@@ -37,7 +36,7 @@ export const _getCustomMessageEmbed = ({
     .setColor(BOT_COLOR.embed);
 
   const pageToRender = CUSTOM_MESSAGE_PAGES.find(
-    (page) => page.id === pageType,
+    (page) => page.id === pageType
   )!;
 
   switch (pageType) {
@@ -68,7 +67,7 @@ export const _getCustomMessageEmbed = ({
             type,
             userId: author.id,
             readyAt: new Date(Date.now() + ms('1h')),
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+
             // @ts-ignore
             props: getReminderProps[type] ?? {},
           },
@@ -98,7 +97,7 @@ export const _getCustomMessageEmbed = ({
           value: Object.values(CUSTOM_MESSAGE_TYPES_DISPLAY_NAME)
             .map((type) => `\`${type}\``)
             .join(' '),
-        },
+        }
       );
       break;
   }

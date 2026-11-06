@@ -1,5 +1,8 @@
 import type {RPG_COMMAND_TYPE} from '@epic-helper/constants';
-import {BOT_CUSTOM_MESSAGE_TYPES, BOT_CUSTOM_MESSAGE_VARIABLES} from '@epic-helper/constants';
+import {
+  BOT_CUSTOM_MESSAGE_TYPES,
+  BOT_CUSTOM_MESSAGE_VARIABLES,
+} from '@epic-helper/constants';
 import type {ValuesOf} from '@epic-helper/types';
 
 export const CUSTOM_MESSAGE_PAGE_TYPE = {
@@ -50,9 +53,7 @@ export const CUSTOM_MESSAGE_PAGES: IPage[] = [
   {
     id: CUSTOM_MESSAGE_PAGE_TYPE.event,
     label: 'Event',
-    rows: [
-      {label: 'Xmas Chimney', type: 'xmasChimney'},
-    ],
+    rows: [{label: 'Xmas Chimney', type: 'xmasChimney'}],
   },
 ];
 

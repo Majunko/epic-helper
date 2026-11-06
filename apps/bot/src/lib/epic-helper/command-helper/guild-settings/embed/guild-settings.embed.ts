@@ -56,7 +56,7 @@ export const _getGuildSettingsEmbed = ({
               : '-'
           }`,
         ].join('\n'),
-      },
+      }
     );
 
   return embed;

@@ -2,7 +2,7 @@ import {mongoClient} from '../clients/mongoose.service';
 import type {IDonor} from '@epic-helper/models';
 import {donorSchema} from '@epic-helper/models';
 import type {DONOR_TIER} from '@epic-helper/constants';
-import type {FilterQuery, Promise, QueryOptions} from 'mongoose';
+import type {Promise, QueryOptions} from 'mongoose';
 import {redisDonor} from '../redis/donor.redis';
 import {redisUserBoostedServers} from '../redis/user-boosted-servers.redis';
 import type {ValuesOf} from '@epic-helper/types';
@@ -64,7 +64,7 @@ interface IGetDonors {
 }
 
 const getDonors = async ({tier, page, limit}: IGetDonors) => {
-  const query: FilterQuery<IDonor> = {};
+  const query: Record<string, any> = {};
   if (tier) query.tier = tier;
   const options: QueryOptions<IDonor> = {
     sort: {
@@ -75,7 +75,7 @@ const getDonors = async ({tier, page, limit}: IGetDonors) => {
     options.skip = page * limit;
     options.limit = limit;
   }
-  const data = await dbDonor.find(query, null, options);
+  const data = await dbDonor.find(query, undefined, options);
   const total = await dbDonor.countDocuments(query);
   return {
     data,
@@ -91,12 +91,12 @@ const findDonor = async ({discordUserId}: IFindDonor) => {
   const cachedDonor = await redisDonor.findDonor(discordUserId);
   if (cachedDonor) return cachedDonor;
 
-  const query: FilterQuery<IDonor> = {};
+  const query: Record<string, any> = {};
   if (discordUserId) query['discord.userId'] = discordUserId;
-  const donor = await dbDonor.findOne(query);
+  const donor = await dbDonor.findOne(query).lean();
 
   if (donor) {
-    await redisDonor.setDonor(discordUserId, donor);
+    await redisDonor.setDonor(discordUserId, donor as IDonor);
   }
 
   return donor ?? null;
@@ -107,4 +107,3 @@ export const donorService = {
   getDonors,
   findDonor,
 };
-

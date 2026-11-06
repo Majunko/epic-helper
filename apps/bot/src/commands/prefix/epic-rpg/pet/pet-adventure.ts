@@ -1,4 +1,8 @@
-import {PREFIX_COMMAND_TYPE, USER_ACC_OFF_ACTIONS, USER_NOT_REGISTERED_ACTIONS} from '@epic-helper/constants';
+import {
+  PREFIX_COMMAND_TYPE,
+  USER_ACC_OFF_ACTIONS,
+  USER_NOT_REGISTERED_ACTIONS,
+} from '@epic-helper/constants';
 import {rpgPetAdventure} from '../../../../lib/epic-rpg/commands/pets/pet-adventure';
 
 const args1 = ['pets', 'pet'];
@@ -8,10 +12,10 @@ const args3 = ['learn', 'drill', 'find', 'cancel'];
 function generateAllPossibleCommands(
   args1: string[],
   args2: string[],
-  args3: string[],
+  args3: string[]
 ) {
   return args1.flatMap((arg1) =>
-    args2.flatMap((arg2) => args3.map((arg3) => `${arg1} ${arg2} ${arg3}`)),
+    args2.flatMap((arg2) => args3.map((arg3) => `${arg1} ${arg2} ${arg3}`))
   );
 }
 

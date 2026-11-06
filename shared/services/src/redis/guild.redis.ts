@@ -16,7 +16,7 @@ const setGuild = async (serverId: string, roleId: string, guild: IGuild) => {
 
 const getGuild = async (
   serverId: string,
-  roleId: string,
+  roleId: string
 ): Promise<IGuild | null> => {
   const key = getKey(serverId, roleId);
   const guild = await redisService.get(key);

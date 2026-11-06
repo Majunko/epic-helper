@@ -1,15 +1,23 @@
-import type {RPG_AREA, RPG_COMMAND_TYPE, RPG_DONOR_TIER, RPG_ENCHANT_LEVEL} from '@epic-helper/constants';
+import type {
+  RPG_AREA,
+  RPG_COMMAND_TYPE,
+  RPG_DONOR_TIER,
+  RPG_ENCHANT_LEVEL,
+} from '@epic-helper/constants';
 import redisUserAccount from '../redis/user-account.redis';
 import userAccountRedis from '../redis/user-account.redis';
-import type {IUser, IUserToggle, USER_STATS_RPG_COMMAND_TYPE} from '@epic-helper/models';
+import type {
+  IUser,
+  IUserToggle,
+  USER_STATS_RPG_COMMAND_TYPE,
+} from '@epic-helper/models';
 import {userSchema} from '@epic-helper/models';
 import mongooseLeanDefaults from 'mongoose-lean-defaults';
 import {mongoClient} from '../clients/mongoose.service';
 import type {ValuesOf} from '@epic-helper/types';
 import type {UpdateQuery} from 'mongoose';
 
-
-userSchema.post('findOneAndUpdate', async function(doc) {
+userSchema.post('findOneAndUpdate', async function (doc) {
   if (!doc) return;
   await userAccountRedis.setUser(doc.userId, doc);
 });
@@ -56,7 +64,7 @@ const userAccountOn = async (userId: string): Promise<void> => {
         'config.onOff': true,
       },
     },
-    {new: true},
+    {new: true}
   );
 };
 
@@ -70,7 +78,7 @@ const userAccountOff = async (userId: string): Promise<void> => {
         'config.onOff': false,
       },
     },
-    {new: true},
+    {new: true}
   );
 };
 
@@ -82,7 +90,7 @@ const userAccountDelete = async (userId: string): Promise<void> => {
 };
 
 const isUserAccountExist = async (userId: string): Promise<boolean> => {
-  const user = await dbUser.count({
+  const user = await dbUser.countDocuments({
     userId,
   });
   return user > 0;
@@ -106,7 +114,7 @@ const updateRpgDonorTier = async ({
         'config.donor': tier,
       },
     },
-    {new: true},
+    {new: true}
   );
 };
 
@@ -128,7 +136,7 @@ const updateRpgDonorPTier = async ({
         'config.donorP': tier,
       },
     },
-    {new: true},
+    {new: true}
   );
 };
 
@@ -142,7 +150,7 @@ const removeRpgDonorPTier = async (userId: string): Promise<void> => {
         'config.donorP': '',
       },
     },
-    {new: true},
+    {new: true}
   );
 };
 
@@ -189,7 +197,7 @@ const updateUserRubyAmount = async ({
     query,
     {
       new: true,
-    },
+    }
   );
 };
 
@@ -216,7 +224,7 @@ const setUserEnchantTier = async ({
         'config.enchant': tier,
       },
     },
-    {new: true},
+    {new: true}
   );
 };
 
@@ -236,7 +244,7 @@ const removeUserEnchantTier = async ({
         'config.enchant': '',
       },
     },
-    {new: true},
+    {new: true}
   );
 };
 
@@ -267,7 +275,7 @@ const removeUserHealReminder = async ({
         'config.heal': '',
       },
     },
-    {new: true},
+    {new: true}
   );
 };
 
@@ -300,7 +308,7 @@ const setUserHealReminder = async ({
         'config.heal': hp,
       },
     },
-    {new: true},
+    {new: true}
   );
 };
 
@@ -327,7 +335,7 @@ const setUserReminderChannel = async ({
     {
       $set: updateQuery,
     },
-    {new: true},
+    {new: true}
   );
 };
 
@@ -352,7 +360,7 @@ const removeUserReminderChannel = async ({
     {
       $unset: updateQuery,
     },
-    {new: true},
+    {new: true}
   );
 };
 
@@ -388,7 +396,7 @@ const updateUserToggle = async ({
     query,
     {
       new: true,
-    },
+    }
   );
   await redisUserAccount.delUser(userId);
   return await getUserAccount(userId);
@@ -412,7 +420,7 @@ const resetUserToggle = async ({
     },
     {
       new: true,
-    },
+    }
   );
 
   return await getUserAccount(userId);
@@ -451,7 +459,7 @@ const updateUserCustomMessage = async ({
     },
     {
       new: true,
-    },
+    }
   );
   return await getUserAccount(userId);
 };
@@ -474,7 +482,7 @@ const resetUserCustomMessage = async ({
     },
     {
       new: true,
-    },
+    }
   );
   return await getUserAccount(userId);
 };
@@ -515,7 +523,7 @@ const updateBestStats = async ({userId, type, value}: IUpdateBestStats) => {
     },
     {
       new: true,
-    },
+    }
   );
 };
 
@@ -534,7 +542,7 @@ const updateUserMaxArea = async ({userId, area}: IUpdateUserMaxArea) => {
     },
     {
       new: true,
-    },
+    }
   );
 };
 
@@ -543,7 +551,10 @@ interface IUpdateUserCurrentArea {
   area: keyof typeof RPG_AREA;
 }
 
-const updateUserCurrentArea = async ({userId, area}: IUpdateUserCurrentArea) => {
+const updateUserCurrentArea = async ({
+  userId,
+  area,
+}: IUpdateUserCurrentArea) => {
   await dbUser.findOneAndUpdate(
     {userId},
     {
@@ -553,7 +564,7 @@ const updateUserCurrentArea = async ({userId, area}: IUpdateUserCurrentArea) => 
     },
     {
       new: true,
-    },
+    }
   );
 };
 
@@ -563,7 +574,11 @@ interface IUpdateUserPocketWatch {
   percent: number;
 }
 
-const updateUserPocketWatch = async ({userId, percent, owned}: IUpdateUserPocketWatch) => {
+const updateUserPocketWatch = async ({
+  userId,
+  percent,
+  owned,
+}: IUpdateUserPocketWatch) => {
   await dbUser.findOneAndUpdate(
     {userId},
     {
@@ -576,7 +591,7 @@ const updateUserPocketWatch = async ({userId, percent, owned}: IUpdateUserPocket
     },
     {
       new: true,
-    },
+    }
   );
 };
 
@@ -586,7 +601,11 @@ interface ISaveUserGroupCooldowns {
   types: (keyof typeof RPG_COMMAND_TYPE)[];
 }
 
-const saveUserGroupCooldowns = async ({userId, users, types}: ISaveUserGroupCooldowns) => {
+const saveUserGroupCooldowns = async ({
+  userId,
+  users,
+  types,
+}: ISaveUserGroupCooldowns) => {
   const user = await getUserAccount(userId);
   if (!user) return;
   for (const targetUserId of users) {
@@ -609,7 +628,7 @@ const saveUserGroupCooldowns = async ({userId, users, types}: ISaveUserGroupCool
     },
     {
       new: true,
-    },
+    }
   );
 };
 
@@ -627,7 +646,7 @@ const resetGroupCooldowns = async ({userId}: IResetGroupCooldowns) => {
     },
     {
       new: true,
-    },
+    }
   );
 };
 
@@ -636,7 +655,10 @@ interface IRemoveUsersFromGroupCooldowns {
   users: string[];
 }
 
-const removeUsersFromGroupCooldowns = async ({userId, users}: IRemoveUsersFromGroupCooldowns) => {
+const removeUsersFromGroupCooldowns = async ({
+  userId,
+  users,
+}: IRemoveUsersFromGroupCooldowns) => {
   await dbUser.findOneAndUpdate(
     {userId},
     {
@@ -650,7 +672,7 @@ const removeUsersFromGroupCooldowns = async ({userId, users}: IRemoveUsersFromGr
     },
     {
       new: true,
-    },
+    }
   );
 };
 
@@ -665,7 +687,6 @@ const getUsersAccount = async ({usersId}: IGetUsersAccount) => {
     if (user) users.push(user);
   }
   return users;
-
 };
 
 interface IGetUserByChannelIds {
@@ -673,11 +694,12 @@ interface IGetUserByChannelIds {
 }
 
 const getUserByChannelIds = async ({channelIds}: IGetUserByChannelIds) => {
-  const users = await dbUser.find({
-    'channel.all': {
-      $in: channelIds,
-    },
-  })
+  const users = await dbUser
+    .find({
+      'channel.all': {
+        $in: channelIds,
+      },
+    })
     .select({
       userId: 1,
     })

@@ -170,7 +170,7 @@ export const showArenaCooldown = async ({
     embed.setDescription(
       `Your **Arena** command is on cooldown! ${timestampHelper.relative({
         time: cooldown.readyAt.getTime(),
-      })}`,
+      })}`
     );
   } else {
     embed.setDescription('Your **Arena** command is ready!');
@@ -212,7 +212,7 @@ export const showMinibossCooldown = async ({
     embed.setDescription(
       `Your **Miniboss** command is on cooldown! ${timestampHelper.relative({
         time: cooldown.readyAt.getTime(),
-      })}`,
+      })}`
     );
   } else {
     embed.setDescription('Your **Miniboss** command is ready!');

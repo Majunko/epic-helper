@@ -54,15 +54,15 @@ export const _verifyTT = async ({
 
   const fulfilledRoles = ttVerificationSettings.rules.filter(
     (rule) =>
-      rule.minTT <= timeTravels && (!rule.maxTT || rule.maxTT >= timeTravels),
+      rule.minTT <= timeTravels && (!rule.maxTT || rule.maxTT >= timeTravels)
   );
   const notFulfilledRoles = ttVerificationSettings.rules.filter(
     (rule) =>
-      rule.minTT > timeTravels || (rule.maxTT && rule.maxTT < timeTravels),
+      rule.minTT > timeTravels || (rule.maxTT && rule.maxTT < timeTravels)
   );
 
   const rolesToAssign = fulfilledRoles.filter(
-    (role) => !member.roles.cache.has(role.roleId),
+    (role) => !member.roles.cache.has(role.roleId)
   );
   if (rolesToAssign.length) {
     await djsMemberHelper.addRoles({
@@ -74,7 +74,7 @@ export const _verifyTT = async ({
   }
 
   const rolesToRemove = notFulfilledRoles.filter((role) =>
-    member.roles.cache.has(role.roleId),
+    member.roles.cache.has(role.roleId)
   );
   if (rolesToRemove.length) {
     await djsMemberHelper.removeRoles({
@@ -172,7 +172,7 @@ const checkTokenStatus = async ({
         [
           'TT Verification has been disabled due to insufficient EPIC Tokens',
           `You can check the status in server settings \`${PREFIX.bot}ss\``,
-        ].join('\n'),
+        ].join('\n')
       );
     await djsMessageHelper.send({
       client,

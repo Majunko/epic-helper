@@ -15,7 +15,7 @@ export default <PrefixCommand>{
     const isGuild = message.content.includes('--guild');
     const isGlobal = message.content.includes('--global');
     const commandsToRegister = slashCommands.filter((sc) =>
-      args.includes(sc.name),
+      args.includes(sc.name)
     );
     if (!commandsToRegister.length)
       return djsMessageHelper.send({
@@ -46,7 +46,6 @@ export default <PrefixCommand>{
     if (!sentMessage) return;
     if (isGuild) {
       for (const command of commandsToRegister) {
-
         // ==== Register guild slash command ====
         await djsRestHelper.slashCommand.guild.createOne({
           client,
@@ -69,7 +68,6 @@ export default <PrefixCommand>{
       }
     } else if (isGlobal) {
       for (const command of commandsToRegister) {
-
         // ==== Register global slash command ====
         await djsRestHelper.slashCommand.global.createOne({
           client,

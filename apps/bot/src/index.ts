@@ -49,15 +49,16 @@ manager.on('clusterCreate', (cluster) => {
         }
         break;
     }
-
   });
 });
-manager.spawn({
-  timeout: -1,
-}).catch((error) => {
-  logger({
-    message: error.message,
+manager
+  .spawn({
+    timeout: -1,
+  })
+  .catch((error) => {
+    logger({
+      message: error.message,
+    });
   });
-});
 
 manager.extend(new ReClusterManager());

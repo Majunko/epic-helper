@@ -44,15 +44,16 @@ interface IRpgArtifactsSuccess {
   author: User;
 }
 
-const rpgArtifactsSuccess = async ({
-  embed,
-  author,
-}: IRpgArtifactsSuccess) => {
+const rpgArtifactsSuccess = async ({embed, author}: IRpgArtifactsSuccess) => {
   const artifacts = embedReaders.artifacts(embed);
   const userAccount = await userService.getUserAccount(author.id);
 
-  if (userAccount?.rpgInfo.artifacts.pocketWatch.owned !== artifacts.pocketWatch ||
-    userAccount?.rpgInfo.artifacts.pocketWatch.percent !== artifacts.pocketWatchPercent) {
+  if (
+    userAccount?.rpgInfo.artifacts.pocketWatch.owned !==
+      artifacts.pocketWatch ||
+    userAccount?.rpgInfo.artifacts.pocketWatch.percent !==
+      artifacts.pocketWatchPercent
+  ) {
     await userService.updateUserPocketWatch({
       userId: author.id,
       owned: artifacts.pocketWatch,

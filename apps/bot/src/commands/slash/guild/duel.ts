@@ -1,5 +1,8 @@
 import {SLASH_COMMAND} from '../constant';
-import {USER_ACC_OFF_ACTIONS, USER_NOT_REGISTERED_ACTIONS} from '@epic-helper/constants';
+import {
+  USER_ACC_OFF_ACTIONS,
+  USER_NOT_REGISTERED_ACTIONS,
+} from '@epic-helper/constants';
 import commandHelper from '../../../lib/epic-helper/command-helper';
 import djsInteractionHelper from '../../../lib/discordjs/interaction';
 
@@ -14,12 +17,12 @@ export default <SlashCommand>{
         option
           .setName('role')
           .setDescription('Select the role of the guild to update')
-          .setRequired(true),
+          .setRequired(true)
       )
       .addChannelOption((option) =>
         option
           .setName('channel')
-          .setDescription('Channel to send duel log message'),
+          .setDescription('Channel to send duel log message')
       ),
   preCheck: {
     userAccOff: USER_ACC_OFF_ACTIONS.skip,

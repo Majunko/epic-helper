@@ -8,7 +8,10 @@ import type {
   User,
 } from 'discord.js';
 import type {ScheduleOptions} from 'node-cron';
-import type {PREFIX_COMMAND_TYPE, SLASH_MESSAGE_BOT_TYPE} from '@epic-helper/constants';
+import type {
+  PREFIX_COMMAND_TYPE,
+  SLASH_MESSAGE_BOT_TYPE,
+} from '@epic-helper/constants';
 import type {ICommandPreCheck} from './utils';
 import type {ValuesOf} from '@epic-helper/types';
 
@@ -19,7 +22,7 @@ declare global {
     execute: (
       client: Client,
       message: Message<true>,
-      args: string[],
+      args: string[]
     ) => void | Promise<void>;
     preCheck: ICommandPreCheck;
     type: ValuesOf<typeof PREFIX_COMMAND_TYPE>;
@@ -35,7 +38,7 @@ declare global {
     description: string;
     execute: (
       client: Client,
-      interaction: ChatInputCommandInteraction,
+      interaction: ChatInputCommandInteraction
     ) => Promise<void>;
     preCheck: ICommandPreCheck;
   }
@@ -50,7 +53,7 @@ declare global {
     groupName?: string;
     commandName: string;
     builder?: (
-      subcommand: SlashCommandSubcommandBuilder,
+      subcommand: SlashCommandSubcommandBuilder
     ) => SlashCommandSubcommandBuilder;
   }
 
@@ -67,7 +70,7 @@ declare global {
     execute: (
       client: Client,
       message: Message<true>,
-      author: User,
+      author: User
     ) => Promise<void>;
   }
 

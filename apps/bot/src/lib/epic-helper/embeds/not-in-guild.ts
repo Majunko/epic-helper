@@ -8,6 +8,6 @@ export const _notInGuild = async () => {
       [
         'You are not registered in a guild!',
         'If you think this is a mistake, please send `rpg guild` in your guild server to register',
-      ].join('\n'),
+      ].join('\n')
     );
 };

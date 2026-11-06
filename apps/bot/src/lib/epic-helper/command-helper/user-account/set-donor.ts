@@ -1,6 +1,15 @@
 import type {BaseMessageOptions, User} from 'discord.js';
-import {ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder} from 'discord.js';
-import {BOT_CLICKABLE_SLASH_COMMANDS, BOT_COLOR, RPG_DONOR_TIER} from '@epic-helper/constants';
+import {
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  EmbedBuilder,
+} from 'discord.js';
+import {
+  BOT_CLICKABLE_SLASH_COMMANDS,
+  BOT_COLOR,
+  RPG_DONOR_TIER,
+} from '@epic-helper/constants';
 import {userService} from '@epic-helper/services';
 import type {ValuesOf} from '@epic-helper/types';
 
@@ -17,7 +26,7 @@ export const _setDonor = ({author}: ISetDonor) => {
   }
 
   async function responseInteraction(
-    customId: string,
+    customId: string
   ): Promise<BaseMessageOptions | null> {
     let tier: ValuesOf<typeof RPG_DONOR_TIER> | null = null;
     if (customId === 'non-donor') {
@@ -63,7 +72,7 @@ const row = new ActionRowBuilder<ButtonBuilder>().addComponents(
   new ButtonBuilder()
     .setCustomId('0.65')
     .setLabel('-35%')
-    .setStyle(ButtonStyle.Primary),
+    .setStyle(ButtonStyle.Primary)
 );
 
 const RESPONSE_MSG = {
@@ -79,7 +88,7 @@ const getSuccessEmbed = (tier: ValuesOf<typeof RPG_DONOR_TIER>) => {
   embed.setTitle(RESPONSE_MSG[tier]);
 
   embed.setDescription(
-    `If you wish to hunt with your partner's cooldown, you can setup via ${BOT_CLICKABLE_SLASH_COMMANDS.accountDonorPartner}`,
+    `If you wish to hunt with your partner's cooldown, you can setup via ${BOT_CLICKABLE_SLASH_COMMANDS.accountDonorPartner}`
   );
 
   return embed;

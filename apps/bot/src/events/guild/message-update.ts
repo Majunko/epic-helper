@@ -39,7 +39,9 @@ export default <BotEvent>{
 };
 
 const isBotSlashCommand = (message: Message) =>
-  message.interaction && message.author.bot && message.author.id === EPIC_RPG_ID;
+  message.interaction &&
+  message.author.bot &&
+  message.author.id === EPIC_RPG_ID;
 
 const isFirstUpdateAfterDeferred = (oldMessage: Message) =>
   oldMessage.content === '' && oldMessage.embeds.length === 0;
@@ -48,6 +50,6 @@ const searchSlashMessages = (client: Client, message: Message) =>
   client.slashMessages.filter((cmd) =>
     cmd.commandName.some(
       (name) =>
-        name.toLowerCase() === message.interaction?.commandName?.toLowerCase(),
-    ),
+        name.toLowerCase() === message.interaction?.commandName?.toLowerCase()
+    )
   );

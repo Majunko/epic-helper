@@ -18,8 +18,10 @@ type ToggleMentionsOptions =
 type CustomMessageOptions = keyof typeof RPG_COMMAND_TYPE | 'all';
 type ReminderChannelOptions = keyof typeof RPG_COMMAND_TYPE | 'all';
 
-export interface IUserToggle
-  extends Record<string, boolean | Record<string, boolean>> {
+export interface IUserToggle extends Record<
+  string,
+  boolean | Record<string, boolean>
+> {
   dm: Record<ToggleDmOptions, boolean>;
   reminder: Record<ToggleReminderOptions, boolean>;
   mentions: Record<ToggleMentionsOptions, boolean>;
@@ -67,7 +69,7 @@ export interface IUser {
       pocketWatch: {
         owned: boolean;
         percent: number;
-      }
+      };
     };
   };
   items: {

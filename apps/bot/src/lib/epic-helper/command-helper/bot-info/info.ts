@@ -1,6 +1,10 @@
 import type {Client, Guild} from 'discord.js';
 import {EmbedBuilder} from 'discord.js';
-import {BOT_COLOR, BOT_INVITE_LINK, SUPPORT_SERVER_INVITE_LINK} from '@epic-helper/constants';
+import {
+  BOT_COLOR,
+  BOT_INVITE_LINK,
+  SUPPORT_SERVER_INVITE_LINK,
+} from '@epic-helper/constants';
 import {getUptime} from '../../../../utils/uptime';
 
 interface IInfo {
@@ -36,7 +40,7 @@ export const _info = async ({client, server}: IInfo): Promise<EmbedBuilder> => {
       name: '**Cluster**',
       value: `${clusterId + 1}/${totalCluster}`,
       inline: true,
-    },
+    }
   );
 
   embed.addFields({

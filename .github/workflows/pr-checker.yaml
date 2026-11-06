@@ -4,7 +4,7 @@ on:
   pull_request:
     paths-ignore:
       - '.gitignore'
-      - '.prettierrc'
+      - 'vite.config.ts'
       - '*.md'
 
   workflow_dispatch:
@@ -23,23 +23,21 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [ 18.x ]
+        node-version: [24.x]
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
 
       - uses: pnpm/action-setup@v2
-        with:
-          version: 8
 
-      - name: Cache turbo build setup
+      - name: Cache Vite+ task setup
         uses: actions/cache@v3
         with:
-          path: .turbo
-          key: turbo-${{ github.job }}-${{ github.ref_name }}-${{ github.sha }}
+          path: ~/.cache/vite-plus
+          key: vp-${{ github.job }}-${{ github.ref_name }}-${{ github.sha }}
           restore-keys: |
-            turbo-${{ github.job }}-${{ github.ref_name }}-
+            vp-${{ github.job }}-${{ github.ref_name }}-
 
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
@@ -56,12 +54,11 @@ jobs:
       - name: Build Bot
         run: pnpm build:bot
 
-      - name: Run TSC
+      - name: Run Type Check
         run: pnpm type-check
 
-      - name: Run Prettier
+      - name: Run Format
         run: pnpm format
 
       - name: Run Lint
         run: pnpm lint
-

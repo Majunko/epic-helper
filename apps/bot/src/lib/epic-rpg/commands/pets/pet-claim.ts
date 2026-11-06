@@ -1,4 +1,7 @@
-import type {IMessageContentChecker, IMessageEmbedChecker} from '../../../../types/utils';
+import type {
+  IMessageContentChecker,
+  IMessageEmbedChecker,
+} from '../../../../types/utils';
 import type {Client, Embed, Message, User} from 'discord.js';
 import {userPetServices} from '@epic-helper/services';
 import {createRpgCommandListener} from '../../../../utils/rpg-command-listener';
@@ -53,7 +56,11 @@ interface IRpgPetClaimSuccess {
   message: Message<true>;
 }
 
-const rpgPetClaimSuccess = async ({author, client, message}: IRpgPetClaimSuccess) => {
+const rpgPetClaimSuccess = async ({
+  author,
+  client,
+  message,
+}: IRpgPetClaimSuccess) => {
   const toggleUser = await toggleUserChecker({
     userId: author.id,
     client,
@@ -68,7 +75,7 @@ const rpgPetClaimSuccess = async ({author, client, message}: IRpgPetClaimSuccess
 
 const isSuccessfullyClaimedPet = ({embed, author}: IMessageEmbedChecker) =>
   ['Reward summary', 'Pet adventure rewards'].some((str) =>
-    embed.title?.includes(str),
+    embed.title?.includes(str)
   ) && embed.author?.name === `${author.username} — pets`;
 
 const isNoPetsToClaim = ({message, author}: IMessageContentChecker) =>

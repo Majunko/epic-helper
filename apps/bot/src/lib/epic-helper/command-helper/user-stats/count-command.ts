@@ -24,7 +24,7 @@ export const _countCommand = async ({userId, type}: ICountCommand) => {
     await userService.updateBestStats({
       userId,
       type,
-      value: updatedStats?.rpg[type],
+      value: currentStats,
     });
   }
 };

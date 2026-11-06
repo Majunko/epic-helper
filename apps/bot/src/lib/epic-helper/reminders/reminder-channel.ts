@@ -36,7 +36,10 @@ export const updateReminderChannel = async ({
       fn: async (client, {userId}) => {
         if (!client.mainUsers.has(userId)) return;
         client.mainUsers.delete(userId);
-        await client.utils.redis.redisMainUsers.set(client.cluster?.id, Array.from(client.mainUsers));
+        await client.utils.redis.redisMainUsers.set(
+          client.cluster?.id,
+          Array.from(client.mainUsers)
+        );
       },
     });
   }

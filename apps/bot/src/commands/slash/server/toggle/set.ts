@@ -1,5 +1,8 @@
 import {SLASH_COMMAND} from '../../constant';
-import {USER_ACC_OFF_ACTIONS, USER_NOT_REGISTERED_ACTIONS} from '@epic-helper/constants';
+import {
+  USER_ACC_OFF_ACTIONS,
+  USER_NOT_REGISTERED_ACTIONS,
+} from '@epic-helper/constants';
 import commandHelper from '../../../../lib/epic-helper/command-helper';
 
 export default <SlashCommand>{
@@ -16,10 +19,10 @@ export default <SlashCommand>{
   builder: (subcommand) =>
     subcommand
       .addStringOption((option) =>
-        option.setName('on').setDescription('Features to turn on'),
+        option.setName('on').setDescription('Features to turn on')
       )
       .addStringOption((option) =>
-        option.setName('off').setDescription('Features to turn off'),
+        option.setName('off').setDescription('Features to turn off')
       ),
   execute: async (client, interaction) => {
     if (!interaction.guild) return;

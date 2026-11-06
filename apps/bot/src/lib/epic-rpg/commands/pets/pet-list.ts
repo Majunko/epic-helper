@@ -2,7 +2,10 @@ import type {Client, Embed, Message, User} from 'discord.js';
 import ms from 'ms';
 import embedReaders from '../../embed-readers';
 import {userPetServices} from '@epic-helper/services';
-import {RPG_PET_SKILL_ASCEND, RPG_PET_SKILL_SPECIAL} from '@epic-helper/constants';
+import {
+  RPG_PET_SKILL_ASCEND,
+  RPG_PET_SKILL_SPECIAL,
+} from '@epic-helper/constants';
 import type {IUserPet} from '@epic-helper/models';
 import {createRpgCommandListener} from '../../../../utils/rpg-command-listener';
 import {createMessageEditedListener} from '../../../../utils/message-edited-listener';
@@ -51,11 +54,7 @@ interface IUpdatedPets {
   updatedPets: IUserPet[];
 }
 
-const rpgPetSuccess = async ({
-  author,
-  embed,
-  message,
-}: IRpgPetSuccess) => {
+const rpgPetSuccess = async ({author, embed, message}: IRpgPetSuccess) => {
   const updatedPets: IUpdatedPets = {
     newPets: [],
     updatedPets: [],
@@ -76,7 +75,6 @@ const rpgPetSuccess = async ({
     }
   });
 };
-
 
 interface IUpdatePetsFromEmbed {
   embed: Embed;
@@ -155,9 +153,9 @@ const isPetUpdated = ({newPet, oldPet}: IIsPetUpdated) => {
   }) as (
     | keyof typeof RPG_PET_SKILL_ASCEND
     | keyof typeof RPG_PET_SKILL_SPECIAL
-    )[];
+  )[];
   const isSkillUpdated = skillNameList.some(
-    (skillName) => newPet.skills[skillName] !== oldPet.skills[skillName],
+    (skillName) => newPet.skills[skillName] !== oldPet.skills[skillName]
   );
   return (
     isStatusUpdated ||

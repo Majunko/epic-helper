@@ -7,7 +7,7 @@
   "scripts": {
     "build:shared": "tsc",
     "type-check": "tsc --noEmit --skipLibCheck",
-    "lint": "eslint src/ --ext .ts --fix"
+    "lint": "vp lint src/ --fix"
   },
   "dependencies": {},
   "devDependencies": {

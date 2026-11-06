@@ -30,7 +30,7 @@ const addRecord = async ({
     roleId: guildRoleId,
     weekAt: getGuildWeek(),
   });
-  let query = {};
+  let query: Record<string, any>;
   const arrayFilters: {[p: string]: any}[] = [];
   if (existingRecord?.users.some((user) => user.uId === userId)) {
     query = {
@@ -83,7 +83,7 @@ const addRecord = async ({
     {
       upsert: true,
       arrayFilters,
-    },
+    }
   );
 };
 

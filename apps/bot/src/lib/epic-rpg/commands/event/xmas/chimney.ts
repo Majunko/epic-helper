@@ -1,6 +1,10 @@
 import type {Client, Message, User} from 'discord.js';
 import {createRpgCommandListener} from '../../../../../utils/rpg-command-listener';
-import {BOT_REMINDER_BASE_COOLDOWN, RPG_COMMAND_TYPE, RPG_COOLDOWN_EMBED_TYPE} from '@epic-helper/constants';
+import {
+  BOT_REMINDER_BASE_COOLDOWN,
+  RPG_COMMAND_TYPE,
+  RPG_COOLDOWN_EMBED_TYPE,
+} from '@epic-helper/constants';
 import messageChecker from '../../../message-checker';
 import toggleUserChecker from '../../../../epic-helper/toggle-checker/user';
 import {calcCdReduction} from '../../../../epic-helper/reminders/commands-cooldown';
@@ -13,7 +17,12 @@ interface IRpgXmasChimney {
   isSlashCommand?: boolean;
 }
 
-export const rpgXmasChimney = async ({message, client, isSlashCommand, author}: IRpgXmasChimney) => {
+export const rpgXmasChimney = async ({
+  message,
+  client,
+  isSlashCommand,
+  author,
+}: IRpgXmasChimney) => {
   let event = createRpgCommandListener({
     client,
     author,
@@ -45,7 +54,11 @@ interface IRpgXmasChimneySuccess {
   message: Message<true>;
 }
 
-const rpgXmasChimneySuccess = async ({client, author, message}: IRpgXmasChimneySuccess) => {
+const rpgXmasChimneySuccess = async ({
+  client,
+  author,
+  message,
+}: IRpgXmasChimneySuccess) => {
   const toggleChecker = await toggleUserChecker({
     userId: author.id,
     client,
@@ -64,6 +77,4 @@ const rpgXmasChimneySuccess = async ({client, author, message}: IRpgXmasChimneyS
       readyAt: new Date(Date.now() + cooldown),
     });
   }
-
-
 };

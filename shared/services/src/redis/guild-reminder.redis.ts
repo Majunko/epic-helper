@@ -27,15 +27,15 @@ const setReminderTime = async ({
   };
   await redisService.set(
     `${prefix}${serverId}:${guildRoleId}`,
-    JSON.stringify(data),
+    JSON.stringify(data)
   );
 };
 
-const getReadyGuild = async (client: Client): Promise<
-  Pick<ISetReminderTime, 'serverId' | 'guildRoleId'>[]
-> => {
+const getReadyGuild = async (
+  client: Client
+): Promise<Pick<ISetReminderTime, 'serverId' | 'guildRoleId'>[]> => {
   let keys = await redisService.keys(`${prefix}*`);
-  keys = keys.filter(key => client.guilds.cache.has(key.split(':')[2]));
+  keys = keys.filter((key) => client.guilds.cache.has(key.split(':')[2]));
   const reminderList = await Promise.all(
     keys.map(async (key) => {
       const data = await redisService.get(key);
@@ -49,7 +49,7 @@ const getReadyGuild = async (client: Client): Promise<
         guildRoleId,
         serverId,
       };
-    }),
+    })
   );
   return reminderList.filter((item) => item !== null) as Pick<
     ISetReminderTime,
@@ -71,7 +71,7 @@ const deleteReminderTime = async ({
 
 const getAllGuildReminder = async (client: Client) => {
   let keys = await redisService.keys(`${prefix}*`);
-  keys = keys.filter(key => client.guilds.cache.has(key.split(':')[2]));
+  keys = keys.filter((key) => client.guilds.cache.has(key.split(':')[2]));
   const reminderList = await Promise.all(
     keys.map(async (key) => {
       const data = await redisService.get(key);
@@ -85,7 +85,7 @@ const getAllGuildReminder = async (client: Client) => {
         serverId,
         readyAt: new Date(readyAt),
       };
-    }),
+    })
   );
   return reminderList.filter((item) => item !== null) as IRedisGuildReminder[];
 };

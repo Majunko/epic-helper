@@ -38,7 +38,7 @@ export const _addRoles = async ({
       clusterId: client.cluster?.id,
       logLevel: 'error',
       message: `Failed to add roles ${roleIds.join(
-        ', ',
+        ', '
       )} to ${userId} in ${serverId}`,
       variant: 'add-roles',
     });

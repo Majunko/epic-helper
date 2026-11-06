@@ -1,6 +1,11 @@
 import type {Client, Message} from 'discord.js';
 import {Events} from 'discord.js';
-import {DEVS_ID, EPIC_RPG_ID, PREFIX, PREFIX_COMMAND_TYPE} from '@epic-helper/constants';
+import {
+  DEVS_ID,
+  EPIC_RPG_ID,
+  PREFIX,
+  PREFIX_COMMAND_TYPE,
+} from '@epic-helper/constants';
 import {preCheckCommand} from '../../utils/command-precheck';
 import commandHelper from '../../lib/epic-helper/command-helper';
 import type {ValuesOf} from '@epic-helper/types';
@@ -63,8 +68,8 @@ const searchSlashMessages = (client: Client, message: Message) =>
   client.slashMessages.filter((cmd) =>
     cmd.commandName.some(
       (name) =>
-        name.toLowerCase() === message.interaction?.commandName?.toLowerCase(),
-    ),
+        name.toLowerCase() === message.interaction?.commandName?.toLowerCase()
+    )
   );
 
 const isRpgCommand = (message: Message) =>
@@ -82,7 +87,7 @@ const validateCommand = (commands: string[], args: string[]) => {
   return commands.some((cmd) =>
     cmd
       .split(' ')
-      .every((name, i) => name?.toLowerCase() === args[i]?.toLowerCase()),
+      .every((name, i) => name?.toLowerCase() === args[i]?.toLowerCase())
   );
 };
 
@@ -90,14 +95,14 @@ const getMatchedCommandLength = (commands: string[], args: string[]) => {
   const matched = commands.find((cmd) =>
     cmd
       .split(' ')
-      .every((name, i) => name?.toLowerCase() === args[i]?.toLowerCase()),
+      .every((name, i) => name?.toLowerCase() === args[i]?.toLowerCase())
   );
   return matched?.split(' ').length ?? 0;
 };
 
 function searchCommand(
   client: Client,
-  message: Message,
+  message: Message
 ): {command: PrefixCommand; args: string[]} | null {
   const messageContent = message.content.toLowerCase().trim();
   if (messageContent === '') return null;
@@ -140,7 +145,7 @@ function searchCommand(
   }
 
   const matchedCommands = client.prefixCommands.filter(
-    (cmd) => cmd.type === commandType && validateCommand(cmd.commands, args),
+    (cmd) => cmd.type === commandType && validateCommand(cmd.commands, args)
   );
   if (matchedCommands.size === 1) {
     command = matchedCommands.first();
@@ -149,7 +154,7 @@ function searchCommand(
       .sort(
         (a, b) =>
           getMatchedCommandLength(b.commands, args) -
-          getMatchedCommandLength(a.commands, args),
+          getMatchedCommandLength(a.commands, args)
       )
       .first();
   }
@@ -161,12 +166,13 @@ const isBotSlashCommand = (message: Message) =>
   message.interaction && message.author.bot;
 const isSentByUser = (message: Message) => !message.author.bot;
 
-const isSentByBot = (message: Message) => message.author.bot && message.author.id == EPIC_RPG_ID;
+const isSentByBot = (message: Message) =>
+  message.author.bot && message.author.id == EPIC_RPG_ID;
 
 const isNotDeferred = (message: Message) =>
   !(message.content === '' && !message.embeds.length);
 
 const searchBotMatchedCommands = (client: Client, message: Message) =>
   client.botMessages.filter(
-    (cmd) => message.author.id === cmd.bot && cmd.match(message),
+    (cmd) => message.author.id === cmd.bot && cmd.match(message)
   );

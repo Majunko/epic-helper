@@ -1,6 +1,9 @@
 import generateFusionScoreEmbed from '../../../lib/epic-helper/features/pets/pet-calc-fusion-score';
 import djsInteractionHelper from '../../../lib/discordjs/interaction';
-import {USER_ACC_OFF_ACTIONS, USER_NOT_REGISTERED_ACTIONS} from '@epic-helper/constants';
+import {
+  USER_ACC_OFF_ACTIONS,
+  USER_NOT_REGISTERED_ACTIONS,
+} from '@epic-helper/constants';
 import {SLASH_COMMAND} from '../constant';
 
 export default <SlashCommand>{
@@ -18,7 +21,7 @@ export default <SlashCommand>{
       option
         .setName('pet-id')
         .setDescription('ID of the pet, separate multiple pets with space')
-        .setRequired(true),
+        .setRequired(true)
     ),
   execute: async (client, interaction) => {
     const petIds = interaction.options.getString('pet-id')?.split(' ') ?? [];

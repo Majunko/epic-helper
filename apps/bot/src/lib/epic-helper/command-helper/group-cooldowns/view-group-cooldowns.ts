@@ -17,8 +17,12 @@ export const _viewGroupCooldowns = async ({author}: IVGroupCooldowns) => {
   if (!userAccount) return null;
 
   const groupCooldowns = userAccount?.groupCooldowns;
-  const cooldownList = await userReminderServices.getUserAllCooldowns(author.id);
-  const users = await userService.getUsersAccount({usersId: groupCooldowns?.map(cd => cd.userId)});
+  const cooldownList = await userReminderServices.getUserAllCooldowns(
+    author.id
+  );
+  const users = await userService.getUsersAccount({
+    usersId: groupCooldowns?.map((cd) => cd.userId),
+  });
 
   const commandsToShow = new Set<ValuesOf<typeof RPG_COMMAND_TYPE>>();
 
@@ -29,7 +33,6 @@ export const _viewGroupCooldowns = async ({author}: IVGroupCooldowns) => {
       commandsToShow.add(type);
     }
   }
-
 
   const embed = generateEmbed({
     author: userAccount,
@@ -49,34 +52,37 @@ interface IGenerateEmbed {
 }
 
 const generateEmbed = ({author, users, cooldownList}: IGenerateEmbed) => {
-  const embed = new EmbedBuilder()
-    .setColor(BOT_COLOR.embed)
-    .setAuthor({
-      name: 'Group Cooldowns',
-    });
-
+  const embed = new EmbedBuilder().setColor(BOT_COLOR.embed).setAuthor({
+    name: 'Group Cooldowns',
+  });
 
   const commandsToShow = new Set<ValuesOf<typeof RPG_COMMAND_TYPE>>();
 
-  for (const { types} of author.groupCooldowns) {
-    types.forEach(type => commandsToShow.add(type));
+  for (const {types} of author.groupCooldowns) {
+    types.forEach((type) => commandsToShow.add(type));
   }
 
-  if(author.groupCooldowns.length) {
-
-
+  if (author.groupCooldowns.length) {
     for (const [type] of typedObjectEntries(RPG_COMMAND_TYPE)) {
-      if(!commandsToShow.has(type)) continue;
+      if (!commandsToShow.has(type)) continue;
       const title = RPG_COMMAND_LABEL[type];
       const value = [];
 
-      const authorCooldown = cooldownList.find(cooldown => cooldown.userId === author.userId && cooldown.type === type);
+      const authorCooldown = cooldownList.find(
+        (cooldown) =>
+          cooldown.userId === author.userId && cooldown.type === type
+      );
       value.push(`**${author.username}** ~ ${getCommandState(authorCooldown)}`);
 
       for (const user of users) {
-        const commandsOfUser = author.groupCooldowns.find(cd => cd.userId === user.userId);
-        if(!commandsOfUser?.types.includes(type)) continue;
-        const userCooldown = cooldownList.find(cooldown => cooldown.userId === user.userId && cooldown.type === type);
+        const commandsOfUser = author.groupCooldowns.find(
+          (cd) => cd.userId === user.userId
+        );
+        if (!commandsOfUser?.types.includes(type)) continue;
+        const userCooldown = cooldownList.find(
+          (cooldown) =>
+            cooldown.userId === user.userId && cooldown.type === type
+        );
         value.push(`**${user.username}** ~ ${getCommandState(userCooldown)}`);
       }
 
@@ -86,10 +92,9 @@ const generateEmbed = ({author, users, cooldownList}: IGenerateEmbed) => {
         inline: true,
       });
     }
-  }else{
+  } else {
     embed.setDescription('You have not set any group cooldowns yet');
   }
-
 
   embed.addFields({
     name: 'Commands',
@@ -107,6 +112,7 @@ const generateEmbed = ({author, users, cooldownList}: IGenerateEmbed) => {
 const getCommandState = (reminder?: IUserReminder) => {
   if (!reminder) return BOT_EMOJI.utils.off;
   if (!reminder.readyAt) return BOT_EMOJI.utils.on;
-  if (reminder.readyAt.getTime() > Date.now()) return `⏳ ${timestampHelper.relative({time: reminder.readyAt})}`;
+  if (reminder.readyAt.getTime() > Date.now())
+    return `⏳ ${timestampHelper.relative({time: reminder.readyAt})}`;
   return BOT_EMOJI.utils.on;
 };

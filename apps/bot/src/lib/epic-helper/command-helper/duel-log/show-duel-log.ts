@@ -1,4 +1,11 @@
-import type {BaseInteraction, BaseMessageOptions, Client, Guild, StringSelectMenuInteraction, User} from 'discord.js';
+import type {
+  BaseInteraction,
+  BaseMessageOptions,
+  Client,
+  Guild,
+  StringSelectMenuInteraction,
+  User,
+} from 'discord.js';
 import {EmbedBuilder} from 'discord.js';
 import {guildDuelService, guildService} from '@epic-helper/services';
 import {BOT_COLOR} from '@epic-helper/constants';
@@ -57,7 +64,7 @@ export const _showDuelLog = async ({server, client, author}: IShowDuelLog) => {
       };
     }
     const guild = filteredGuilds.find(
-      (guild) => guild.roleId === guildSelector.getGuildId(),
+      (guild) => guild.roleId === guildSelector.getGuildId()
     );
     if (!guild)
       return {
@@ -77,7 +84,7 @@ export const _showDuelLog = async ({server, client, author}: IShowDuelLog) => {
       interaction,
     });
     const guild = filteredGuilds.find(
-      (guild) => guild.roleId === guildSelector.getGuildId(),
+      (guild) => guild.roleId === guildSelector.getGuildId()
     );
     if (!guild)
       return {
@@ -110,7 +117,7 @@ const generateEmbed = ({duelLogs, guild}: IGenerateEmbed) => {
     logs: duelLogs.find(
       (log) =>
         log.guildRoleId === guild.roleId &&
-        log.weekAt.getTime() === getGuildWeek().getTime(),
+        log.weekAt.getTime() === getGuildWeek().getTime()
     ),
   };
   const previousCycle = {
@@ -118,7 +125,7 @@ const generateEmbed = ({duelLogs, guild}: IGenerateEmbed) => {
     logs: duelLogs.find(
       (log) =>
         log.guildRoleId === guild.roleId &&
-        log.weekAt.getTime() == getGuildWeek().getTime() - ms('7d'),
+        log.weekAt.getTime() == getGuildWeek().getTime() - ms('7d')
     ),
   };
   [currentCycle, previousCycle].forEach((cycle) => {
@@ -126,14 +133,14 @@ const generateEmbed = ({duelLogs, guild}: IGenerateEmbed) => {
       name: cycle.label,
       value: cycle.logs?.users?.length
         ? cycle.logs.users
-          .sort((a, b) => b.totalExp - a.totalExp)
-          .map(
-            (user, index) =>
-              `\`[${index + 1}]\` ${messageFormatter.user(user.userId)} \`${
-                user.totalExp
-              } XP | ${user.duelCount} duels\``,
-          )
-          .join('\n')
+            .sort((a, b) => b.totalExp - a.totalExp)
+            .map(
+              (user, index) =>
+                `\`[${index + 1}]\` ${messageFormatter.user(user.userId)} \`${
+                  user.totalExp
+                } XP | ${user.duelCount} duels\``
+            )
+            .join('\n')
         : 'None',
       inline: true,
     });

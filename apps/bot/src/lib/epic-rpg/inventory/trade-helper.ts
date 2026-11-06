@@ -1,4 +1,7 @@
-import type {IInventoryItem, TRpgItemName} from '../embed-readers/inventory.reader';
+import type {
+  IInventoryItem,
+  TRpgItemName,
+} from '../embed-readers/inventory.reader';
 import type {RpgArea} from '../../../types/rpg.types';
 import dismantleHelper from './dismantle-helper';
 import {RPG_TRADE_RATE} from '@epic-helper/constants';

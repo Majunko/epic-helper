@@ -1,76 +1,72 @@
 {
   "name": "epic-helper",
   "version": "1.0.0",
-  "description": "An unofficial Discord EPIC RPG helper bot",
-  "main": "dist/index.js",
   "private": true,
+  "description": "An unofficial Discord EPIC RPG helper bot",
+  "homepage": "https://github.com/pwkang/epic-helper#readme",
+  "bugs": {
+    "url": "https://github.com/pwkang/epic-helper/issues"
+  },
+  "author": "whigon",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pwkang/epic-helper.git"
+  },
   "workspaces": [
     "apps/*",
     "shared/*"
   ],
-  "engines": {
-    "node": ">=18.15 <=19",
-    "pnpm": ">=8"
-  },
-  "packageManager": "pnpm@8.6.2",
+  "main": "dist/index.js",
   "scripts": {
     "dev:bot": "nodemon --exec ts-node --files apps/bot/src/bot.ts --watch apps/bot",
     "dev:api": "nodemon --exec ts-node --files apps/api/src/index.ts --watch apps/api",
     "clean:node_modules": "find . -name \"node_modules\" -type d -prune -exec rm -rf '{}' +",
     "clean:dist": "find . -name \"dist\" -type d -prune -exec rm -rf '{}' +",
-    "clean:turbo": "find . -name \".turbo\" -type d -prune -exec rm -rf '{}' +",
-    "clean:all": "npm run clean:node_modules && npm run clean:dist && npm run clean:turbo",
-    "build:shared": "turbo run build:shared",
-    "format": "prettier --write \"apps/**/*.ts\" \"shared/**/*.ts\"",
-    "format:check": "prettier --check \"apps/**/*.ts\" \"shared/**/*.ts\"",
-    "build:bot": "turbo run build:bot",
-    "build:api": "turbo run build:api",
-    "lint": "turbo run lint",
-    "type-check": "turbo run type-check",
+    "clean:cache": "vp cache clean",
+    "clean:all": "npm run clean:node_modules && npm run clean:dist && npm run clean:cache",
+    "build:shared": "vp run -r --cache build:shared",
+    "format": "vp fmt",
+    "format:check": "vp fmt --check",
+    "build:bot": "vp run -r --cache build:shared && vp run -r --cache build:bot",
+    "build:api": "vp run -r --cache build:shared && vp run -r --cache build:api",
+    "lint": "vp lint",
+    "type-check": "vp run -r type-check",
     "dev-shard:bot": "npm run build:bot && USE_PINO_PRETTY=true node apps/bot/dist/index.js",
     "start:bot": "node apps/bot/dist/index.js",
     "prod:bot": "pm2 start ecosystem.config.js --only epic-helper",
     "prod:api": "pm2 start ecosystem.config.js --only epic-helper-api"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/pwkang/epic-helper.git"
-  },
-  "author": "whigon",
-  "bugs": {
-    "url": "https://github.com/pwkang/epic-helper/issues"
-  },
-  "homepage": "https://github.com/pwkang/epic-helper#readme",
   "dependencies": {
-    "axios": "^1.6.8",
-    "contentful": "^10.6.4",
-    "dayjs": "^1.11.8",
-    "discord-hybrid-sharding": "^2.1.3",
-    "discord.js": "^14.11.0",
-    "dotenv": "^16.3.1",
-    "fuse.js": "^6.6.2",
+    "axios": "^1.21.0",
+    "contentful": "^11.12.10",
+    "dayjs": "^1.11.23",
+    "discord-hybrid-sharding": "^3.0.1",
+    "discord.js": "^14.28.1",
+    "dotenv": "^18.0.9",
+    "fuse.js": "^7.5.0",
     "json-bigint": "^1.0.0",
-    "mongodb": "^5.6.0",
-    "mongoose": "^7.3.0",
-    "mongoose-lean-defaults": "^2.2.1",
+    "mongodb": "^7.8.0",
+    "mongoose": "^9.12.0",
+    "mongoose-lean-defaults": "^2.3.1",
     "ms": "^2.1.3",
-    "node-cron": "^3.0.2",
-    "pino": "^8.14.1",
-    "pino-pretty": "^10.0.0",
-    "redis": "^4.6.7"
+    "node-cron": "^4.6.0",
+    "pino": "^10.4.0",
+    "pino-pretty": "^13.2.0",
+    "redis": "^6.3.1"
   },
   "devDependencies": {
-    "@types/json-bigint": "^1.0.1",
-    "@types/ms": "^0.7.31",
-    "@types/node": "^20.3.1",
-    "@types/node-cron": "^3.0.7",
-    "@typescript-eslint/eslint-plugin": "^6.3.0",
-    "@typescript-eslint/parser": "^6.3.0",
-    "eslint": "^8.46.0",
-    "nodemon": "^3.0.1",
-    "prettier": "^2.8.8",
-    "ts-node": "^10.9.1",
-    "turbo": "^1.10.3",
-    "typescript": "^5.1.3"
-  }
+    "@types/json-bigint": "^1.0.4",
+    "@types/ms": "^2.1.0",
+    "@types/node": "^26.6.6",
+    "@types/node-cron": "^3.0.11",
+    "nodemon": "^3.1.14",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.3",
+    "vite-plus": "^1.5.0"
+  },
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=10"
+  },
+  "packageManager": "pnpm@12.18.0"
 }

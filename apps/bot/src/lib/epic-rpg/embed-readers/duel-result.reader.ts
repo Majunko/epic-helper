@@ -8,13 +8,13 @@ interface IDuelResultReader {
 
 const duelResultReader = ({embed, users}: IDuelResultReader) => {
   const winner = users.find(
-    (user) => embed.fields[0].name === `**${user.username}** won!`,
+    (user) => embed.fields[0].name === `**${user.username}** won!`
   );
   const exp: IUserDuelUser[] = [];
   for (const user of users) {
     const escapedUsername = user.username.replaceAll('*', '\\*');
     const regex = new RegExp(
-      `\\*\\*${escapedUsername}\\*\\*'s guild got (\\d) XP`,
+      `\\*\\*${escapedUsername}\\*\\*'s guild got (\\d) XP`
     );
     const expGained = embed.fields[0].value.match(regex)?.[1] ?? 0;
     exp.push({

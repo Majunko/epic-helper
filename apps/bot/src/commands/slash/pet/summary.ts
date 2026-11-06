@@ -1,5 +1,8 @@
 import {SLASH_COMMAND} from '../constant';
-import {USER_ACC_OFF_ACTIONS, USER_NOT_REGISTERED_ACTIONS} from '@epic-helper/constants';
+import {
+  USER_ACC_OFF_ACTIONS,
+  USER_NOT_REGISTERED_ACTIONS,
+} from '@epic-helper/constants';
 import commandHelper from '../../../lib/epic-helper/command-helper';
 import djsInteractionHelper from '../../../lib/discordjs/interaction';
 
@@ -20,9 +23,9 @@ export default <SlashCommand>{
         .setDescription('Select filter')
         .addChoices(
           {name: 'Tier', value: 'tier'},
-          {name: 'Skill', value: 'skill'},
+          {name: 'Skill', value: 'skill'}
         )
-        .setRequired(true),
+        .setRequired(true)
     ),
   execute: async (client, interaction) => {
     const filter = interaction.options.getString('filter', true) as

@@ -1,4 +1,8 @@
-import {PREFIX_COMMAND_TYPE, USER_ACC_OFF_ACTIONS, USER_NOT_REGISTERED_ACTIONS} from '@epic-helper/constants';
+import {
+  PREFIX_COMMAND_TYPE,
+  USER_ACC_OFF_ACTIONS,
+  USER_NOT_REGISTERED_ACTIONS,
+} from '@epic-helper/constants';
 import commandHelper from '../../../../../lib/epic-helper/command-helper';
 import {djsMessageHelper} from '../../../../../lib/discordjs/message';
 
@@ -12,9 +16,10 @@ export default <PrefixCommand>{
   commands: ['group cd', 'gcd'],
   type: PREFIX_COMMAND_TYPE.bot,
   execute: async (client, message) => {
-    const messageOptions = await commandHelper.groupCooldowns.viewGroupCooldowns({
-      author: message.author,
-    });
+    const messageOptions =
+      await commandHelper.groupCooldowns.viewGroupCooldowns({
+        author: message.author,
+      });
     if (!messageOptions) return;
     await djsMessageHelper.send({
       client,

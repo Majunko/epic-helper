@@ -174,7 +174,7 @@ const generateSkillEmbed = ({author, pets}: IGenerateSkillEmbed) => {
     }
   }
   for (const skillType of Object.keys(
-    PET_SKILL_ORDER,
+    PET_SKILL_ORDER
   ) as (keyof IUserPet['skills'])[]) {
     const emoji = BOT_EMOJI.petSkill[skillType];
     const skillName = RPG_PET_SKILL_LABEL[skillType];
@@ -202,13 +202,13 @@ const generateSkillEmbed = ({author, pets}: IGenerateSkillEmbed) => {
           .sort((a, b) => a.petId - b.petId)
           .map((pet) => ({
             isSpecial: Object.values(RPG_PET_TYPE_BASIC).every(
-              (type) => type !== pet.name,
+              (type) => type !== pet.name
             ),
             petId: pet.petId,
           }))
           .map(
             (pet) =>
-              `${convertNumToPetId(pet.petId)}${pet.isSpecial ? '*' : ''}`,
+              `${convertNumToPetId(pet.petId)}${pet.isSpecial ? '*' : ''}`
           )
           .map((id) => `\`${id}\``)
           .join(' | ');

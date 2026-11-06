@@ -1,4 +1,8 @@
-import type {BaseMessageOptions, StringSelectMenuInteraction, User} from 'discord.js';
+import type {
+  BaseMessageOptions,
+  StringSelectMenuInteraction,
+  User,
+} from 'discord.js';
 import {ActionRowBuilder, StringSelectMenuBuilder} from 'discord.js';
 import {
   donorService,
@@ -77,7 +81,7 @@ export const _accountSettings = async ({author}: IAccountSettings) => {
   }
 
   function responseInteraction(
-    interaction: StringSelectMenuInteraction,
+    interaction: StringSelectMenuInteraction
   ): BaseMessageOptions {
     const selected = interaction.values[0] as ValuesOf<typeof PAGE_TYPE>;
     return render({type: selected});
@@ -119,7 +123,7 @@ const getActionRow = ({selected}: IGetActionRow) => {
           label: 'Donor Info',
           value: 'donor_info',
           default: selected === PAGE_TYPE.donorInfo,
-        },
-      ),
+        }
+      )
   );
 };

@@ -13,7 +13,7 @@ const findFreeDonor = async (userId: string) => {
 const setFreeDonor = async (userId: string, donor: IFreeDonor) => {
   await redisService.set(
     `${freeDonorPrefix}:${userId}`,
-    JSON.stringify(toFreeDonor(donor)),
+    JSON.stringify(toFreeDonor(donor))
   );
 };
 
@@ -23,7 +23,7 @@ const delFreeDonor = async (userId: string) => {
 
 const delFreeDonors = async (usersId: string[]) => {
   await redisService.del(
-    usersId.map((userId) => `${freeDonorPrefix}:${userId}`),
+    usersId.map((userId) => `${freeDonorPrefix}:${userId}`)
   );
 };
 

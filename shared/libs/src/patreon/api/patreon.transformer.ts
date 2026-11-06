@@ -4,7 +4,10 @@ import type {
   IIncludeItem,
   IUserAttributes,
 } from '../type';
-import type {PATREON_PATRON_STATUS, PATREON_PAYMENT_STATUS} from '../patreon.constant';
+import type {
+  PATREON_PATRON_STATUS,
+  PATREON_PAYMENT_STATUS,
+} from '../patreon.constant';
 import {PATREON_INCLUDE_TYPE} from '../patreon.constant';
 import type {DONOR_TIER} from '@epic-helper/constants';
 import {DONOR_TIER_ID} from '@epic-helper/constants';
@@ -25,7 +28,7 @@ interface ICampaignInfo {
 }
 
 export const toCampaignInfo = (
-  response: Pick<IFetchPatreonCampaignResponse, 'data' | 'included'>,
+  response: Pick<IFetchPatreonCampaignResponse, 'data' | 'included'>
 ): ICampaignInfo[] => {
   const campaignInfo: ICampaignInfo[] = [];
 
@@ -73,14 +76,14 @@ interface IPatron {
 }
 
 export const toPatrons = (
-  response: Pick<IFetchPatreonCampaignMembersResponse, 'data' | 'included'>,
+  response: Pick<IFetchPatreonCampaignMembersResponse, 'data' | 'included'>
 ): IPatron[] => {
   const patrons: IPatron[] = [];
   for (const member of response.data) {
     const userAttributes = response.included.find(
       (i) =>
         i.type === PATREON_INCLUDE_TYPE.user &&
-        i.id === member.relationships.user.data.id,
+        i.id === member.relationships.user.data.id
     ) as IIncludeItem<IUserAttributes> | undefined;
     const lastChargeDate = member.attributes.last_charge_date;
     const lastChargeStatus = member.attributes.last_charge_status;
@@ -109,8 +112,8 @@ export const toPatrons = (
       },
       currentTier: currentTierId
         ? typedObjectEntries(DONOR_TIER_ID).find(
-          ([, v]) => v === currentTierId,
-        )?.[0]
+            ([, v]) => v === currentTierId
+          )?.[0]
         : undefined,
       discord: {
         userId: discordUserId ?? undefined,

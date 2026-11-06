@@ -13,7 +13,7 @@ const findDonor = async (userId: string) => {
 const setDonor = async (userId: string, donor: IDonor) => {
   await redisService.set(
     `${donorPrefix}:${userId}`,
-    JSON.stringify(toDonor(donor)),
+    JSON.stringify(toDonor(donor))
   );
 };
 

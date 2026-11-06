@@ -1,14 +1,15 @@
 import patreonUrlGenerator from './patreon-url-generator';
-import type {IFetchPatreonCampaignMembersResponse, IFetchPatreonCampaignResponse} from '../type';
+import type {
+  IFetchPatreonCampaignMembersResponse,
+  IFetchPatreonCampaignResponse,
+} from '../type';
 import {logger, sleep} from '@epic-helper/utils';
 import {patreonAxiosClient} from '@epic-helper/services';
 import {toPatrons} from './patreon.transformer';
 
 const PATREON_CAMPAIGN_ID = process.env.PATREON_CAMPAIGN_ID!;
 
-export const getPatrons = async (): Promise<
-  ReturnType<typeof toPatrons>
-> => {
+export const getPatrons = async (): Promise<ReturnType<typeof toPatrons>> => {
   const data: IFetchPatreonCampaignMembersResponse['data'] = [];
   const included: IFetchPatreonCampaignMembersResponse['included'] = [];
   let nextCursor: string | undefined = undefined;

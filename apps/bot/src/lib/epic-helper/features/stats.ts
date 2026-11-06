@@ -1,5 +1,10 @@
 import type {EmbedField, User} from 'discord.js';
-import {ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder} from 'discord.js';
+import {
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  EmbedBuilder,
+} from 'discord.js';
 import {
   getDayOfWeek,
   getStartOfLastWeek,
@@ -67,7 +72,7 @@ const getThisWeekStats = ({stats, author}: IGetThisWeekStats) => {
     .setThumbnail(author.avatarURL());
   for (const [, value] of Object.entries(weekDays)) {
     const dayStats = stats.find(
-      (stat) => stat.statsAt.getTime() === startOfWeek.getTime(),
+      (stat) => stat.statsAt.getTime() === startOfWeek.getTime()
     );
     embed.addFields(generateStatsField(value, dayStats?.rpg));
     startOfWeek.setDate(startOfWeek.getDate() + 1);
@@ -91,7 +96,7 @@ const getLastWeekStats = ({stats, author}: IGetLastWeekStats) => {
     .setThumbnail(author.avatarURL());
   for (const [, value] of Object.entries(weekDays)) {
     const dayStats = stats.find(
-      (stat) => stat.statsAt.getTime() === startOfWeek.getTime(),
+      (stat) => stat.statsAt.getTime() === startOfWeek.getTime()
     );
     embed.addFields(generateStatsField(value, dayStats?.rpg));
     startOfWeek.setDate(startOfWeek.getDate() + 1);
@@ -99,7 +104,7 @@ const getLastWeekStats = ({stats, author}: IGetLastWeekStats) => {
   return embed;
 };
 
-interface getDonorDefaultEmbed {
+interface IGetDonorDefaultEmbed {
   stats: IUserStats[];
   author: User;
   bestStats?: IUser['stats']['best'];
@@ -109,7 +114,7 @@ const getDonorDefaultEmbed = ({
   stats,
   author,
   bestStats,
-}: getDonorDefaultEmbed) => {
+}: IGetDonorDefaultEmbed) => {
   const embed = new EmbedBuilder()
     .setColor(BOT_COLOR.embed)
     .setAuthor({
@@ -119,10 +124,10 @@ const getDonorDefaultEmbed = ({
     .setThumbnail(author.avatarURL());
 
   const todayStats = stats.find(
-    (stat) => stat.statsAt.getTime() === getStartOfToday().getTime(),
+    (stat) => stat.statsAt.getTime() === getStartOfToday().getTime()
   );
   const yesterdayStats = stats.find(
-    (stat) => stat.statsAt.getTime() === getStartOfYesterday().getTime(),
+    (stat) => stat.statsAt.getTime() === getStartOfYesterday().getTime()
   );
   const thisWeekAvg = stats
     .filter((stat) => stat.statsAt.getTime() > getStartOfThisWeek().getTime())
@@ -137,9 +142,9 @@ const getDonorDefaultEmbed = ({
     generateWeeklyStatsField(
       'This week',
       getDayOfWeek(),
-      calculateTotal(thisWeekAvg),
+      calculateTotal(thisWeekAvg)
     ),
-    generateWeeklyStatsField('Last week', 7, calculateTotal(lastWeekAvg)),
+    generateWeeklyStatsField('Last week', 7, calculateTotal(lastWeekAvg))
   );
 
   return embed;
@@ -168,7 +173,7 @@ const getNonDonorStatsEmbed = ({
     });
 
   const yesterdayStats = stats.find(
-    (stat) => stat.statsAt.getTime() === getStartOfYesterday().getTime(),
+    (stat) => stat.statsAt.getTime() === getStartOfYesterday().getTime()
   );
   const lastWeekAvg = stats
     .filter((stat) => stat.statsAt.getTime() < getStartOfThisWeek().getTime())
@@ -177,7 +182,7 @@ const getNonDonorStatsEmbed = ({
   embed.addFields(
     generateStatsField('Yesterday', yesterdayStats?.rpg),
     generateWeeklyStatsField('Last week', 7, calculateTotal(lastWeekAvg)),
-    generateStatsField('Best', bestStats),
+    generateStatsField('Best', bestStats)
   );
   return embed;
 };
@@ -194,13 +199,13 @@ const statsToShow = {
 
 const generateStatsField = (
   name: string,
-  stats?: Partial<IUserStats['rpg']>,
+  stats?: Partial<IUserStats['rpg']>
 ): EmbedField => {
   const row: string[] = [];
 
   for (const [type, label] of Object.entries(statsToShow) as [
     keyof typeof statsToShow,
-    string
+    string,
   ][]) {
     if (
       [
@@ -223,13 +228,13 @@ const generateStatsField = (
 const generateWeeklyStatsField = (
   name: string,
   divideBy: number,
-  stats?: Partial<IUserStats['rpg']>,
+  stats?: Partial<IUserStats['rpg']>
 ): EmbedField => {
   const row: string[] = [];
 
   for (const [type, label] of Object.entries(statsToShow) as [
     keyof typeof statsToShow,
-    string
+    string,
   ][]) {
     if (
       [
@@ -252,7 +257,7 @@ const generateWeeklyStatsField = (
 };
 
 const calculateTotal = (
-  stats: IUserStats['rpg'][],
+  stats: IUserStats['rpg'][]
 ): Partial<IUserStats['rpg']> => {
   const avg: Partial<IUserStats['rpg']> = {};
 
@@ -270,17 +275,17 @@ export const statsActionRow = new ActionRowBuilder<ButtonBuilder>()
     new ButtonBuilder()
       .setCustomId('default')
       .setLabel('Default')
-      .setStyle(ButtonStyle.Primary),
+      .setStyle(ButtonStyle.Primary)
   )
   .addComponents(
     new ButtonBuilder()
       .setCustomId('thisWeek')
       .setLabel('This Week')
-      .setStyle(ButtonStyle.Primary),
+      .setStyle(ButtonStyle.Primary)
   )
   .addComponents(
     new ButtonBuilder()
       .setCustomId('lastWeek')
       .setLabel('Last Week')
-      .setStyle(ButtonStyle.Primary),
+      .setStyle(ButtonStyle.Primary)
   );

@@ -1,7 +1,11 @@
 import type {Client, Embed, Message, User} from 'discord.js';
 import {createRpgCommandListener} from '../../../../utils/rpg-command-listener';
 import {USER_STATS_RPG_COMMAND_TYPE} from '@epic-helper/models';
-import {BOT_REMINDER_BASE_COOLDOWN, RPG_COMMAND_TYPE, RPG_COOLDOWN_EMBED_TYPE} from '@epic-helper/constants';
+import {
+  BOT_REMINDER_BASE_COOLDOWN,
+  RPG_COMMAND_TYPE,
+  RPG_COOLDOWN_EMBED_TYPE,
+} from '@epic-helper/constants';
 import {calcCdReduction} from '../../../epic-helper/reminders/commands-cooldown';
 import {updateReminderChannel} from '../../../epic-helper/reminders/reminder-channel';
 import toggleUserChecker from '../../../epic-helper/toggle-checker/user';
@@ -119,7 +123,7 @@ interface IIsEpicQuestSuccess {
 const isEpicQuestSuccess = ({embed, author}: IIsEpicQuestSuccess) =>
   embed.author?.name === `${author.username} — epic quest` &&
   ['You failed the quest', 'Your profit was'].some((str) =>
-    embed.fields[0]?.value.includes(str),
+    embed.fields[0]?.value.includes(str)
   );
 
 interface IIsEpicHorseMissing {

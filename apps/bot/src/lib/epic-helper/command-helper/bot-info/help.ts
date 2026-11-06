@@ -1,5 +1,10 @@
 import type {BaseMessageOptions, Client} from 'discord.js';
-import {ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder} from 'discord.js';
+import {
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  EmbedBuilder,
+} from 'discord.js';
 import {
   BOT_COLOR,
   BOT_INVITE_LINK,
@@ -14,7 +19,7 @@ import Fuse from 'fuse.js';
 import type {IHelpCommand, IHelpCommandsGroup} from '@epic-helper/types';
 
 interface IHelp {
-  client: Client<true>;
+  client: Client;
   search?: string;
 }
 
@@ -22,7 +27,6 @@ export const _help = async ({
   client,
   search,
 }: IHelp): Promise<BaseMessageOptions> => {
-
   if (!search) {
     const embed = generateEmbedHome({
       groups: HELP_COMMANDS_GROUPS,
@@ -59,14 +63,14 @@ const searchCommand = ({search, commands}: ISearchCommand) => {
     {
       keys: ['prefixCommands'],
       threshold: 0.2,
-    },
+    }
   );
   const fuseFeatures = new Fuse(
     commands.filter((cmd) => cmd.type === 'feature'),
     {
       keys: ['name'],
       threshold: 0.4,
-    },
+    }
   );
 
   return [...fuseCommand.search(search), ...fuseFeatures.search(search)];
@@ -74,14 +78,16 @@ const searchCommand = ({search, commands}: ISearchCommand) => {
 
 interface IGenerateEmbed {
   groups: IHelpCommandsGroup[];
-  client: Client<true>;
+  client: Client;
 }
 
 export const generateEmbedHome = ({groups, client}: IGenerateEmbed) => {
   const embed = new EmbedBuilder()
     .setColor(BOT_COLOR.embed)
     .setTitle('EPIC Helper Help')
-    .setDescription(`Prefix: \`${PREFIX.bot}\` | \`@${client.user.username}\``);
+    .setDescription(
+      `Prefix: \`${PREFIX.bot}\` | \`@${client.user!.username}\``
+    );
 
   for (const group of groups) {
     if (!group.commands?.length || !group.fieldLabel) continue;
@@ -116,25 +122,25 @@ export const generateButtons = () => {
       new ButtonBuilder()
         .setStyle(ButtonStyle.Link)
         .setLabel('Invite')
-        .setURL(BOT_INVITE_LINK),
+        .setURL(BOT_INVITE_LINK)
     )
     .addComponents(
       new ButtonBuilder()
         .setStyle(ButtonStyle.Link)
         .setLabel('Support Server')
-        .setURL(SUPPORT_SERVER_INVITE_LINK),
+        .setURL(SUPPORT_SERVER_INVITE_LINK)
     )
     .addComponents(
       new ButtonBuilder()
         .setStyle(ButtonStyle.Link)
         .setLabel('Donate')
-        .setURL(PATREON_LINK),
+        .setURL(PATREON_LINK)
     )
     .addComponents(
       new ButtonBuilder()
         .setStyle(ButtonStyle.Link)
         .setLabel('Vote')
-        .setURL(TOPGG_LINK),
+        .setURL(TOPGG_LINK)
     );
 };
 
@@ -155,7 +161,7 @@ const generateEmbedCommand = (command: IHelpCommand) => {
     {
       name: 'Usage',
       value: command.usage ?? '-',
-    },
+    }
   );
 
   return embed;

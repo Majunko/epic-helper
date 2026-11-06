@@ -1,4 +1,8 @@
-import {SLASH_MESSAGE_BOT_TYPE, USER_ACC_OFF_ACTIONS, USER_NOT_REGISTERED_ACTIONS} from '@epic-helper/constants';
+import {
+  SLASH_MESSAGE_BOT_TYPE,
+  USER_ACC_OFF_ACTIONS,
+  USER_NOT_REGISTERED_ACTIONS,
+} from '@epic-helper/constants';
 import {rpgProgress} from '../../../../lib/epic-rpg/commands/account/progress';
 
 export default <SlashMessage>{

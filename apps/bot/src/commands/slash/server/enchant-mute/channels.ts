@@ -1,6 +1,9 @@
 import djsInteractionHelper from '../../../../lib/discordjs/interaction';
 import commandHelper from '../../../../lib/epic-helper/command-helper';
-import {USER_ACC_OFF_ACTIONS, USER_NOT_REGISTERED_ACTIONS} from '@epic-helper/constants';
+import {
+  USER_ACC_OFF_ACTIONS,
+  USER_NOT_REGISTERED_ACTIONS,
+} from '@epic-helper/constants';
 import {SLASH_COMMAND} from '../../constant';
 
 type TActionType = 'add' | 'remove' | 'reset';
@@ -26,21 +29,21 @@ export default <SlashCommand>{
           .setChoices(
             {name: 'Add', value: 'add'},
             {name: 'Remove', value: 'remove'},
-            {name: 'Reset', value: 'reset'},
-          ),
+            {name: 'Reset', value: 'reset'}
+          )
       )
       .addStringOption((option) =>
         option
           .setName('channels')
           .setDescription('Mention multiple channels to perform action')
-          .setRequired(false),
+          .setRequired(false)
       ),
   execute: async (client, interaction) => {
     if (!interaction.inGuild()) return;
     const channels = interaction.options.getString('channels');
     const action = interaction.options.getString('action') as TActionType;
     const validatedChannels = readChannels(channels).filter((channelId) =>
-      interaction.guild?.channels.cache.has(channelId),
+      interaction.guild?.channels.cache.has(channelId)
     );
     const enchantMuteSettings = await commandHelper.serverSettings.enchantMute({
       serverId: interaction.guildId,
@@ -49,14 +52,12 @@ export default <SlashCommand>{
     let messageOptions;
     switch (action) {
       case 'add':
-        messageOptions = await enchantMuteSettings.addChannels(
-          validatedChannels,
-        );
+        messageOptions =
+          await enchantMuteSettings.addChannels(validatedChannels);
         break;
       case 'remove':
-        messageOptions = await enchantMuteSettings.removeChannels(
-          validatedChannels,
-        );
+        messageOptions =
+          await enchantMuteSettings.removeChannels(validatedChannels);
         break;
       case 'reset':
         messageOptions = await enchantMuteSettings.reset();

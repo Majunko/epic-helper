@@ -1,5 +1,5 @@
 import type {Client, Embed, Guild, Message, User} from 'discord.js';
-import ms from 'ms';
+import {parseMs} from '@epic-helper/utils';
 import {createRpgCommandListener} from '../../../../utils/rpg-command-listener';
 import djsChannelHelper from '../../../discordjs/channel';
 import {djsMessageHelper} from '../../../discordjs/message';
@@ -107,7 +107,7 @@ const rpgEnchantSuccess = async ({
 
   const enchantTier = getEnchantType({embed});
   const equipmentType = Object.values(EQUIPMENT_TYPE).find((type) =>
-    embed.description?.toLowerCase().includes(type),
+    embed.description?.toLowerCase().includes(type)
   );
   const targetTier = await userService.getUserEnchantTier({
     userId: author.id,
@@ -121,12 +121,12 @@ const rpgEnchantSuccess = async ({
       userId,
       client,
       channelId,
-      unMuteIn: ms(muteDuration),
-    }),
+      unMuteIn: parseMs(muteDuration),
+    })
   );
 
   const unmuteIn = timestampHelper.relative({
-    time: new Date(Date.now() + ms(muteDuration)),
+    time: new Date(Date.now() + parseMs(muteDuration)),
   });
 
   await djsMessageHelper.send({
@@ -144,7 +144,7 @@ interface IEnchantGet {
 
 export const getEnchantType = ({embed}: IEnchantGet) =>
   Object.values(RPG_ENCHANT_LEVEL).find((level) =>
-    embed.fields[0].name.toLowerCase().includes(`**${level}**`),
+    embed.fields[0].name.toLowerCase().includes(`**${level}**`)
   );
 
 interface IIsSuccessfullyEnchanted {
@@ -154,7 +154,7 @@ interface IIsSuccessfullyEnchanted {
 
 const isSuccessfullyEnchanted = ({author, embed}: IIsSuccessfullyEnchanted) =>
   Object.values(ENCHANT_CMD_TYPE).some(
-    (type) => embed.author?.name === `${author.username} — ${type}`,
+    (type) => embed.author?.name === `${author.username} — ${type}`
   );
 
 interface IIsEnchantEquipmentBroken {

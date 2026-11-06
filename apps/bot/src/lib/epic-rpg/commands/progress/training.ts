@@ -3,7 +3,11 @@ import {createRpgCommandListener} from '../../../../utils/rpg-command-listener';
 import getTrainingAnswer from '../../../epic-helper/features/training-helper';
 import {djsMessageHelper} from '../../../discordjs/message';
 import {USER_STATS_RPG_COMMAND_TYPE} from '@epic-helper/models';
-import {BOT_REMINDER_BASE_COOLDOWN, RPG_COMMAND_TYPE, RPG_COOLDOWN_EMBED_TYPE} from '@epic-helper/constants';
+import {
+  BOT_REMINDER_BASE_COOLDOWN,
+  RPG_COMMAND_TYPE,
+  RPG_COOLDOWN_EMBED_TYPE,
+} from '@epic-helper/constants';
 import {calcCdReduction} from '../../../epic-helper/reminders/commands-cooldown';
 import {updateReminderChannel} from '../../../epic-helper/reminders/reminder-channel';
 import {userReminderServices} from '@epic-helper/services';
@@ -195,5 +199,5 @@ interface IIsEncounteringPet {
 
 const isEncounteringPet = ({embed, author}: IIsEncounteringPet) =>
   [author.username, 'IS APPROACHING'].every((msg) =>
-    embed.fields[0]?.name?.includes(msg),
+    embed.fields[0]?.name?.includes(msg)
   );

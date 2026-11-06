@@ -1,5 +1,18 @@
-import type {BaseInteraction, BaseMessageOptions, Client, Guild, StringSelectMenuInteraction, User} from 'discord.js';
-import {ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, PermissionsBitField} from 'discord.js';
+import type {
+  BaseInteraction,
+  BaseMessageOptions,
+  Client,
+  Guild,
+  StringSelectMenuInteraction,
+  User,
+} from 'discord.js';
+import {
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  EmbedBuilder,
+  PermissionsBitField,
+} from 'discord.js';
 import {guildService} from '@epic-helper/services';
 import {_getGuildSettingsEmbed} from './embed/guild-settings.embed';
 import messageFormatter from '../../../discordjs/message-formatter';
@@ -63,7 +76,7 @@ export const _configureGuild = async ({
     userId: author.id,
   });
   const isServerAdmin = member?.permissions.has(
-    PermissionsBitField.Flags.ManageGuild,
+    PermissionsBitField.Flags.ManageGuild
   );
   const isGuildLeader = guildAccount?.leaderId === author.id;
 
@@ -104,7 +117,7 @@ export const _configureGuild = async ({
         embeds: [
           new EmbedBuilder()
             .setDescription(
-              `Successfully deleted guild - ${messageFormatter.role(roleId)}`,
+              `Successfully deleted guild - ${messageFormatter.role(roleId)}`
             )
             .setColor(BOT_COLOR.embed),
         ],
@@ -328,11 +341,11 @@ const guildDeletionConfirmation = new ActionRowBuilder<ButtonBuilder>()
     new ButtonBuilder()
       .setCustomId('yes')
       .setLabel('Yes')
-      .setStyle(ButtonStyle.Success),
+      .setStyle(ButtonStyle.Success)
   )
   .addComponents(
     new ButtonBuilder()
       .setCustomId('no')
       .setLabel('No')
-      .setStyle(ButtonStyle.Danger),
+      .setStyle(ButtonStyle.Danger)
   );

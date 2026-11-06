@@ -1,5 +1,5 @@
 import type {Model} from 'mongoose';
-import {type FilterQuery, type QueryOptions} from 'mongoose';
+import type {mongo, QueryOptions} from 'mongoose';
 import {RPG_PET_ADV_STATUS} from '@epic-helper/constants';
 import {type IUserPet, userPetSchema} from '@epic-helper/models';
 import {userReminderServices} from './user-reminder.service';
@@ -19,7 +19,7 @@ userPetSchema.post('updateMany', async function () {
 
 async function updateNextPetReminderTime(
   userId: string,
-  model: Model<IUserPet>,
+  model: Model<IUserPet>
 ) {
   const nextReminderTime = await model
     .find({
@@ -59,7 +59,7 @@ const getUserPets = async ({
   status,
   orderBy = 'petId',
 }: IGetUserPets) => {
-  const query: FilterQuery<IUserPet> = {
+  const query: mongo.Filter<IUserPet> = {
     userId,
   };
   if (petsId) {
@@ -91,7 +91,7 @@ interface ICalcTotalPets {
 }
 
 const calcTotalPets = async ({userId, status}: ICalcTotalPets) => {
-  const query: FilterQuery<IUserPet> = {
+  const query: mongo.Filter<IUserPet> = {
     userId,
   };
   if (status) {
@@ -118,7 +118,7 @@ const createUserPet = async ({userId, pet}: ICreateUserPet) => {
     },
     {
       upsert: true,
-    },
+    }
   );
 };
 
@@ -135,7 +135,7 @@ const updateUserPet = async ({userId, pet}: IUpdateUserPet) => {
     },
     {
       $set: pet,
-    },
+    }
   );
 };
 
@@ -186,7 +186,7 @@ const updateRemindedPets = async ({userId, petIds}: IUpdateRemindedPets) => {
       $set: {
         status: RPG_PET_ADV_STATUS.back,
       },
-    },
+    }
   );
 };
 
@@ -242,7 +242,7 @@ const claimAllPets = async ({userId}: {userId: string}) => {
       $unset: {
         readyAt: 1,
       },
-    },
+    }
   );
 };
 
@@ -258,7 +258,7 @@ const resetUserPetsAdvStatus = async (userId: string) => {
       $unset: {
         readyAt: 1,
       },
-    },
+    }
   );
 };
 
@@ -292,7 +292,7 @@ const cancelAdventurePets = async ({userId, petIds}: ICancelAdventurePets) => {
       $unset: {
         readyAt: 1,
       },
-    },
+    }
   );
 };
 

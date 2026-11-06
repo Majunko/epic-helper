@@ -1,6 +1,9 @@
 import {createRpgCommandListener} from '../../../../utils/rpg-command-listener';
 import type {Client, Message, User} from 'discord.js';
-import type {IMessageContentChecker, IMessageEmbedChecker} from '../../../../types/utils';
+import type {
+  IMessageContentChecker,
+  IMessageEmbedChecker,
+} from '../../../../types/utils';
 import {guildService} from '@epic-helper/services';
 import ms from 'ms';
 import {upgraidService} from '@epic-helper/services';
@@ -120,6 +123,6 @@ const isGuildRaidSuccess = ({author, embed}: IMessageEmbedChecker) =>
   [author.username, 'RAIDED'].every((msg) => embed.description?.includes(msg));
 
 const isUserDontHaveGuild = ({author, message}: IMessageContentChecker) =>
-  ['you don\'t have a guild', 'not in a guild'].some((msg) =>
-    message.content.includes(msg),
+  ["you don't have a guild", 'not in a guild'].some((msg) =>
+    message.content.includes(msg)
   ) && message.mentions.users.has(author.id);

@@ -1,6 +1,15 @@
 import {BOT_COLOR} from '@epic-helper/constants';
-import type {BaseInteraction, BaseMessageOptions, Client, StringSelectMenuInteraction} from 'discord.js';
-import {ActionRowBuilder, EmbedBuilder, UserSelectMenuBuilder} from 'discord.js';
+import type {
+  BaseInteraction,
+  BaseMessageOptions,
+  Client,
+  StringSelectMenuInteraction,
+} from 'discord.js';
+import {
+  ActionRowBuilder,
+  EmbedBuilder,
+  UserSelectMenuBuilder,
+} from 'discord.js';
 import type {IFreeDonor} from '@epic-helper/models';
 import messageFormatter from '../../../discordjs/message-formatter';
 import {djsUserHelper} from '../../../discordjs/user';
@@ -30,7 +39,7 @@ export const _listFreeDonors = ({client}: IListFreeDonors) => {
           total,
           all: false,
           itemsPerPage: PAGE_SIZE,
-        }),
+        })
       );
     }
 
@@ -69,7 +78,7 @@ export const _listFreeDonors = ({client}: IListFreeDonors) => {
   };
 
   const responseInteraction = async (
-    interaction: BaseInteraction | StringSelectMenuInteraction,
+    interaction: BaseInteraction | StringSelectMenuInteraction
   ): Promise<BaseMessageOptions | null> => {
     if (interaction.isButton()) {
       page = Number(interaction.customId);
@@ -127,7 +136,7 @@ const buildFreeDonorsEmbed = async ({
 
 const userSelector =
   new ActionRowBuilder<UserSelectMenuBuilder>().addComponents(
-    new UserSelectMenuBuilder().setCustomId('user').setPlaceholder('User'),
+    new UserSelectMenuBuilder().setCustomId('user').setPlaceholder('User')
   );
 
 interface IBuildDonorEmbed {
@@ -178,14 +187,14 @@ const buildFreeDonorEmbed = async ({
       name: 'BOOSTED GUILDS',
       value: boostedGuilds.length
         ? boostedGuilds
-          .map(
-            (guild, index) =>
-              `\`[${index + 1}]\` **${guild.name}**- ${guild.token}`,
-          )
-          .join('\n')
+            .map(
+              (guild, index) =>
+                `\`[${index + 1}]\` **${guild.name}**- ${guild.token}`
+            )
+            .join('\n')
         : '-',
       inline: false,
-    },
+    }
   );
 
   embed.setFooter({
@@ -197,7 +206,7 @@ const buildFreeDonorEmbed = async ({
 const fetchUser = async (client: Client, userId?: string) =>
   userId
     ? await djsUserHelper.getUser({
-      userId,
-      client,
-    })
+        userId,
+        client,
+      })
     : null;

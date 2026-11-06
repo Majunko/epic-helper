@@ -35,8 +35,8 @@ export const _enchantMuteSettings = async ({
         channelsId.includes(channel.id) &&
         (channel.isTextBased() || channel.isThread()) &&
         enchantChannels.every(
-          (enchantChannel) => enchantChannel.channelId !== channel.id,
-        ),
+          (enchantChannel) => enchantChannel.channelId !== channel.id
+        )
     );
     const totalChannels = channels.size + enchantChannels.length;
     if (
@@ -49,7 +49,7 @@ export const _enchantMuteSettings = async ({
           [
             'You can only have maximum 3 channels for enchant mute',
             'Checkout `donate` to view more information',
-          ].join('\n'),
+          ].join('\n')
         );
       return {
         embeds: [embed],

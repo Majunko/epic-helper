@@ -159,7 +159,7 @@ const getModifyLogEmbed = ({
         name: 'To',
         value: `\`\`${curr.exp} exp ${curr.count} duels\`\``,
         inline: true,
-      },
+      }
     )
     .setFooter({text: `Modified by ${author.username}`});
 };

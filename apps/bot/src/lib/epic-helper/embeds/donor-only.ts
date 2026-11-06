@@ -19,9 +19,9 @@ const _donorOnly = ({author}: IDonorOnly) => {
         '**This command is only available for donor**',
         `You can support the bot by donating in ${messageFormatter.hyperlink(
           'Patreon',
-          PATREON_LINK,
+          PATREON_LINK
         )}`,
-      ].join('\n'),
+      ].join('\n')
     );
 };
 

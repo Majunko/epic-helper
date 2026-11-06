@@ -7,7 +7,6 @@ export default <BotEvent>{
   eventName: Events.GuildCreate,
   once: false,
   execute: async (client, guild: Guild) => {
-
     const isClusterActive = await commandHelper.cluster.isClusterActive(client);
     if (!isClusterActive) return;
 

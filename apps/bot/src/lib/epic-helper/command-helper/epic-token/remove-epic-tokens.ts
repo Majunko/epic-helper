@@ -1,6 +1,10 @@
 import {serverService} from '@epic-helper/services';
 import type {BaseInteraction, BaseMessageOptions} from 'discord.js';
-import {ActionRowBuilder, EmbedBuilder, StringSelectMenuBuilder} from 'discord.js';
+import {
+  ActionRowBuilder,
+  EmbedBuilder,
+  StringSelectMenuBuilder,
+} from 'discord.js';
 import {generateNavigationRow} from '../../../../utils/pagination-row';
 import {BOT_COLOR} from '@epic-helper/constants';
 
@@ -27,12 +31,12 @@ export const _removeEpicTokens = async ({userId}: IRemoveEpicTokens) => {
   };
 
   const responseInteraction = async (
-    interaction: BaseInteraction,
+    interaction: BaseInteraction
   ): Promise<BaseMessageOptions | null> => {
     if (interaction.isStringSelectMenu() && interaction.customId === 'server') {
       const serverId = interaction.values[0];
       const removedServer = boostedServers.find(
-        (server) => server.serverId === serverId,
+        (server) => server.serverId === serverId
       );
       await removeTokens({
         serverId,
@@ -84,7 +88,7 @@ const getInteraction = ({boostedServers, page}: IGetInteraction) => {
     getServerSelector({
       page,
       servers: boostedServers,
-    }),
+    })
   );
   if (boostedServers.length > SERVERS_PER_PAGE) {
     actionRows.push(
@@ -93,7 +97,7 @@ const getInteraction = ({boostedServers, page}: IGetInteraction) => {
         total: boostedServers.length,
         all: false,
         itemsPerPage: SERVERS_PER_PAGE,
-      }),
+      })
     );
   }
   return actionRows;
@@ -107,7 +111,7 @@ interface IGetServerSelector {
 const getServerSelector = ({servers, page}: IGetServerSelector) => {
   const serversToShow = servers.slice(
     page * SERVERS_PER_PAGE,
-    (page + 1) * SERVERS_PER_PAGE,
+    (page + 1) * SERVERS_PER_PAGE
   );
   return new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(
     new StringSelectMenuBuilder()
@@ -118,8 +122,8 @@ const getServerSelector = ({servers, page}: IGetServerSelector) => {
           value: server.serverId,
           label: server.name,
           description: `Token: ${server.token}`,
-        })),
-      ),
+        }))
+      )
   );
 };
 
@@ -139,7 +143,7 @@ const getSelectServerEmbed = ({boostedServers}: IGetSelectServerEmbed) => {
     .setTitle('Select a server to remove tokens from.')
     .setColor(BOT_COLOR.embed)
     .setDescription(
-      'This will remove all tokens from the selected server immediately.',
+      'This will remove all tokens from the selected server immediately.'
     );
 };
 
@@ -152,7 +156,7 @@ const getSuccessEmbed = ({serverName}: IGetSuccessEmbed) => {
     .setDescription(
       `Successfully removed tokens${
         serverName ? ` from **${serverName}**` : ''
-      }.`,
+      }.`
     )
     .setColor(BOT_COLOR.embed);
 };

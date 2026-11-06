@@ -1,7 +1,10 @@
 import type {Embed, User} from 'discord.js';
 import {convertRomanToNumber} from '../../../utils/roman-conversion';
-import ms from 'ms';
-import {convertPetIdToNum, typedObjectEntries} from '@epic-helper/utils';
+import {
+  convertPetIdToNum,
+  parseMs,
+  typedObjectEntries,
+} from '@epic-helper/utils';
 import type {TSkillTierStr} from '@epic-helper/constants';
 import {
   RPG_PET_ADV_STATUS,
@@ -49,7 +52,7 @@ const getPetStatus = (fieldValue: string) => {
     return RPG_PET_ADV_STATUS.back;
   } else if (
     ['learning', 'drilling', 'finding'].some((type) =>
-      fieldValue.includes(type),
+      fieldValue.includes(type)
     )
   ) {
     return RPG_PET_ADV_STATUS.adventure;
@@ -59,12 +62,12 @@ const getPetStatus = (fieldValue: string) => {
 
 const getPetId = (fieldName: string) => {
   return convertPetIdToNum(
-    fieldName.split('\n')[0].split(' ')[1].replaceAll('`', ''),
+    fieldName.split('\n')[0].split(' ')[1].replaceAll('`', '')
   );
 };
 const getPetName = (fieldName: string) => {
   return typedObjectEntries(RPG_PET_LABEL).find(([, name]) =>
-    fieldName.includes(name),
+    fieldName.includes(name)
   )?.[0];
 };
 
@@ -72,7 +75,7 @@ const getPetSkills = (fieldValue: string) => {
   const skill: IUserPet['skills'] = {};
   for (const line of fieldValue.split('\n')) {
     const skillName = typedObjectEntries(RPG_PET_SKILL_LABEL).find(
-      ([, skill]) => line.includes(`${skill}**`),
+      ([, skill]) => line.includes(`${skill}**`)
     )?.[0];
     const skillTier = line.match(/\[(SS\+|SS|S|A|B|C|D|E|F)]/)?.[1];
     if (!skillName) continue;
@@ -109,7 +112,7 @@ const getPetReadyAt = (fieldValue: string) => {
     .filter((time) => time !== '');
   if (!timeArr) return null;
   const duration = timeArr.reduce((acc, time) => {
-    return acc + ms(time);
+    return acc + parseMs(time);
   }, 0);
   return new Date(Date.now() + duration);
 };

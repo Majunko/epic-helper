@@ -32,7 +32,7 @@ export const _getDonorInfoEmbed = ({
   const totalToken = donorToken + freeToken;
   const usedToken = boostedServers.reduce(
     (acc, server) => acc + server.token,
-    0,
+    0
   );
   const remainingToken = totalToken - usedToken;
 
@@ -63,7 +63,7 @@ export const _getDonorInfoEmbed = ({
       value: boostedServers
         .map(
           (server, index) =>
-            `\`[${index + 1}]\` **${server.name}** - ${server.token} boosts`,
+            `\`[${index + 1}]\` **${server.name}** - ${server.token} boosts`
         )
         .join('\n'),
       inline: false,

@@ -1,6 +1,10 @@
 import embedProvider from '../../../../lib/epic-helper/embeds';
 import {djsMessageHelper} from '../../../../lib/discordjs/message';
-import {PREFIX_COMMAND_TYPE, USER_ACC_OFF_ACTIONS, USER_NOT_REGISTERED_ACTIONS} from '@epic-helper/constants';
+import {
+  PREFIX_COMMAND_TYPE,
+  USER_ACC_OFF_ACTIONS,
+  USER_NOT_REGISTERED_ACTIONS,
+} from '@epic-helper/constants';
 import {userReminderServices} from '@epic-helper/services';
 import {userService} from '@epic-helper/services';
 import toggleUserChecker from '../../../../lib/epic-helper/toggle-checker/user';
@@ -25,7 +29,7 @@ export default <PrefixCommand>{
     const embed = embedProvider.userCooldown({
       author: message.author,
       userReminder: await userReminderServices.getUserAllCooldowns(
-        message.author.id,
+        message.author.id
       ),
       userAccount,
       toggleChecker,

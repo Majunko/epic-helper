@@ -99,7 +99,7 @@ interface IExtractCancelledPetAmount {
 
 const extractCancelledPetAmount = ({message}: IExtractCancelledPetAmount) => {
   const amount = message.content.match(
-    /\*\*(\d+)\*\* pet adventure\(s\) cancelled/,
+    /\*\*(\d+)\*\* pet adventure\(s\) cancelled/
   )?.[1];
   return amount ? parseInt(amount) : 0;
 };

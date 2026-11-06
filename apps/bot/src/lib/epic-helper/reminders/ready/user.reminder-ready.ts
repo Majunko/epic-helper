@@ -4,7 +4,11 @@ import {userPetReminderTimesUp} from './user-pet.reminder-ready';
 import {getReminderChannel} from '../reminder-channel';
 import {djsMessageHelper} from '../../../discordjs/message';
 import {RPG_COMMAND_TYPE} from '@epic-helper/constants';
-import {redisMainUsers, userReminderServices, userService} from '@epic-helper/services';
+import {
+  redisMainUsers,
+  userReminderServices,
+  userService,
+} from '@epic-helper/services';
 import {generateUserReminderMessage} from '../message-generator/custom-message-generator';
 import {djsUserHelper} from '../../../discordjs/user';
 import toggleUserChecker from '../../toggle-checker/user';
@@ -17,20 +21,23 @@ export const userReminderTimesUp = async (client: Client, userId: string) => {
   if (!client.channels.cache.has(defaultChannel)) {
     if (client.mainUsers.has(userId)) {
       client.mainUsers.delete(userId);
-      await redisMainUsers.set(client.cluster?.id, Array.from(client.mainUsers));
+      await redisMainUsers.set(
+        client.cluster?.id,
+        Array.from(client.mainUsers)
+      );
     }
     return;
   }
 
-  const readyCommands = await userReminderServices.findUserReadyCommands(
-    userId,
-  );
+  const readyCommands =
+    await userReminderServices.findUserReadyCommands(userId);
   await userReminderServices.updateRemindedCooldowns({
     userId: userAccount.userId,
     types: readyCommands.map((cmd) => cmd.type),
   });
   for (const command of readyCommands) {
-    if (command.readyAt && Date.now() - command.readyAt.getTime() > ms('5s')) continue;
+    if (command.readyAt && Date.now() - command.readyAt.getTime() > ms('5s'))
+      continue;
 
     if (command.type === RPG_COMMAND_TYPE.pet) {
       return userPetReminderTimesUp({

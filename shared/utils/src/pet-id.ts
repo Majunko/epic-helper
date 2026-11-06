@@ -23,7 +23,7 @@ export const convertPetIdToNum = (petId: string) => {
   let petIdNum = 0;
   for (let i = 0; i < arr.length; i++) {
     const str = arr[i];
-    let num = 0;
+    let num: number;
     if (str === 'lmao') {
       num = 27;
     } else {

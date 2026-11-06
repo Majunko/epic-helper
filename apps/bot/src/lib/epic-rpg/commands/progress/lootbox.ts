@@ -92,7 +92,7 @@ const rpgBuyLootboxSuccess = async ({
   });
   if (!toggleChecker) return;
   const lootboxType = Object.values(RPG_LOOTBOX_TYPE).find((type) =>
-    content.toLowerCase().includes(type),
+    content.toLowerCase().includes(type)
   );
 
   if (toggleChecker.reminder.lootbox) {
@@ -126,7 +126,7 @@ interface IIsLootboxSuccessfullyBought {
 
 const isLootboxSuccessfullyBought = ({content}: IIsLootboxSuccessfullyBought) =>
   Object.values(RPG_LOOTBOX_TYPE).some((lb) =>
-    content.toLowerCase().includes(lb),
+    content.toLowerCase().includes(lb)
   ) && content.includes('successfully bought for');
 
 interface IIsNotEligibleToBuyLootbox {
@@ -149,4 +149,4 @@ interface IIsNotEnoughMoneyToBuyLootbox {
 const isNotEnoughMoneyToBuyLootbox = ({
   content,
 }: IIsNotEnoughMoneyToBuyLootbox) =>
-  content.includes('You don\'t have enough money');
+  content.includes("You don't have enough money");

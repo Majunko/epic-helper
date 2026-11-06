@@ -1,5 +1,16 @@
-import type {BaseInteraction, BaseMessageOptions, Client, Guild, User} from 'discord.js';
-import {ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder} from 'discord.js';
+import type {
+  BaseInteraction,
+  BaseMessageOptions,
+  Client,
+  Guild,
+  User,
+} from 'discord.js';
+import {
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  EmbedBuilder,
+} from 'discord.js';
 import {guildDuelService, guildService} from '@epic-helper/services';
 import {BOT_COLOR} from '@epic-helper/constants';
 import messageFormatter from '../../../discordjs/message-formatter';
@@ -97,8 +108,8 @@ const generateConfirmationOptions = ({
     .setColor(BOT_COLOR.embed)
     .setDescription(
       `Are you sure want to reset duel record for ${messageFormatter.role(
-        roleId,
-      )}?`,
+        roleId
+      )}?`
     );
 
   const rows = new ActionRowBuilder<ButtonBuilder>().addComponents(
@@ -109,7 +120,7 @@ const generateConfirmationOptions = ({
     new ButtonBuilder()
       .setCustomId('no')
       .setLabel('No')
-      .setStyle(ButtonStyle.Danger),
+      .setStyle(ButtonStyle.Danger)
   );
 
   return {
@@ -132,7 +143,7 @@ const generateResultOptions = ({
   const embed = new EmbedBuilder().setColor(BOT_COLOR.embed);
   if (deleted) {
     embed.setDescription(
-      `Successfully reset duel record for ${messageFormatter.role(roleId)}`,
+      `Successfully reset duel record for ${messageFormatter.role(roleId)}`
     );
     embed.setFooter({text: `Reset by ${author.username}`});
   } else {

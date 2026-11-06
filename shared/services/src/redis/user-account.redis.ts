@@ -15,10 +15,7 @@ const findUser = async (userId: string) => {
 };
 
 const setUser = async (userId: string, user: IUser) => {
-  await redisService.set(
-    getKey(userId),
-    JSON.stringify(toUser(user)),
-  );
+  await redisService.set(getKey(userId), JSON.stringify(toUser(user)));
 };
 
 const delUser = async (userId: string) => {

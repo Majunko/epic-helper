@@ -61,8 +61,6 @@ export const _petCatchHelper = ({
     render,
     sendCopyCommands,
   };
-
-
 };
 
 interface IGeneratePetCatchCommand {
@@ -92,7 +90,7 @@ export const generatePetCatchMessageOptions = ({
 const getEmbed = (
   commands: ICmd[],
   owner?: string,
-  petName?: ReturnType<typeof wildPetReader>['petName'],
+  petName?: ReturnType<typeof wildPetReader>['petName']
 ) => {
   const embed = new EmbedBuilder().setColor(BOT_COLOR.embed);
   if (owner) {
@@ -166,7 +164,11 @@ const getEmbed = (
 
 const MAX_CLICKS = 6;
 
-const getCommands = (hunger: number, happiness: number, clicked: number = 0) => {
+const getCommands = (
+  hunger: number,
+  happiness: number,
+  clicked: number = 0
+) => {
   const feedAmount = getFeedTimes(hunger);
   let patAmount = getPatTimes(happiness, MAX_CLICKS - clicked - feedAmount);
   const list: ICmd[] = [];
@@ -176,7 +178,7 @@ const getCommands = (hunger: number, happiness: number, clicked: number = 0) => 
       hunger,
       happiness,
       feedAmount,
-      patAmount,
+      patAmount
     );
     if (percentage.min === 100 && list[0]?.isMax) {
       list.pop();
@@ -190,7 +192,6 @@ const getCommands = (hunger: number, happiness: number, clicked: number = 0) => 
       isMax: percentage.min === 100,
     });
     if (percentage.min !== 100 || !patAmount) {
-      loop = false;
       break;
     }
     patAmount--;
@@ -218,7 +219,7 @@ const generatePercentage = (
   hunger: number,
   happiness: number,
   feedAmount: number,
-  patAmount: number,
+  patAmount: number
 ) => {
   const min = calcPercentage(hunger, happiness, feedAmount, patAmount, 'min');
   const max = calcPercentage(hunger, happiness, feedAmount, patAmount, 'max');
@@ -247,12 +248,12 @@ const calcPercentage = (
   happiness: number,
   feedAmount: number,
   patAmount: number,
-  type: 'min' | 'max' | 'avg',
+  type: 'min' | 'max' | 'avg'
 ) => {
   const finalHunger = Math.max(0, hunger - feedAmount * hungerTimes[type]);
   const finalHappiness = Math.min(
     100,
-    happiness + patAmount * happinessTimes[type],
+    happiness + patAmount * happinessTimes[type]
   );
   const value = finalHappiness - finalHunger;
   return value >= 85 ? 100 : calcFinalPercentage(value);

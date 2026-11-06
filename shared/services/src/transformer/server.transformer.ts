@@ -22,7 +22,7 @@ export const toServer = (server: any): IServer => {
             acc[key] = server?.settings?.randomEvent?.[key];
           return acc;
         },
-        {} as Record<ValuesOf<typeof RPG_RANDOM_EVENTS>, string>,
+        {} as Record<ValuesOf<typeof RPG_RANDOM_EVENTS>, string>
       ),
       ttVerification: {
         channelId: server?.settings?.ttVerification?.channelId,

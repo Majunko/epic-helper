@@ -228,7 +228,7 @@ function isZombieHordeEnded({content, author}: IIsZombieHordeEnded) {
   return (
     content.includes(author.username) &&
     ['cried', 'fights the horde', 'the horde did not notice'].some((text) =>
-      content.includes(text),
+      content.includes(text)
     )
   );
 }
@@ -257,7 +257,7 @@ function isUserJoinedTheHorde({content, author}: IIsUserJoinedTheHorde) {
   return (
     content.includes(author.username) &&
     ['pretends to be a zombie', 'area #2'].some((text) =>
-      content.includes(text),
+      content.includes(text)
     )
   );
 }
@@ -282,7 +282,6 @@ const getHealReminderMsg = ({
   let dead: boolean | undefined = false;
   if (!together) {
     if (content.includes('found and killed a')) {
-
       //player survived
       hp = content
         .split('\n')
@@ -298,19 +297,17 @@ const getHealReminderMsg = ({
         .split(' ')
         .pop();
     } else if (content.includes('lost fighting')) {
-
       //player died
       dead = true;
       if (content.includes('saved you before the enemy')) horseSaved = true;
     }
   } else if (together) {
     if (content.includes('Both enemies were killed')) {
-
       //Both Enemy were Killed
       hp = content
         .split('\n')
         .find((msg) =>
-          [author.username, 'remaining HP is'].every((m) => msg.includes(m)),
+          [author.username, 'remaining HP is'].every((m) => msg.includes(m))
         )
         ?.split('HP is')[1]
         .trim()
@@ -318,32 +315,28 @@ const getHealReminderMsg = ({
       hpLost = content
         .split('\n')
         .find((msg) =>
-          [author.username, 'remaining HP is'].every((m) => msg.includes(m)),
+          [author.username, 'remaining HP is'].every((m) => msg.includes(m))
         )
         ?.split('HP')[0]
         .trim()
         .split(' ')
         .pop();
     } else if (content.includes('just in time')) {
-
       //one of the player died
       const playerSurvived = content
         .split('\n')
         .find((msg) =>
-          [author.username, 'remaining HP is'].every((m) => msg.includes(m)),
+          [author.username, 'remaining HP is'].every((m) => msg.includes(m))
         );
       if (playerSurvived) {
-
         //player is survived
         hp = playerSurvived.split('HP is')[1].trim().split('/')[0];
       } else {
-
         //player dead but saved
         dead = true;
         partnerSaved = true;
       }
     } else if (content.includes('but they saved each other')) {
-
       //both player died
       dead = true;
       partnerSaved = true;
@@ -361,7 +354,6 @@ const getHealReminderMsg = ({
       return;
     }
   } else if (hpLost && Number(hpLost) !== 0) {
-
     // user is damaged
     if (target && Number(hp) <= Number(target))
       msg = `Your HP is getting low. Time to ${RPG_CLICKABLE_SLASH_COMMANDS.heal} now`;

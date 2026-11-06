@@ -9,7 +9,7 @@ import {redisUserBoostedServers} from '../redis/user-boosted-servers.redis';
 import {mongoClient} from '../clients/mongoose.service';
 import type {ValuesOf} from '@epic-helper/types';
 
-serverSchema.post('findOneAndUpdate', async function(doc) {
+serverSchema.post('findOneAndUpdate', async function (doc) {
   if (!doc) return;
   await redisServerAccount.setServer(doc.serverId, doc);
 });
@@ -62,7 +62,7 @@ const listRegisteredServersId = async (): Promise<string[]> => {
       {},
       {
         serverId: 1,
-      },
+      }
     )
     .lean({defaults: true});
   return servers?.map((server) => server.serverId) ?? [];
@@ -98,7 +98,7 @@ const addEnchantChannels = async ({
         },
       },
     },
-    {new: true},
+    {new: true}
   );
 };
 
@@ -122,7 +122,7 @@ const removeEnchantChannels = async ({
         },
       },
     },
-    {new: true},
+    {new: true}
   );
 };
 
@@ -144,7 +144,7 @@ const updateEnchantChannel = async ({
         'settings.enchant.channels.$': settings,
       },
     },
-    {new: true},
+    {new: true}
   );
 };
 
@@ -162,7 +162,7 @@ const resetEnchantChannels = async ({serverId}: IResetEnchantChannels) => {
     },
     {
       new: true,
-    },
+    }
   );
 };
 
@@ -182,7 +182,7 @@ const updateEnchantMuteDuration = async ({
         'settings.enchant.muteDuration': duration,
       },
     },
-    {new: true},
+    {new: true}
   );
 };
 
@@ -226,7 +226,7 @@ const setTTVerificationChannel = async ({
     {
       $set: {'settings.ttVerification.channelId': channelId},
     },
-    {new: true},
+    {new: true}
   );
 
   return await getServer({serverId});
@@ -245,7 +245,7 @@ const isTTVerificationRuleExists = async ({
 
   return (
     server?.settings.ttVerification.rules.some(
-      (rule) => rule.roleId === roleId,
+      (rule) => rule.roleId === roleId
     ) ?? false
   );
 };
@@ -279,7 +279,7 @@ const setTTVerificationRule = async ({
           },
         },
       },
-      {new: true},
+      {new: true}
     );
   } else {
     await dbServer.findOneAndUpdate(
@@ -294,7 +294,7 @@ const setTTVerificationRule = async ({
           },
         },
       },
-      {new: true},
+      {new: true}
     );
   }
   return await getServer({serverId});
@@ -318,7 +318,7 @@ const removeTTVerificationRule = async ({
         },
       },
     },
-    {new: true},
+    {new: true}
   );
   return await getServer({serverId});
 };
@@ -398,7 +398,7 @@ const addTokens = async ({serverId, userId, amount}: IAddTokens) => {
           'tokens.$.amount': amount,
         },
       },
-      {new: true},
+      {new: true}
     );
   } else {
     await dbServer.findOneAndUpdate(
@@ -413,7 +413,7 @@ const addTokens = async ({serverId, userId, amount}: IAddTokens) => {
           },
         },
       },
-      {new: true},
+      {new: true}
     );
   }
   await redisUserBoostedServers.del(userId);
@@ -431,7 +431,7 @@ const removeTokens = async ({serverId, userId, tokens}: IRemoveTokens) => {
 
   if (!isUserExists || !server) return;
   const tokenBoosted = server.tokens.find(
-    (token) => token.userId === userId,
+    (token) => token.userId === userId
   )?.amount;
   if (!tokenBoosted) return;
   const toRemove = tokens === undefined || tokens >= tokenBoosted;
@@ -447,7 +447,7 @@ const removeTokens = async ({serverId, userId, tokens}: IRemoveTokens) => {
           },
         },
       },
-      {new: true},
+      {new: true}
     );
   } else {
     await dbServer.findOneAndUpdate(
@@ -460,7 +460,7 @@ const removeTokens = async ({serverId, userId, tokens}: IRemoveTokens) => {
           'tokens.$.amount': -tokens,
         },
       },
-      {new: true},
+      {new: true}
     );
   }
   await redisUserBoostedServers.del(userId);
@@ -481,7 +481,7 @@ const addServerAdmins = async ({serverId, usersId}: IAddServerAdmins) => {
         },
       },
     },
-    {new: true},
+    {new: true}
   );
   return await getServer({serverId});
 };
@@ -501,7 +501,7 @@ const removeServerAdmins = async ({serverId, usersId}: IRemoveServerAdmins) => {
         },
       },
     },
-    {new: true},
+    {new: true}
   );
   return await getServer({serverId});
 };
@@ -518,7 +518,7 @@ const clearServerAdmins = async ({serverId}: IClearServerAdmins) => {
         'settings.admin.usersId': [],
       },
     },
-    {new: true},
+    {new: true}
   );
   return await getServer({serverId});
 };
@@ -541,7 +541,7 @@ const addServerAdminRoles = async ({
         },
       },
     },
-    {new: true},
+    {new: true}
   );
   return await getServer({serverId});
 };
@@ -564,7 +564,7 @@ const removeServerAdminRoles = async ({
         },
       },
     },
-    {new: true},
+    {new: true}
   );
   return await getServer({serverId});
 };
@@ -577,7 +577,7 @@ const clearServerAdminRoles = async ({serverId}: IClearServerAdminRoles) => {
   await dbServer.findOneAndUpdate(
     {serverId},
     {$set: {'settings.admin.rolesId': []}},
-    {new: true},
+    {new: true}
   );
   return await getServer({serverId});
 };
@@ -600,7 +600,7 @@ const resetServerToggle = async ({serverId}: IResetToggle) => {
   await dbServer.findOneAndUpdate(
     {serverId},
     {$unset: {toggle: ''}},
-    {new: true},
+    {new: true}
   );
   return await getServer({serverId});
 };
@@ -620,7 +620,7 @@ const addDonorRoles = async ({serverId, rolesId}: IAddDonorRoles) => {
         },
       },
     },
-    {new: true},
+    {new: true}
   );
   return getServer({serverId});
 };
@@ -640,7 +640,7 @@ const removeDonorRoles = async ({serverId, rolesId}: IRemoveDonorRoles) => {
         },
       },
     },
-    {new: true},
+    {new: true}
   );
   return getServer({serverId});
 };
@@ -653,7 +653,7 @@ const clearDonorRoles = async ({serverId}: IClearDonorRoles) => {
   await dbServer.findOneAndUpdate(
     {serverId},
     {$set: {'donor.roles': []}},
-    {new: true},
+    {new: true}
   );
   return getServer({serverId});
 };

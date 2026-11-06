@@ -9,17 +9,22 @@ interface IVSetGroupCooldowns {
   message: Message;
 }
 
-export const _setGroupCooldowns = async ({author, message}: IVSetGroupCooldowns) => {
+export const _setGroupCooldowns = async ({
+  author,
+  message,
+}: IVSetGroupCooldowns) => {
   const commandTypes = searchCmdByKeyword(message.content);
-  const users = message.mentions.users.filter(user => user.id !== author.id && !user.bot);
+  const users = message.mentions.users.filter(
+    (user) => user.id !== author.id && !user.bot
+  );
   const userAccount = await userService.getUserAccount(author.id);
-  if(!userAccount) return null;
+  if (!userAccount) return null;
   const usersToView = new Set<string>();
 
   for (const {userId} of userAccount.groupCooldowns) {
     usersToView.add(userId);
   }
-  for(const user of users.values()) {
+  for (const user of users.values()) {
     usersToView.add(user.id);
   }
 
@@ -51,7 +56,7 @@ export const _setGroupCooldowns = async ({author, message}: IVSetGroupCooldowns)
   // }
 
   await userService.saveUserGroupCooldowns({
-    users: users.map(user => user.id),
+    users: users.map((user) => user.id),
     types: commandTypes,
     userId: author.id,
   });

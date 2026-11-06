@@ -2,15 +2,15 @@
   "name": "@epic-helper/constants",
   "version": "1.0.0",
   "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "author": "",
   "main": "dist/index.js",
   "scripts": {
     "build:shared": "tsc",
     "type-check": "tsc --noEmit --skipLibCheck",
-    "lint": "eslint src/ --ext .ts --fix"
+    "lint": "vp lint src/ --fix"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "@epic-helper/types": "workspace:*"
   },

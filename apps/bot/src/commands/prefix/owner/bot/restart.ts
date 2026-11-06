@@ -8,8 +8,11 @@ export default <PrefixCommand>{
   commands: ['restart'],
   type: PREFIX_COMMAND_TYPE.dev,
   execute: async (client, message, args) => {
-    const ids = args.slice(1).filter((id) => !isNaN(Number(id))).map(Number);
-    let content = '';
+    const ids = args
+      .slice(1)
+      .filter((id) => !isNaN(Number(id)))
+      .map(Number);
+    let content: string;
 
     if (ids.length) {
       await commandHelper.cluster.restartClusters(client, ids);
@@ -20,7 +23,6 @@ export default <PrefixCommand>{
     } else {
       content = 'Please provide cluster id(s) or `all`';
     }
-
 
     await djsMessageHelper.send({
       client,

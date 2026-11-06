@@ -42,7 +42,7 @@ const generateFetchPatreonApiUrl = ({
   if (currently_entitled_tiers?.length)
     params.append(
       'fields[currently_entitled_tiers]',
-      currently_entitled_tiers.join(','),
+      currently_entitled_tiers.join(',')
     );
 
   if (nextCursor) params.append('page[cursor]', nextCursor);

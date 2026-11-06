@@ -1,5 +1,14 @@
-import type {BaseMessageOptions, Guild, StringSelectMenuInteraction, User} from 'discord.js';
-import {ActionRowBuilder, EmbedBuilder, StringSelectMenuBuilder} from 'discord.js';
+import type {
+  BaseMessageOptions,
+  Guild,
+  StringSelectMenuInteraction,
+  User,
+} from 'discord.js';
+import {
+  ActionRowBuilder,
+  EmbedBuilder,
+  StringSelectMenuBuilder,
+} from 'discord.js';
 import {BOT_COLOR, RPG_ENCHANT_LEVEL} from '@epic-helper/constants';
 import {serverService, userService} from '@epic-helper/services';
 import type {IServer} from '@epic-helper/models';
@@ -24,7 +33,7 @@ export const _setEnchant = async ({author, server}: ISlashAccountEnchant) => {
   }
 
   async function responseInteraction(
-    interaction: StringSelectMenuInteraction,
+    interaction: StringSelectMenuInteraction
   ): Promise<BaseMessageOptions> {
     const selectedEnchantLevel = interaction.values[0] as
       | ValuesOf<typeof RPG_ENCHANT_LEVEL>
@@ -74,7 +83,7 @@ const actionRow = new ActionRowBuilder<StringSelectMenuBuilder>().addComponents(
       {label: 'Godly', value: RPG_ENCHANT_LEVEL.godly},
       {label: 'Void', value: RPG_ENCHANT_LEVEL.void},
       {label: 'Remove', value: 'remove'},
-    ]),
+    ])
 );
 
 interface IGetEmbed {
@@ -86,7 +95,7 @@ const getEmbed = ({serverAccount, tier}: IGetEmbed) => {
   const embed = new EmbedBuilder().setColor(BOT_COLOR.embed).setDescription(
     `Successfully set your target enchant tier to **${tier.toUpperCase()}**
     
-    Note: Enchant mute will only available in the channels set by server admins`,
+    Note: Enchant mute will only available in the channels set by server admins`
   );
 
   if (serverAccount?.settings.enchant.channels.length) {

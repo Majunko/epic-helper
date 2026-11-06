@@ -103,7 +103,7 @@ export default async function getTrainingAnswer({
     if (questionLogs && targetLog) {
       components = generateRows(
         FOREST,
-        questionLogs.filter((log) => log === targetLog[0]).length,
+        questionLogs.filter((log) => log === targetLog[0]).length
       );
     }
   } else if (content.includes('is training in the... casino?')) {
@@ -111,7 +111,7 @@ export default async function getTrainingAnswer({
 
     const matched = Object.entries(CASINO_ANSWER_LIST).some(
       ([key, value]) =>
-        content.split('\n')[1].includes(value) && content.includes(key),
+        content.split('\n')[1].includes(value) && content.includes(key)
     );
     components = generateRows(TRUE_FALSE, matched);
   } else if (content.includes('in the mine')) {
@@ -150,7 +150,7 @@ function generateButton(label: string, style: boolean) {
         ? label === 'no'
           ? ButtonStyle.Danger
           : ButtonStyle.Success
-        : ButtonStyle.Secondary,
+        : ButtonStyle.Secondary
     );
 }
 

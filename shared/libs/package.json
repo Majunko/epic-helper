@@ -7,14 +7,14 @@
   "scripts": {
     "build:shared": "tsc",
     "type-check": "tsc --noEmit --skipLibCheck",
-    "lint": "eslint src/ --ext .ts --fix"
+    "lint": "vp lint src/ --fix"
   },
   "dependencies": {
     "@epic-helper/constants": "workspace:*",
     "@epic-helper/services": "workspace:*",
-    "@epic-helper/utils": "workspace:*",
     "@epic-helper/types": "workspace:*",
-    "readdirp": "^3.6.0"
+    "@epic-helper/utils": "workspace:*",
+    "readdirp": "^5.1.1"
   },
   "devDependencies": {
     "@epic-helper/tsconfig": "workspace:*"

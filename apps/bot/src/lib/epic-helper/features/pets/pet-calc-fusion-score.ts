@@ -4,7 +4,12 @@ import {convertPetIdToNum} from '@epic-helper/utils';
 import {generateEmbedPetFields} from './pet-list';
 import type {IUserPet} from '@epic-helper/models';
 import type {RPG_PET_SKILL_TIER} from '@epic-helper/constants';
-import {BOT_COLOR, BOT_EMOJI, RPG_PET_SKILL, RPG_PET_SKILL_TIER_REVERSE} from '@epic-helper/constants';
+import {
+  BOT_COLOR,
+  BOT_EMOJI,
+  RPG_PET_SKILL,
+  RPG_PET_SKILL_TIER_REVERSE,
+} from '@epic-helper/constants';
 import {userPetServices} from '@epic-helper/services';
 import type {ValuesOf} from '@epic-helper/types';
 
@@ -54,7 +59,7 @@ interface ICalcSelectedPetsFusionScoreReturn {
 }
 
 const calcSelectedPetsFusionScore = (
-  pets: IUserPet[],
+  pets: IUserPet[]
 ): ICalcSelectedPetsFusionScoreReturn[] => {
   const result: ICalcSelectedPetsFusionScoreReturn[] = [];
   for (const skill of skillsToFuse) {
@@ -62,17 +67,20 @@ const calcSelectedPetsFusionScore = (
     if (!petsWithSkill.length) continue;
     const totalScore = petsWithSkill.reduce(
       (acc, pet) => acc + pet.skills[skill]!,
-      0,
+      0
     );
-    const petsBySkillTier = petsWithSkill.reduce((acc, pet) => {
-      if (!pet.skills[skill]) return acc;
-      const tier = pet.skills[skill] as ValuesOf<typeof RPG_PET_SKILL_TIER>;
-      if (!acc[tier]) {
-        acc[tier] = [];
-      }
-      acc[tier]!.push(pet.petId);
-      return acc;
-    }, {} as ICalcSelectedPetsFusionScoreReturn['pets']);
+    const petsBySkillTier = petsWithSkill.reduce(
+      (acc, pet) => {
+        if (!pet.skills[skill]) return acc;
+        const tier = pet.skills[skill] as ValuesOf<typeof RPG_PET_SKILL_TIER>;
+        if (!acc[tier]) {
+          acc[tier] = [];
+        }
+        acc[tier]!.push(pet.petId);
+        return acc;
+      },
+      {} as ICalcSelectedPetsFusionScoreReturn['pets']
+    );
     result.push({
       type: skill,
       total: totalScore * petsWithSkill.length,
@@ -146,7 +154,7 @@ const getScoreSummaryDescription = ({
     const totalScore = total;
     const isEnough = totalScore >= recommendedScore;
     description += `${skillName.padEnd(14, ' ')} | ${String(
-      recommendedScore,
+      recommendedScore
     ).padEnd(6, ' ')} | ${totalScore.toString().padEnd(8, ' ')} | ${
       isEnough ? '✓' : '✗'
     }\n`;

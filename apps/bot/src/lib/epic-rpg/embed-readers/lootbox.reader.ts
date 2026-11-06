@@ -17,12 +17,12 @@ const lootboxReader = ({embed}: IScanLootbox) => {
   const items: IInventoryItem = {};
   for (const row of itemsList) {
     const itemName = typedObjectEntries(RPG_ITEMS).find(([, value]) =>
-      row.toLowerCase().includes(value),
+      row.toLowerCase().includes(value)
     )?.[0] as ItemName;
     if (!itemName) continue;
-    items[itemName] =
-      Number((row.split(' ')[0] ?? '').replaceAll(',', '').replace('+', '')) ??
-      0;
+    items[itemName] = Number(
+      (row.split(' ')[0] ?? '').replaceAll(',', '').replace('+', '')
+    );
   }
 
   return items;

@@ -1,4 +1,3 @@
-
 export interface IHelpCommandsGroup {
   name?: string;
   fieldLabel?: string;

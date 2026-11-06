@@ -53,7 +53,6 @@ export function rpgFarm({client, message, author, isSlashCommand}: IRpgFarm) {
   });
   event.on('embed', (embed) => {
     if (isSeedNotGrowingUp({embed, author})) {
-
       // event.stop();
     }
   });
@@ -137,7 +136,7 @@ const isRpgFarmSuccess = ({author, content}: IIsRpgFarmSuccess) =>
 
 function whatIsTheSeed(content: string) {
   return Object.values(RPG_FARM_SEED).find(
-    (seed) => seed && content.split('\n')[0].includes(seed),
+    (seed) => seed && content.split('\n')[0].includes(seed)
   );
 }
 
@@ -158,7 +157,7 @@ const hasNoSeedToPlant = ({message, author}: IHasNoSeedToPlant) =>
   message.mentions.has(author.id) &&
   (['you need a', 'seed'].every((msg) => message.content.includes(msg)) ||
     ['you do not have this type of seed'].some((msg) =>
-      message.content.includes(msg),
+      message.content.includes(msg)
     ));
 
 interface IIsSeedNotGrowingUp {
@@ -168,7 +167,7 @@ interface IIsSeedNotGrowingUp {
 
 const isSeedNotGrowingUp = ({embed, author}: IIsSeedNotGrowingUp) =>
   embed.description?.includes(
-    'You planted a seed, but for some reason it\'s not growing up',
+    "You planted a seed, but for some reason it's not growing up"
   ) && embed.author?.name === `${author.username} — farm`;
 
 interface IIsFailToPlantAnotherSeed {

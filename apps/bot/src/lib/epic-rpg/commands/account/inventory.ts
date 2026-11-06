@@ -44,16 +44,16 @@ export function rpgInventory({
           if (!calcInfo.area) return;
           const options = materialCalculator.isCalcMaterial(args)
             ? materialCalculator.getCalcMaterialMessage({
-              embed,
-              area: calcInfo.area ?? 0,
-              author,
-            })
+                embed,
+                area: calcInfo.area ?? 0,
+                author,
+              })
             : sttScoreCalculator.getCalcSTTMessage({
-              embed,
-              area: calcInfo.area ?? 0,
-              author,
-              level: calcInfo?.level ?? 0,
-            });
+                embed,
+                area: calcInfo.area ?? 0,
+                author,
+                level: calcInfo?.level ?? 0,
+              });
 
           djsMessageHelper.send({
             client,

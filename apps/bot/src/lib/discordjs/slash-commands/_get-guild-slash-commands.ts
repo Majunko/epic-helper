@@ -16,7 +16,7 @@ export const _getGuildSlashCommands = async ({
 
   try {
     const data = await djsRestClient.get(
-      Routes.applicationGuildCommands(client.user.id, guild.id),
+      Routes.applicationGuildCommands(client.user.id, guild.id)
     );
 
     return data as ApplicationCommand[];

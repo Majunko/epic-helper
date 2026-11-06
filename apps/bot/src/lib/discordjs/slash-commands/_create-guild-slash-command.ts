@@ -1,4 +1,9 @@
-import type {ApplicationCommand, Client, Guild, SlashCommandBuilder} from 'discord.js';
+import type {
+  ApplicationCommand,
+  Client,
+  Guild,
+  SlashCommandBuilder,
+} from 'discord.js';
 import {Routes} from 'discord.js';
 import {logger} from '@epic-helper/utils';
 import {djsRestClient} from '@epic-helper/services';
@@ -20,7 +25,7 @@ export const _createGuildSlashCommand = async ({
       Routes.applicationGuildCommands(client.user.id!, guild.id),
       {
         body: commands,
-      },
+      }
     );
     return data as ApplicationCommand;
   } catch (e: any) {

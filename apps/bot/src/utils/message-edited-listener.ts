@@ -18,11 +18,12 @@ export const createMessageEditedListener = async ({
     messageId,
   });
 
-  if (messageEditedEvent.eventNames().includes(messageId)) return messageEditedEvent;
+  if (messageEditedEvent.eventNames().includes(messageId))
+    return messageEditedEvent;
 
   messageEditedEvent.on = (
     messageId: string | symbol,
-    callback: (message: Message) => void,
+    callback: (message: Message) => void
   ): any => {
     setTimeout(() => {
       messageEditedEvent.removeListener(messageId, callback);
@@ -30,7 +31,6 @@ export const createMessageEditedListener = async ({
 
     return messageEditedEvent.addListener(messageId, callback);
   };
-
 
   return messageEditedEvent;
 };

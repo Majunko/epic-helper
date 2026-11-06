@@ -4,5 +4,6 @@ export * from './json-bin';
 export * from './logger';
 export * from './datetime';
 export * from './files-import';
+export * from './parse-ms';
 export * from './typed-object-entries';
 export * from './capitalize-first-letters';

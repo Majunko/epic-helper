@@ -1,5 +1,8 @@
 import {SLASH_COMMAND} from '../constant';
-import {USER_ACC_OFF_ACTIONS, USER_NOT_REGISTERED_ACTIONS} from '@epic-helper/constants';
+import {
+  USER_ACC_OFF_ACTIONS,
+  USER_NOT_REGISTERED_ACTIONS,
+} from '@epic-helper/constants';
 import commandHelper from '../../../lib/epic-helper/command-helper';
 import djsInteractionHelper from '../../../lib/discordjs/interaction';
 
@@ -19,15 +22,15 @@ export default <SlashCommand>{
         option
           .setName('role')
           .setDescription('Select the role of the guild to update')
-          .setRequired(true),
+          .setRequired(true)
       )
       .addUserOption((option) =>
         option
           .setName('leader')
           .setDescription(
-            'User that can modify the guild settings without admin permission',
+            'User that can modify the guild settings without admin permission'
           )
-          .setRequired(true),
+          .setRequired(true)
       ),
   execute: async (client, interaction) => {
     const role = interaction.options.getRole('role', true);

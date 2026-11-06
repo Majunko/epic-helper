@@ -42,16 +42,21 @@ export const BOT_CLICKABLE_SLASH_COMMANDS = {
   serverDonorRoleAdd: '</server donor-role add:935105366553952290>',
   serverDonorRoleRemove: '</server donor-role remove:935105366553952290>',
   serverDonorRoleReset: '</server donor-role reset:935105366553952290>',
-  serverEnchantMuteChannels: '</server enchant-mute channels:935105366553952290>',
-  serverEnchantMuteDuration: '</server enchant-mute duration:935105366553952290>',
+  serverEnchantMuteChannels:
+    '</server enchant-mute channels:935105366553952290>',
+  serverEnchantMuteDuration:
+    '</server enchant-mute duration:935105366553952290>',
   serverRandomEvents: '</server random-events:935105366553952290>',
   serverSettings: '</server settings:935105366553952290>',
   serverToggleReset: '</server toggle reset:935105366553952290>',
   serverToggleSet: '</server toggle set:935105366553952290>',
   serverToggleShow: '</server toggle show:935105366553952290>',
-  serverTtVerificationRemoveRule: '</server tt-verification remove-rule:935105366553952290>',
-  serverTtVerificationSetChannel: '</server tt-verification set-channel:935105366553952290>',
-  serverTtVerificationSetRule: '</server tt-verification set-rule:935105366553952290>',
+  serverTtVerificationRemoveRule:
+    '</server tt-verification remove-rule:935105366553952290>',
+  serverTtVerificationSetChannel:
+    '</server tt-verification set-channel:935105366553952290>',
+  serverTtVerificationSetRule:
+    '</server tt-verification set-rule:935105366553952290>',
   stats: '</stats:935105366478442544>',
   toggleReset: '</toggle reset:935105366553952291>',
   toggleSet: '</toggle set:935105366553952291>',

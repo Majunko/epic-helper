@@ -1,5 +1,9 @@
 import type {RPG_WORKING_TYPE} from '@epic-helper/constants';
-import {BOT_REMINDER_BASE_COOLDOWN, RPG_COMMAND_TYPE, RPG_COOLDOWN_EMBED_TYPE} from '@epic-helper/constants';
+import {
+  BOT_REMINDER_BASE_COOLDOWN,
+  RPG_COMMAND_TYPE,
+  RPG_COOLDOWN_EMBED_TYPE,
+} from '@epic-helper/constants';
 import type {Client, Embed, Message, User} from 'discord.js';
 import {createRpgCommandListener} from '../../../../utils/rpg-command-listener';
 import {USER_STATS_RPG_COMMAND_TYPE} from '@epic-helper/models';
@@ -193,7 +197,7 @@ interface IIsRubyMined {
 
 const isRubyMined = ({content, author}: IIsRubyMined) =>
   [author.username, 'GOT', '<:ruby:603456286184701953>'].every((msg) =>
-    content.includes(msg),
+    content.includes(msg)
   );
 
 interface IRubyAmountMined {
@@ -223,5 +227,5 @@ interface IIsFoughtRubyDragon {
 
 const isFoughtRubyDragon = ({content, author}: IIsFoughtRubyDragon) =>
   [author.username, 'fights', 'THE RUBY DRAGON'].every((msg) =>
-    content.includes(msg),
+    content.includes(msg)
   );

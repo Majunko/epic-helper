@@ -1,4 +1,9 @@
-import type {RPG_EPIC_ITEM_TYPES, RPG_FARM_SEED, RPG_LOOTBOX_TYPE, RPG_WORKING_TYPE} from '@epic-helper/constants';
+import type {
+  RPG_EPIC_ITEM_TYPES,
+  RPG_FARM_SEED,
+  RPG_LOOTBOX_TYPE,
+  RPG_WORKING_TYPE,
+} from '@epic-helper/constants';
 import {RPG_COMMAND_TYPE} from '@epic-helper/constants';
 import type {IUserPet, IUserReminder} from '@epic-helper/models';
 import {userReminderSchema} from '@epic-helper/models';
@@ -7,24 +12,24 @@ import type {Model} from 'mongoose';
 import {mongoClient} from '../clients/mongoose.service';
 import type {ValuesOf} from '@epic-helper/types';
 
-userReminderSchema.post('findOneAndUpdate', async function() {
+userReminderSchema.post('findOneAndUpdate', async function () {
   const updatedUserId = this.getQuery().userId;
   await updateNextReminderTime(updatedUserId, this.model);
 });
 
-userReminderSchema.post('deleteMany', async function() {
+userReminderSchema.post('deleteMany', async function () {
   const deletedUserId = this.getQuery().userId;
   await updateNextReminderTime(deletedUserId, this.model);
 });
 
-userReminderSchema.post('updateMany', async function() {
+userReminderSchema.post('updateMany', async function () {
   const updatedUserId = this.getQuery().userId;
   await updateNextReminderTime(updatedUserId, this.model);
 });
 
 async function updateNextReminderTime(
   userId: string,
-  model: Model<IUserReminder>,
+  model: Model<IUserReminder>
 ) {
   const nextReminderTime = await model
     .find({
@@ -36,14 +41,14 @@ async function updateNextReminderTime(
   if (nextReminderTime.length && nextReminderTime[0].readyAt)
     await redisUserReminder.setReminderTime(
       userId,
-      nextReminderTime[0].readyAt,
+      nextReminderTime[0].readyAt
     );
   else await redisUserReminder.deleteReminderTime(userId);
 }
 
 const dbUserReminder = mongoClient.model<IUserReminder>(
   'user-reminders',
-  userReminderSchema,
+  userReminderSchema
 );
 
 interface ISaveUserHuntCooldown {
@@ -75,7 +80,7 @@ const saveUserHuntCooldown = async ({
     },
     {
       upsert: true,
-    },
+    }
   );
 };
 
@@ -105,7 +110,7 @@ const saveUserAdventureCooldown = async ({
     },
     {
       upsert: true,
-    },
+    }
   );
 };
 
@@ -135,7 +140,7 @@ const saveUserTrainingCooldown = async ({
     },
     {
       upsert: true,
-    },
+    }
   );
 };
 
@@ -165,7 +170,7 @@ const saveUserQuestCooldown = async ({
     },
     {
       upsert: true,
-    },
+    }
   );
 };
 
@@ -201,7 +206,7 @@ const saveUserFarmCooldown = async ({
     },
     {
       upsert: true,
-    },
+    }
   );
 };
 
@@ -226,7 +231,7 @@ const saveUserDuelCooldown = async ({
     },
     {
       upsert: true,
-    },
+    }
   );
 };
 
@@ -251,7 +256,7 @@ const saveUserDailyCooldown = async ({
     },
     {
       upsert: true,
-    },
+    }
   );
 };
 
@@ -276,7 +281,7 @@ const saveUserWeeklyCooldown = async ({
     },
     {
       upsert: true,
-    },
+    }
   );
 };
 
@@ -300,7 +305,7 @@ const saveUserWorkingCooldown = async ({
     },
     {
       upsert: true,
-    },
+    }
   );
 };
 
@@ -330,7 +335,7 @@ const saveUserLootboxCooldown = async ({
     },
     {
       upsert: true,
-    },
+    }
   );
 };
 
@@ -360,7 +365,7 @@ const saveUserEpicItemCooldown = async ({
     },
     {
       upsert: true,
-    },
+    }
   );
 };
 
@@ -385,7 +390,7 @@ const saveUserPetCooldown = async ({
     },
     {
       upsert: true,
-    },
+    }
   );
 };
 
@@ -410,10 +415,9 @@ const saveUserXmasChimneyCooldown = async ({
     },
     {
       upsert: true,
-    },
+    }
   );
 };
-
 
 interface IUpdateUserCooldown {
   userId: string;
@@ -438,7 +442,7 @@ const updateUserCooldown = async ({
     },
     {
       upsert: true,
-    },
+    }
   );
 };
 
@@ -455,7 +459,7 @@ const deleteUserCooldowns = async ({userId, types}: IDeleteUserCooldown) => {
 };
 
 const findUserReadyCommands = async (
-  userId: string,
+  userId: string
 ): Promise<IUserReminder[]> => {
   const reminderList = await dbUserReminder.find({
     userId,
@@ -468,7 +472,7 @@ const findUserReadyCommands = async (
 };
 
 const getUserAllCooldowns = async (
-  userId: string,
+  userId: string
 ): Promise<IUserReminder[]> => {
   const reminderList = await dbUserReminder.find({
     userId,
@@ -503,7 +507,7 @@ const getNextReadyCommand = async ({
         readyAt: 1,
       },
       limit: 1,
-    },
+    }
   );
   return reminder?.length ? reminder[0].toObject() : null;
 };
@@ -526,7 +530,7 @@ const updateRemindedCooldowns = async ({
       $unset: {
         readyAt: 1,
       },
-    },
+    }
   );
 };
 

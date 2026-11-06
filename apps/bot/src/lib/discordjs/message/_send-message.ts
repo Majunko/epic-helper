@@ -1,4 +1,10 @@
-import type {Channel, Client, Message, MessageCreateOptions, MessagePayload} from 'discord.js';
+import type {
+  Channel,
+  Client,
+  Message,
+  MessageCreateOptions,
+  MessagePayload,
+} from 'discord.js';
 import {PermissionsBitField} from 'discord.js';
 import {logger} from '@epic-helper/utils';
 import {broadcastEval} from '../../../utils/broadcast-eval';
@@ -57,8 +63,7 @@ async function checkTypeAndSend({
 }: CheckTypeAndSendProps): Promise<Message | undefined> {
   let sentMessage;
   if (!djsChannelHelper.isGuildChannel(channel)) return;
-  if (!channel.permissionsFor(client.user!)?.has(requiredPermissions))
-    return;
+  if (!channel.permissionsFor(client.user!)?.has(requiredPermissions)) return;
 
   try {
     sentMessage = await channel.send(options);

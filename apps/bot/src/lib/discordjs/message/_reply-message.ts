@@ -1,4 +1,9 @@
-import type {Client, Message, MessageCreateOptions, MessagePayload} from 'discord.js';
+import type {
+  Client,
+  Message,
+  MessageCreateOptions,
+  MessagePayload,
+} from 'discord.js';
 import {PermissionsBitField, TextChannel, ThreadChannel} from 'discord.js';
 import {logger} from '@epic-helper/utils';
 
@@ -19,8 +24,7 @@ export default async function _replyMessage({
   if (!channel) return;
 
   if (channel instanceof TextChannel) {
-    if (!channel.permissionsFor(client.user!)?.has(requiredPermissions))
-      return;
+    if (!channel.permissionsFor(client.user!)?.has(requiredPermissions)) return;
     try {
       return await message.reply(options);
     } catch (error: any) {
@@ -34,8 +38,7 @@ export default async function _replyMessage({
     }
   }
   if (channel instanceof ThreadChannel) {
-    if (!channel.permissionsFor(client.user!)?.has(requiredPermissions))
-      return;
+    if (!channel.permissionsFor(client.user!)?.has(requiredPermissions)) return;
     try {
       return await message.reply(options);
     } catch (error: any) {

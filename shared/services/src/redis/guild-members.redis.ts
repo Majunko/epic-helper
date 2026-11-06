@@ -21,7 +21,7 @@ const setGuildMember = async ({
 }: ISetGuildMember) => {
   await redisService.set(
     `${prefix}${userId}`,
-    toRedis({serverId, guildRoleId, userId}),
+    toRedis({serverId, guildRoleId, userId})
   );
 };
 

@@ -21,11 +21,11 @@ export interface SendInteractiveMessageProps {
 
 type TEventCB = (
   collected: BaseInteraction | StringSelectMenuInteraction,
-  customId: string,
+  customId: string
 ) => Promise<InteractionUpdateOptions | null> | InteractionUpdateOptions | null;
 
 export default async function _sendInteractiveMessage<
-  EventType extends string
+  EventType extends string,
 >({channelId, options, client, onStop}: SendInteractiveMessageProps) {
   const channel = client.channels.cache.get(channelId);
   if (!channel) return;
@@ -49,7 +49,7 @@ export default async function _sendInteractiveMessage<
 
   function on(
     customId: EventType extends undefined ? string : EventType,
-    callback: TEventCB,
+    callback: TEventCB
   ) {
     registeredEvents.set(customId, callback);
   }

@@ -30,10 +30,10 @@ const _getEnchantChannelsEmbed = ({
       name: 'CHANNELS',
       value: enchantSettings.channels.length
         ? enchantSettings.channels
-          .map((channel) => {
-            return `<#${channel.channelId}>`;
-          })
-          .join(', ')
+            .map((channel) => {
+              return `<#${channel.channelId}>`;
+            })
+            .join(', ')
         : '-',
       inline: true,
     },

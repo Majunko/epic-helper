@@ -25,13 +25,13 @@ const getReminderTime = async (usersIdSet: Set<string>) => {
       const {readyAt, userId} = JSON.parse(data) as IRedisUserReminder;
       if (new Date(readyAt) > new Date()) return '';
       return userId;
-    }),
+    })
   );
   return usersId.filter((id) => id !== '');
 };
 
 const deleteReminderTime: (userId: string) => Promise<void> = async (
-  userId,
+  userId
 ) => {
   await redisService.del(`${prefix}${userId}`);
 };

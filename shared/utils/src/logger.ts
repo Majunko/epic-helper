@@ -21,7 +21,7 @@ export const logger = (props: ILogger | string) => {
   if (isString && isProduction) return;
   const message = isString ? props : props.message;
   const variant = isString ? undefined : props.variant;
-  const logLevel: Level = isString ? 'info' : props.logLevel ?? 'info';
+  const logLevel: Level = isString ? 'info' : (props.logLevel ?? 'info');
 
   let loggerChild: Logger;
   if (isProduction && !isString && !USE_PINO_PRETTY) {
@@ -41,7 +41,7 @@ export const logger = (props: ILogger | string) => {
       pretty({
         translateTime: 'SYS:yyyy-mm-dd hh:MM:ss TT',
         messageFormat: `${clusterIdMsg}${variantMsg}{msg}`,
-      }),
+      })
     );
   }
 

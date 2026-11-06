@@ -25,13 +25,13 @@ export const _renderThisWeekUpgraidListEmbed = ({
     name: 'Records',
     value: users.length
       ? users
-        .map(
-          (user, index) =>
-            `\`[${index + 1}]\` ${messageFormatter.user(user.uId)}: **${
-              user.records.length
-            } times**`,
-        )
-        .join('\n')
+          .map(
+            (user, index) =>
+              `\`[${index + 1}]\` ${messageFormatter.user(user.uId)}: **${
+                user.records.length
+              } times**`
+          )
+          .join('\n')
       : 'No records',
     inline: true,
   });
@@ -40,8 +40,8 @@ export const _renderThisWeekUpgraidListEmbed = ({
     guild.upgraid.readyAt &&
     new Date().getTime() < guild.upgraid.readyAt.getTime()
       ? `Reminds in ${convertMsToHumanReadableString(
-        guild.upgraid.readyAt.getTime() - new Date().getTime(),
-      )}`
+          guild.upgraid.readyAt.getTime() - new Date().getTime()
+        )}`
       : 'Ready';
   embed.setFooter({
     text: `${calcRemainingCount()} left | ${guildMessage}`,

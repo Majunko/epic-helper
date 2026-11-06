@@ -1,4 +1,4 @@
-import type {Client, Message, User} from 'discord.js';
+import type {Client, Message, PartialGroupDMChannel, User} from 'discord.js';
 import {ActionRowBuilder, ButtonBuilder, ButtonStyle} from 'discord.js';
 import timestampHelper from '../../../discordjs/timestamp';
 import ms from 'ms';
@@ -85,13 +85,13 @@ const row = new ActionRowBuilder<ButtonBuilder>()
     new ButtonBuilder()
       .setCustomId('epic')
       .setLabel('EPIC')
-      .setStyle(ButtonStyle.Primary),
+      .setStyle(ButtonStyle.Primary)
   )
   .addComponents(
     new ButtonBuilder()
       .setCustomId('ids')
       .setLabel('IDs')
-      .setStyle(ButtonStyle.Secondary),
+      .setStyle(ButtonStyle.Secondary)
   );
 
 const collectSelectedPetsId = ({
@@ -99,7 +99,9 @@ const collectSelectedPetsId = ({
   author,
 }: ICollectSelectedPets): Promise<string[]> => {
   return new Promise((resolve) => {
-    const event = message.channel.createMessageCollector({
+    const event = (
+      message.channel as Exclude<typeof message.channel, PartialGroupDMChannel>
+    ).createMessageCollector({
       filter: (m) => m.author.id === author.id,
       idle: ms('30s'),
     });

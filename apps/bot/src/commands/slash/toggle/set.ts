@@ -1,6 +1,9 @@
 import commandHelper from '../../../lib/epic-helper/command-helper';
 import djsInteractionHelper from '../../../lib/discordjs/interaction';
-import {USER_ACC_OFF_ACTIONS, USER_NOT_REGISTERED_ACTIONS} from '@epic-helper/constants';
+import {
+  USER_ACC_OFF_ACTIONS,
+  USER_NOT_REGISTERED_ACTIONS,
+} from '@epic-helper/constants';
 import {SLASH_COMMAND} from '../constant';
 
 export default <SlashCommand>{
@@ -17,12 +20,12 @@ export default <SlashCommand>{
       .addStringOption((option) =>
         option
           .setName('on')
-          .setDescription('Type the ID of the settings. e.g. a1 b2a'),
+          .setDescription('Type the ID of the settings. e.g. a1 b2a')
       )
       .addStringOption((option) =>
         option
           .setName('off')
-          .setDescription('Type the ID of the settings. e.g. a1 b2a'),
+          .setDescription('Type the ID of the settings. e.g. a1 b2a')
       ),
   execute: async (client, interaction) => {
     if (!interaction.inGuild()) return;

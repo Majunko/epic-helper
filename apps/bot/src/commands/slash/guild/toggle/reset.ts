@@ -1,6 +1,9 @@
 import djsInteractionHelper from '../../../../lib/discordjs/interaction';
 import {SLASH_COMMAND} from '../../constant';
-import {USER_ACC_OFF_ACTIONS, USER_NOT_REGISTERED_ACTIONS} from '@epic-helper/constants';
+import {
+  USER_ACC_OFF_ACTIONS,
+  USER_NOT_REGISTERED_ACTIONS,
+} from '@epic-helper/constants';
 import commandHelper from '../../../../lib/epic-helper/command-helper';
 
 export default <SlashCommand>{
@@ -18,7 +21,7 @@ export default <SlashCommand>{
       option
         .setName('role')
         .setDescription('Select the role of the guild to reset')
-        .setRequired(true),
+        .setRequired(true)
     ),
   execute: async (client, interaction) => {
     if (!interaction.inGuild()) return;

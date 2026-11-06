@@ -36,10 +36,8 @@ export const getCalcSTTMessage: TCalcFunc = ({embed, area, level, author}) => {
   };
   for (const [key, rate] of typedObjectEntries(RPG_STT_SCORE)) {
     if (key === 'level') {
-
       // skip
     } else if (key === 'stats') {
-
       // skip
     } else if (key in dismantleAll) {
       score[key] = Math.ceil((dismantleAll[key] ?? 0) * rate);
@@ -82,7 +80,7 @@ const buildCalcSTTEmbed = ({items, author, total}: IBuildCalcSTTEmbed) => {
       `:small_orange_diamond: Assuming you dismantle all the materials, follow the trade rate and trade all materials to ruby
       
       Time Travel Score: ≈ ${total.toLocaleString()}
-      `,
+      `
     )
     .setFooter({
       text: 'Feel free to report to support server if you have more accurate value,',
@@ -165,7 +163,6 @@ const groupItems: IGroupItems[] = [
   {
     label: 'Items Score',
     items: [
-
       // 'ultimateLog',
       {
         key: 'ultimateLog',
@@ -289,7 +286,6 @@ const groupItems: IGroupItems[] = [
   {
     label: 'Consumables Score',
     items: [
-
       // 'lifePotion',
       {
         key: 'lifePotion',
@@ -357,7 +353,6 @@ const groupItems: IGroupItems[] = [
   {
     label: 'Extra Score',
     items: [
-
       // 'level'
       {
         key: 'level',

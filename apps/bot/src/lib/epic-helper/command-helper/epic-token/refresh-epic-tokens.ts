@@ -1,4 +1,8 @@
-import {donorService, freeDonorService, serverService} from '@epic-helper/services';
+import {
+  donorService,
+  freeDonorService,
+  serverService,
+} from '@epic-helper/services';
 import {DONOR_TOKEN_AMOUNT} from '@epic-helper/constants';
 
 interface ISyncBoostedServers {
@@ -25,7 +29,7 @@ export const _syncBoostedServers = async ({userId}: ISyncBoostedServers) => {
   const totalToken = donorToken + freeToken;
   const usedToken = boostedServers.reduce(
     (acc, server) => acc + server.token,
-    0,
+    0
   );
 
   if (totalToken > usedToken) return;

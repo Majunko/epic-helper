@@ -15,11 +15,10 @@ const inventoryReader = ({embed}: IScanInventory) => {
   const items: IInventoryItem = {};
   for (const row of itemsList) {
     const itemName = typedObjectEntries(RPG_ITEMS).find(([, value]) =>
-      row.toLowerCase().includes(`**${value}**`),
+      row.toLowerCase().includes(`**${value}**`)
     )?.[0];
     if (!itemName) continue;
-    items[itemName] =
-      Number((row.split(' ').pop() ?? '').replaceAll(',', '')) ?? 0;
+    items[itemName] = Number((row.split(' ').pop() ?? '').replaceAll(',', ''));
   }
 
   return items;

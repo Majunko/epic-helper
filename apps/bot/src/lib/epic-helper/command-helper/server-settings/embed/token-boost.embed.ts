@@ -27,7 +27,7 @@ export const _getTokenBoostsEmbed = ({
       'Server with EPIC tokens allows server members to access all donor perks in the server.',
       'Every 100 members will require 1 token',
       'You can set donor roles to restrict the boost to only users with the role.',
-    ].join('\n'),
+    ].join('\n')
   );
 
   embed.addFields({
@@ -62,7 +62,7 @@ export const _getTokenBoostsEmbed = ({
         name: 'Boosters',
         value: users
           .map(
-            (user) => `${messageFormatter.user(user.userId)} - ${user.tokens}`,
+            (user) => `${messageFormatter.user(user.userId)} - ${user.tokens}`
           )
           .join('\n'),
         inline: true,
@@ -84,7 +84,7 @@ export const _getTokenBoostsEmbed = ({
         name: 'Expired boosters',
         value: users
           .map(
-            (user) => `${messageFormatter.user(user.userId)} - ${user.tokens}`,
+            (user) => `${messageFormatter.user(user.userId)} - ${user.tokens}`
           )
           .join('\n'),
         inline: true,

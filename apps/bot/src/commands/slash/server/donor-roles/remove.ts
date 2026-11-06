@@ -16,7 +16,7 @@ export default <SlashCommand>{
       option
         .setName('role')
         .setDescription('The role to be removed')
-        .setRequired(true),
+        .setRequired(true)
     ),
   execute: async (client, interaction) => {
     if (!interaction.guild) return;

@@ -45,7 +45,7 @@ export const _showSettings = async ({
     if (!guilds.find((guild) => guild.roleId === guildSelector.getGuildId())) {
       return {
         content: `There is no guild with role ${messageFormatter.role(
-          guildSelector.getGuildId(),
+          guildSelector.getGuildId()
         )} setup in this server`,
         ephemeral: true,
       };
@@ -62,13 +62,13 @@ export const _showSettings = async ({
       case GUILD_SETTINGS_PAGE_TYPE.settings:
         return _getGuildSettingsEmbed({
           guildAccount: guilds.find(
-            (guild) => guild.roleId === guildSelector.getGuildId(),
+            (guild) => guild.roleId === guildSelector.getGuildId()
           )!,
         });
       case GUILD_SETTINGS_PAGE_TYPE.toggle:
         return getGuildToggleEmbed({
           guildAccount: guilds.find(
-            (guild) => guild.roleId === guildSelector.getGuildId(),
+            (guild) => guild.roleId === guildSelector.getGuildId()
           )!,
         });
     }

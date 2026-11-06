@@ -25,9 +25,9 @@ export default <SlashCommand>{
         option
           .setName('reminder-type')
           .setDescription(
-            'Type of reminder, separate different type with space. e.g. hunt adv use',
+            'Type of reminder, separate different type with space. e.g. hunt adv use'
           )
-          .setRequired(true),
+          .setRequired(true)
       )
       .addStringOption((option) =>
         option
@@ -42,8 +42,8 @@ export default <SlashCommand>{
             {
               name: 'Remove',
               value: 'remove',
-            },
-          ),
+            }
+          )
       ),
   execute: async (client, interaction) => {
     const optionReminderType = interaction.options.getString('reminder-type')!;
@@ -59,7 +59,7 @@ export default <SlashCommand>{
         interaction,
         options: {
           content: `Invalid reminder type. Valid reminder types are: ${Object.keys(
-            RPG_COMMAND_TYPE,
+            RPG_COMMAND_TYPE
           )
             .map((i) => `\`${i}\``)
             .join(', ')}`,
@@ -110,7 +110,7 @@ const matchReminderType = (reminderType: string) => {
     const _key = key as keyof typeof RPG_COMMANDS_KEYWORDS;
     if (
       RPG_COMMANDS_KEYWORDS[_key].some((keyword) =>
-        reminderTypeLower.includes(keyword.toLowerCase()),
+        reminderTypeLower.includes(keyword.toLowerCase())
       )
     ) {
       if (!matched.includes(_key)) {

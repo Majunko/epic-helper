@@ -61,7 +61,7 @@ export interface IEpicItemReminder extends BaseUserReminder {
   type: typeof RPG_COMMAND_TYPE.epicItem;
   props: {
     epicItemType?: ValuesOf<typeof RPG_EPIC_ITEM_TYPES>;
-  }
+  };
 }
 
 export interface IDailyReminder extends BaseUserReminder {

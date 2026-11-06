@@ -1,6 +1,16 @@
-import type {BaseInteraction, BaseMessageOptions, Client, Guild, Message, User} from 'discord.js';
+import type {
+  BaseInteraction,
+  BaseMessageOptions,
+  Client,
+  Guild,
+  Message,
+  User,
+} from 'discord.js';
 import {PermissionsBitField} from 'discord.js';
-import {USER_ACC_OFF_ACTIONS, USER_NOT_REGISTERED_ACTIONS} from '@epic-helper/constants';
+import {
+  USER_ACC_OFF_ACTIONS,
+  USER_NOT_REGISTERED_ACTIONS,
+} from '@epic-helper/constants';
 import embedProvider from '../lib/epic-helper/embeds';
 import {djsMessageHelper} from '../lib/discordjs/message';
 import type {ICommandPreCheck} from '../types/utils';

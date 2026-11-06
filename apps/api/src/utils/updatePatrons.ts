@@ -16,7 +16,8 @@ export const updatePatrons = async () => {
       },
       tier: patron.currentTier,
       expiresAt: patron.subscription.nextChargeDate,
-      active: patron.subscription.patronStatus === PATREON_PATRON_STATUS.activePatron,
-    })),
+      active:
+        patron.subscription.patronStatus === PATREON_PATRON_STATUS.activePatron,
+    }))
   );
 };

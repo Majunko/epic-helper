@@ -37,13 +37,13 @@ export const getUserToggle = async ({
   function getEmbed(userToggle: IUserToggle) {
     return isDonor
       ? getDonorToggleEmbed({
-        author,
-        userToggle,
-      })
+          author,
+          userToggle,
+        })
       : getNonDonorToggleEmbed({
-        author,
-        userToggle,
-      });
+          author,
+          userToggle,
+        });
   }
 
   async function update({on, off}: IUpdateToggle) {
@@ -88,7 +88,7 @@ export const getDonorToggleEmbed = ({
     .setDescription(
       `**Syntax 1:** \`${PREFIX.bot}t <on/off> <ID> [ID] [ID]\` - turn on/off any settings
       > *\`${PREFIX.bot}t on a1 a5 b3a c2-c5\`*
-      **Syntax 2:** \`${PREFIX.bot}t reset\` - reset all settings`,
+      **Syntax 2:** \`${PREFIX.bot}t reset\` - reset all settings`
     );
 };
 

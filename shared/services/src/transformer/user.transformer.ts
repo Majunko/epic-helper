@@ -8,10 +8,13 @@ export const toUser = (user: any): IUser => {
     userId: user?.userId,
     channel: {
       all: user?.channel?.all,
-      ...typedObjectEntries(RPG_COMMAND_TYPE).reduce((acc, [key]) => {
-        acc[key] = user?.channel?.[key];
-        return acc;
-      }, {} as Record<keyof typeof RPG_COMMAND_TYPE, string>),
+      ...typedObjectEntries(RPG_COMMAND_TYPE).reduce(
+        (acc, [key]) => {
+          acc[key] = user?.channel?.[key];
+          return acc;
+        },
+        {} as Record<keyof typeof RPG_COMMAND_TYPE, string>
+      ),
     },
     username: user?.username,
     config: {
@@ -25,10 +28,13 @@ export const toUser = (user: any): IUser => {
     },
     customMessage: {
       all: user?.customMessage?.all,
-      ...typedObjectEntries(RPG_COMMAND_TYPE).reduce((acc, [key]) => {
-        acc[key] = user?.customMessage?.[key];
-        return acc;
-      }, {} as Record<keyof typeof RPG_COMMAND_TYPE, string>),
+      ...typedObjectEntries(RPG_COMMAND_TYPE).reduce(
+        (acc, [key]) => {
+          acc[key] = user?.customMessage?.[key];
+          return acc;
+        },
+        {} as Record<keyof typeof RPG_COMMAND_TYPE, string>
+      ),
     },
     items: {
       ruby: user?.items?.ruby,
@@ -36,10 +42,13 @@ export const toUser = (user: any): IUser => {
     toggle: {
       dm: {
         all: user?.toggle?.dm?.all,
-        ...typedObjectEntries(RPG_COMMAND_TYPE).reduce((acc, [key]) => {
-          acc[key] = user?.toggle?.dm?.[key];
-          return acc;
-        }, {} as Record<keyof typeof RPG_COMMAND_TYPE, boolean>),
+        ...typedObjectEntries(RPG_COMMAND_TYPE).reduce(
+          (acc, [key]) => {
+            acc[key] = user?.toggle?.dm?.[key];
+            return acc;
+          },
+          {} as Record<keyof typeof RPG_COMMAND_TYPE, boolean>
+        ),
       },
       countdown: {
         all: user?.toggle?.countdown?.all,
@@ -58,19 +67,25 @@ export const toUser = (user: any): IUser => {
         all: user?.toggle?.mentions?.all,
         trainingAnswer: user?.toggle?.mentions?.trainingAnswer,
         petCatch: user?.toggle?.mentions?.petCatch,
-        ...typedObjectEntries(RPG_COMMAND_TYPE).reduce((acc, [key]) => {
-          acc[key] = user?.toggle?.mentions?.[key];
-          return acc;
-        }, {} as Record<keyof typeof RPG_COMMAND_TYPE, boolean>),
+        ...typedObjectEntries(RPG_COMMAND_TYPE).reduce(
+          (acc, [key]) => {
+            acc[key] = user?.toggle?.mentions?.[key];
+            return acc;
+          },
+          {} as Record<keyof typeof RPG_COMMAND_TYPE, boolean>
+        ),
       },
       huntSwitch: user?.toggle?.huntSwitch,
       emoji: user?.toggle?.emoji,
       reminder: {
         all: user?.toggle?.reminder?.all,
-        ...typedObjectEntries(RPG_COMMAND_TYPE).reduce((acc, [key]) => {
-          acc[key] = user?.toggle?.reminder?.[key];
-          return acc;
-        }, {} as Record<keyof typeof RPG_COMMAND_TYPE, boolean>),
+        ...typedObjectEntries(RPG_COMMAND_TYPE).reduce(
+          (acc, [key]) => {
+            acc[key] = user?.toggle?.reminder?.[key];
+            return acc;
+          },
+          {} as Record<keyof typeof RPG_COMMAND_TYPE, boolean>
+        ),
       },
       training: {
         all: user?.toggle?.training?.all,
@@ -84,7 +99,7 @@ export const toUser = (user: any): IUser => {
           acc[key] = user?.stats?.best?.[key] ?? 0;
           return acc;
         },
-        {} as Record<keyof typeof USER_STATS_RPG_COMMAND_TYPE, number>,
+        {} as Record<keyof typeof USER_STATS_RPG_COMMAND_TYPE, number>
       ),
     },
     rpgInfo: {
