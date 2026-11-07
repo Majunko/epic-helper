@@ -54,7 +54,7 @@ export const importFiles = <T>({
           new Promise((resolve) => {
             import(fullPath).then((file) => {
               resolve({
-                data: file.default,
+                data: file?.default?.default ?? file?.default,
                 path,
               });
             });
